@@ -2,11 +2,14 @@
 \label{sec:algorithm}
 
 In this section, we shall introduce a novel approximation method to decouple the centralized optimization on the RHS of the Bellman's equations in equation (\ref{eqn:sp_0}) to each AP for arbitrary system state.
-For the APs outside the conflict AP sets of each other, the update of dispatching actions at one AP will not affect the task computation originated from other APs.
-Thus, the optimization of their dispatching actions can be decoupled.
-On the other hand, for the APs within the same conflict AP set, the optimization of their dispatching actions is coupled.
-Due to the unknown signaling latency, it is difficult for one AP (say the $k$-th AP) to predict the update of the dispatching actions at the other APs ($\forall k' \in\ccSet_{k}$).
-Hence, cooperative optimization of dispatching actions for the APs within the same conflict AP set is infeasible.
+\comments{Thus, the optimization of their dispatching actions can be decoupled.}
+%FIXME: temporarily delete those descriptions
+\delete{v1}{
+    For the APs outside the conflict AP sets of each other, the update of dispatching actions at one AP will not affect the task computation originated from other APs.
+    On the other hand, for the APs within the same conflict AP set, the optimization of their dispatching actions is coupled.
+    Due to the unknown signaling latency, it is difficult for one AP (say the $k$-th AP) to predict the update of the dispatching actions at the other APs ($\forall k' \in\ccSet_{k}$).
+    Hence, cooperative optimization of dispatching actions for the APs within the same conflict AP set is infeasible.
+}
 In this section, we introduce an alternative algorithm to optimize the dispatching actions of one AP in a conflict AP set in each broadcast interval periodically, while other APs maintain their dispatching actions in the previous broadcast interval.
 Specifically, the proposed distributed algorithm consists of the following two steps:
 %\hongyc{(move two steps adjacent in the following subsections)}
@@ -253,22 +256,22 @@ As a result, the overall algorithm of job dispatching is elaborated in Algorithm
         $\hphantom{~~~~~~~~~~~~~~~~~} \cup \set{ {\omega}_{y,j}(t) | \forall y\notin\mathcal{Y}_{n-1},j\in\jSpace }$\;
     }
 \end{algorithm}
-Moreover, we use the following example to illustrate the procedure of Algorithm \ref{alg_1}.
-\begin{example}
-    \label{exp:update}
-    Consider an edge computing system as Fig.\ref{fig:system}, where the AP set $\apSet$ could be partitioned into two subsets which are denoted as $\mathcal{Y}_{0} = \set{1,3}$ and $\mathcal{Y}_{1} = \set{2}$, respectively.
-    As illustrated in Fig.\ref{fig:update_timeline}, in the $1$-st interval the APs in subset $\mathcal{Y}_{0}$ would update their dispatching actions by solving P3, while the AP in subset $\mathcal{Y}_{1}$ fix its actions.
-    Denote the aggregation of their dispatching actions as $\tilde{\mathcal{A}}(1)$ and $\hat{\mathcal{A}}(1)$, respectively.
-    Then in the $2$-nd interval, the APs in subset $\mathcal{Y}_{0}$ fix their actions as $\tilde{\mathcal{A}}(1)$ which is denoted as $\hat{\mathcal{A}}(2)$, while 
-    the AP in subset $\mathcal{Y}_{1}$ updates the dispatching actions to $\tilde{\mathcal{A}}(2)$.
-    Hence, every AP update its dispatching actions with period $N=2$.
-    \begin{figure*}[htp!]
-        \centering
-        \includegraphics[width=0.60\textwidth]{update-timeline.pdf}
-        \caption{The Illustration of Example \ref{exp:update}.}
-        \label{fig:update_timeline}
-    \end{figure*}
-\end{example}
+% Moreover, we use the following example to illustrate the procedure of Algorithm \ref{alg_1}.
+% \begin{example}
+%     \label{exp:update}
+%     Consider an edge computing system as Fig.\ref{fig:system}, where the AP set $\apSet$ could be partitioned into two subsets which are denoted as $\mathcal{Y}_{0} = \set{1,3}$ and $\mathcal{Y}_{1} = \set{2}$, respectively.
+%     As illustrated in Fig.\ref{fig:update_timeline}, in the $1$-st interval the APs in subset $\mathcal{Y}_{0}$ would update their dispatching actions by solving P3, while the AP in subset $\mathcal{Y}_{1}$ fix its actions.
+%     Denote the aggregation of their dispatching actions as $\tilde{\mathcal{A}}(1)$ and $\hat{\mathcal{A}}(1)$, respectively.
+%     Then in the $2$-nd interval, the APs in subset $\mathcal{Y}_{0}$ fix their actions as $\tilde{\mathcal{A}}(1)$ which is denoted as $\hat{\mathcal{A}}(2)$, while 
+%     the AP in subset $\mathcal{Y}_{1}$ updates the dispatching actions to $\tilde{\mathcal{A}}(2)$.
+%     Hence, every AP update its dispatching actions with period $N=2$.
+%     \begin{figure*}[htp!]
+%         \centering
+%         \includegraphics[width=0.60\textwidth]{update-timeline.pdf}
+%         \caption{The Illustration of Example \ref{exp:update}.}
+%         \label{fig:update_timeline}
+%     \end{figure*}
+% \end{example}
 
 % As a remark notice that Algorithm \ref{alg_1} leads to a time-variant policy, which is referred as the proposed policy $\tilde{\Policy}$.
 % At the $t$-th broadcast interval, the dispatching actions is given by
