@@ -1,0 +1,99 @@
+\section{POMDP-based Problem Formulation}
+\label{sec:formulation}
+%----------------------------------------------------------------------------------------%
+In this section, we formulate the optimization of job dispatching at all APs as a Markov decision process (MDP) problem.
+Since each AP update the job dispatching actions according to OSI instead of GSI, the MDP problem is a partially observable MDP (POMDP).
+Specifically, the individual dispatching policy of one AP, the system dispatching policy, and the cost function are first defined below.
+
+\begin{definition}[Dispatching Policy]
+    The individual dispatching policy of the $k$-th AP, denoted as $\Omega_{k}$ ($\forall k \in\apSet$), maps from its OSI $\Stat_{k}$ and its \brlatency~$\mathcal{D}_{k}$ to the dispatching action for each job type, i.e.,
+    \begin{align}
+        \Omega_{k} \Paren{ \Stat_{k}(t), \mathcal{D}_{k}(t) }
+        &\define \mathcal{A}_{k}(t+1)
+        \nonumber\\
+        &= \Brace{
+            \omega_{k,j}(t+1) \Big| \forall j\in\jSpace
+        }.
+        \label{def:action}
+    \end{align}
+
+    The aggregation of individual policy of all APs is referred to as the system dispatching policy $\Policy$.
+    Thus,
+    {\small
+    \begin{align}
+        \Policy\Paren{ \Stat(t), \Delay(t) } \define \Brace{
+            \Omega_{1}(\Stat_{1}(t), \mathcal{D}_{1}(t)), \dots, \Omega_{K}(\Stat_{K}(t),\mathcal{D}_{K}(t))
+        },
+    \end{align}
+    }
+    where $\Delay(t) \define \set{ \mathcal{D}_{1}(t), \dots, \mathcal{D}_{K}(t) }$.
+\end{definition}
+
+According to the Little's law \cite{Little1961}, the average response time per job, counting the number of broadcast intervals from job arrival to the accomplishment of computation, is proportional to the number of jobs in the system, given the job arrival rates at all the APs.
+Hence, we define the cost function per broadcast interval as follows, {given the information contained in periodic broadcast.}
+
+\begin{definition}[Cost Function per Broadcast Interval]
+    The cost function of the $t$-th broadcast interval with GSI $\Stat(t)$ is defined as
+    {\small
+    \begin{align}
+        g\Paren{\Stat(t)} \define
+            \sum_{m\in\esSet,j\in\jSpace}
+            \Brace{&
+                \sum_{k\in\apSet} \Inorm{\vec{R}^{(k)}_{m,j}(t,0)} + Q_{m,j}(t,0)
+                \nonumber\\
+                &~~~~~+ \beta \cdot I[Q_{m,j}(t,0)=L_{max}]
+            },
+    \end{align}
+    }
+    where $\Inorm{\vec{x}}$ denotes the $L^1$-norm of the vector $\vec{x}$, and $\beta$ is the weight of overflow penalty.
+    \deny{
+        The cost function per broadcast interval could be taken as a uniform sampling of cost function per time slot.
+    }
+\end{definition}
+
+Since the job dispatching in one broadcast interval will affect the GSI of the following broadcast intervals, we should consider the joint minimization of the costs of all the broadcast intervals.
+Specifically, we consider the following discounted sum of the costs of all the broadcast intervals as the system objective.
+\begin{align}
+    &\bar{G}(\Stat, \Policy) \define
+    \lim_{T \to \infty} \mathbb{E}^{\Policy}_{\set{\Stat(t)|\forall t}}
+    \Bracket{
+        \sum_{t=1}^{T} \gamma^{t-1} g\Paren{\Stat(t)} \Big| \Stat(1)
+    },
+\end{align}
+where $\mathbb{E}^{\Policy}_{\set{\Stat(t)|\forall t}}[\cdot]$ denotes the expectation with respect to all possible system state in the future given scheduling policy $\Policy$, and $\gamma \in (0,1)$ is the discount factor.
+Hence, the optimization of job dispatching policy can be formulated as the following minimization problem.
+\begin{align}
+    \textbf{P1:}~
+    \min_{\Policy} \bar{G}(\Stat, \Policy).
+\end{align}
+
+If the GSI $\Stat(t)$ and \brlatency~$\Delay(t)$ are known to all the APs, the MDP in problem P1 can be solved via the following Bellman's equations as in \cite{sutton1998}.
+\begin{align}
+    &V\Paren{\Stat(t)} =g\Paren{\Stat(t)}
+        + \gamma\mathbb{E}_{\Delay}\bigg\{
+            \min_{\Policy(\Stat(t),\Delay(t))}
+            \nonumber\\
+            &\sum_{\Stat(t+1)} \Pr \Big\{ 
+                \Stat(t+1) \Big| \Stat(t), \Policy(\Stat(t), \Delay(t)) \Big\} \cdot V\Big(\Stat(t+1)\Big)
+            \bigg\},
+    \label{eqn:sp_0}
+\end{align}
+where the value function $V(\Stat(t))$ of the optimal policy $\Policy^{*}$ (if GSI and \brlatency~are known to all the APs) is defined as follows.
+\begin{align}
+    &V\Paren{\Stat(t)} \define
+    \lim_{T\to\infty} 
+    \mathbb{E}^{\Policy^*}_{\set{\Stat(t)|\forall t}, \Delay} \Bracket{
+        \sum_{t=1}^{T} \gamma^{t-1} g\Big( \Stat(t) \Big) \Big| \Stat(1)
+    }.
+    \label{eqn:val_f}
+\end{align}
+Moreover, the optimal policy $\Omega^{*}$ can be obtained by solving the right-hand-side (RHS) of the above Bellman's equations.
+
+However, it is infeasible to solve the above Bellman's equations {and achieve the performance of $\Policy^*$ in our considered dispatching system.}
+This is because each AP (say the $k$-th AP) only has the knowledge of its own OSI $\Stat_{k}(t)$ and local \brlatency~$\mathcal{D}_{k}(t)$, but the optimal solution (dispatching actions of all APs) for the RHS of equation (\ref{eqn:sp_0}) depends on the GSI and global \brlatency~information.
+Thus, problem P1 is actually a POMDP.
+The general solution of POMDP is of huge complexity {as all the historical system states should be traced back in the current system state} \cite{IJCAI03-NairR,IJCAI99-BoutilierC}.
+In this paper, we shall propose a novel low-complexity solution framework based on an analytical approximation of the value function $V(\cdot)$ and alternative actions update, where distributed job dispatching via the Bellman's equations becomes feasible
+(the minimization at the RHS of equation (\ref{eqn:sp_0}) is solvable with the approximate value function)
+even with OSI and local \brlatency.
+%----------------------------------------------------------------------------------------%

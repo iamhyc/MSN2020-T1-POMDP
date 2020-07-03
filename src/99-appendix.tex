@@ -1,0 +1,213 @@
+%NOTE: transition matrix and vector for AP
+\appendices
+% \section{ Proof of Lemma \ref{lemma:w_ap} }
+% \label{append_1}
+% At the $n$-th time slot of the $t$-th broadcast interval, let $\hat{\vecG{\Theta}}^{(k,\Policy)}_{m,j}(t,n)$ denote the probability vector of job existence under dispatching policy $\Policy$, of which the explicit definition is given as follows.
+% \begin{align}
+%     \hat{\vecG{\Theta}}^{(k,\Policy)}_{m,j}(t,n) \define \Bracket{
+%         \hat{\theta}^{(k,\Policy)}_{m,j}(0,t,n),
+%         \dots,
+%         \hat{\theta}^{(k,\Policy)}_{m,j}(\Xi,t,n)
+%     },
+% \end{align}
+% where
+% {\small
+% \begin{align}
+%     \hat{\theta}^{(k,\Policy)}_{m,j}(\xi,t,n) \define
+%     \begin{cases}
+%         \lambda_{k,j} I[\omega_{k,j}(t)=m], &\xi=0, n < \mathcal{D}_{k}(t)
+%         \\
+%         \lambda_{k,j} I[\omega_{k,j}(t+1)=m], &\xi=0, n \geq \mathcal{D}_{k}(t) 
+%         \\
+%         \Pr\{R^{(k)}_{m,j}(\xi,t,n)=1\}, & \text{otherwise}
+%     \end{cases}
+% \end{align}
+% }denotes the probability that $\xi$ jobs are in uploading from the $k$-th AP to the $m$-th edge server under dispatching policy $\Policy$, at the $n$-th time slot of the $t$-th broadcast interval.
+% The dispatching policy $\Policy$ only affects the first entry of the probability vector, i.e., the arrival probability of one job in the time slot.
+% Hence, we denote the time-invariant and policy-independent transition matrix $\hat{\Gamma}^{(k)}_{m,j}$ for the state transition on AP between adjacent time slots, which is defined as follows.
+% \begin{align}
+%     \hat{\Gamma}^{(k)}_{m,j} &\define
+%     \begin{bmatrix}
+%         1 & \bar{p}^{(k)}_{m,j,0} &                       &        &                           \\
+%           & 0                     & \bar{p}^{(k)}_{m,j,1} &        & \text{\huge0}             \\
+%           &                       & \ddots                & \ddots &                           \\
+%           & \text{\huge0}         &                       & \ddots & \bar{p}^{(k)}_{m,j,\Xi-1} \\
+%           &                       &                       &        & 0                         \\
+%     \end{bmatrix},
+% \end{align}
+% where $\bar{p}^{(k)}_{m,j,\xi}$ denotes the probability of job still staying at the $k$-th AP in the next time slot as $\bar{p}^{(k)}_{m,j,\xi} = 1 - p^{(k)}_{m,j,\xi}$, and
+% \begin{align}
+%     p^{(k)}_{m,j,\xi} &\define \Pr\{U^{(k)}_{m,j} < (\xi+1) | U^{(k)}_{m,j}>\xi\}
+% \end{align}
+% denotes the probability of job offloading to the $m$-th edge server.
+
+% Hence, let ${\vecG{\Theta}}^{(k, \Policy)}_{m,j}(t)$ and ${\Gamma}^{(k)}_{m,j}$ denotes the probability vector and transition matrix for the adjacent broadcast intervals, respectively.
+% Based on the previous definitions at the scale of time slot, the expressions of $\vecG{\Theta}^{(\Policy, k)}_{m,j}(t)$ and the transition process between adjacent broadcast intervals under policy $\Policy$ are given as follows.
+% \begin{align}
+%     \vecG{\Theta}^{(k, \Policy)}_{m,j}(t) &\define \hat{\vecG{\Theta}}^{(k, \Policy)}_{m,j}(t,0),
+%     \\
+%     \vecG{\Theta}^{(k, \Policy)}_{m,j}(t+1) &= \hat{\vecG{\Theta}}^{(k, \Policy)}_{m,j}(t, \mathcal{D}_{k}(t)) \times (\hat{\Gamma}^{(k)}_{m,j})^{t_B-\mathcal{D}_{k}(t)},
+%     \nonumber\\
+%     \hat{\vecG{\Theta}}^{(k, \Policy)}_{m,j}(t, \mathcal{D}_{k}(t)) &= \vecG{\Theta}_{m,j}(t) \times (\hat{\Gamma}^{(k, \Policy)}_{m,j})^{\mathcal{D}_{k}(t)}.
+% \end{align}
+% % is composed of two-phase policy separated by $D_k(t)$, which is expressed as follows.
+% Given that the cost raised on APs are approximated via baseline policy $\Baseline$, the AP (saying the $k$-th AP) would adopt the same dispatching actions as $\Pi_{k}(\Stat_{k}(t), \mathcal{D}_{k}(t))$ before and after $\mathcal{D}_{k}(t)$ time slots at the $t$-th broadcast interval.
+% Hence, we have
+% \begin{align}
+%     \vecG{\Theta}^{(k,\Baseline)}_{m,j}(t+1) = \vecG{\Theta}^{(k,\Baseline)}_{m,j}(t) \times (\hat{\Gamma}^{(k)}_{m,j})^{t_B}.
+% \end{align}
+% and the definition of transition matrix $\Gamma^{(k)}_{m,j}$ with baseline policy $\Baseline$ as
+% \begin{align}
+%     \Gamma^{(k)}_{m,j} &\define \big( \hat{\Gamma}^{(k)}_{m,j} \big)^{t_B}.
+% \end{align}
+% Hence, the expression of the cost raised on the AP (say the $k$-th AP) under baseline policy $\Baseline$ is given as follows.
+% \begin{align}
+%     &\tilde{W}^{\AP}_{k,m,j}\Paren{\Stat(t+1)} =
+%     \Inorm{
+%         \vecG{\Theta}^{(k, \Baseline)}_{m,j}(t+1) \times
+%         \Bracket{
+%             \mat{I} - \gamma \Gamma^{(k)}_{m,j}
+%         }^{-1}
+%     }.
+% \end{align}
+
+
+% %NOTE: transition matrix and vector for ES
+% \section{ Proof of Lemma \ref{lemma:w_es} }
+% \label{append_2}
+% The state transition on edge server is composed of both arrival processes of all the APs in the corresponding \emph{potential AP set}, and the departure processes of jobs computation.
+% We first denote the offloading matrix $\bar{\Gamma}^{(k)}_{m,j}$ for the type-$j$ job offloaded from the $k$-th AP to the $m$-th edge server and the offloading probability vector $\vecG{\rho}^{(k)}_{m,j}({t,n})$ as follows, respectively ($\forall k\in\apSet, m\in\esSet_{k}, j\in\jSpace$).
+% \begin{align}
+%     \bar{\Gamma}^{(k)}_{m,j}(t,n) &\define
+%     \begin{bmatrix}
+%         0 & p^{(k)}_{m,j,0} &                 &        &                     \\
+%         & 0                 & p^{(k)}_{m,j,1} &        & \text{\huge0}       \\
+%         &                   & \ddots          & \ddots &                     \\
+%         & \text{\huge0}     &                 & \ddots & p^{(k)}_{m,j,\Xi-1} \\
+%         &                   &                 &        & 1                   \\
+%     \end{bmatrix},
+%     \\
+%     \vecG{\rho}^{(k, \Policy)}_{m,j}({t,n}) &\define \hat{\vecG{\Theta}}^{(k, \Policy)}_{m,j}({t,n}) \times \bar{\Gamma}^{(k)}_{m,j}.
+% \end{align}
+% However, the computational complexity of combinations of all the offloading probability vectors for the $m$-th edge server from its \emph{potential AP set} is unacceptable.
+% To alleviate the complexity, we rewrite the combinatorial arrival process on edge server as an equivalent Bernoulli process with \emph{small probability approximation}, i.e., there would be at most one job arriving in one time slot with the probability as the expected arrival rate of the original combinatorial distribution.
+% Specifically, the probability distribution of $\sum_{k\in\apSet} \vecG{\rho}^{(k, \Policy)}_{m,j}({t,n})$ is approximated as a Bernoulli distribution with the expected arrival rate denoted as $\hat{\beta}^{\Policy}_{m,j}({t,n})$ whose definition is given as
+% \begin{align}
+%     \hat{\beta}^{\Policy}_{m,j}({t,n}) &\define \sum_{k\in\apSet} \sum_{\xi=0,\dots,\Xi-1} \mathbb{E}[\vecG{\rho}^{(k, \Policy)}_{m,j,\xi}({t,n})].
+%     \label{eqn_0}
+% \end{align}
+
+% %NOTE: transition matrix and vector for Edge Server
+% Let $\hat{\vecG{\nu}}_{m,j}(t,n)$ denote the probability vector of $Q_{m,j}(t,n)$ at the $n$-th time slot of the $t$-th broadcast interval ($\forall m\in\esSet, j\in\jSpace$)
+% {\small
+% \begin{align}
+%     \vecG{\nu}_{m,j}(t,n) \define \Bracket{
+%         \Pr\{Q_{m,j}(t,n)=0\}, \dots, \Pr\{Q_{m,j}(t,n)=L_{max}\}
+%     }.
+% \end{align}
+% }The transition matrix $\hat{\mat{P}}_{m,j}(\hat{\beta}^{\Policy}_{m,j}(t,n))$ for adjacent time slots is determined by $\hat{\beta}^{\Policy}_{m,j}(t,n)$ under policy $\Policy$, whose entries are elaborated as follows.
+% {\small
+% \begin{align}
+%     &\Bracket{ \hat{\mat{P}}_{m,j}(\hat{\beta}^{\Policy}_{m,j}(t,n)) }_{a,b} =
+%     \nonumber\\
+%     &\begin{cases}
+%         (1/c_{m,j})(1-\hat{\beta}^{\Policy}_{m,j}(t,n)), & b=a-1 \\
+%         (1-1/c_{m,j})\hat{\beta}^{\Policy}_{m,j}(t,n), & b=a+1 \\
+%         (1/c_{m,j})\hat{\beta}^{\Policy}_{m,j}(t,n) + (1-1/c_{m,j})(1-\hat{\beta}^{\Policy}_{m,j}(t,n)), & a=b \\
+%         0, &\text{otherwise}
+%     \end{cases}.
+% \end{align}
+% }
+
+% Hence, let $\vecG{\nu}_{m,j}(t)$ and $\mat{P}^{\Policy}_{m,j}(t)$ denote the probability vector and transition matrix for adjacent broadcast intervals, respectively.
+% Based on the previous definitions in the time slot, the explicit definition is given as
+% \begin{align}
+%     \vecG{\nu}_{m,j}(t) &\define \hat{\vecG{\nu}}_{m,j}(t,0)
+%     \\
+%     \mat{P}^{\Policy}_{m,j}(t) &\define \prod_{n=0,\dots,t_B-1} \hat{\mat{P}}_{m,j}(\hat{\beta}^{\Policy}_{m,j}(t,n)),
+%     \\
+%     \vecG{\nu}_{m,j}(t+1) &= \vecG{\nu}_{m,j}(t) \times \mat{P}^{\Policy}_{m,j}(t)
+% \end{align}
+
+% Given that the cost raised on edge servers is approximated with baseline policy $\Baseline$, the transition matrix for state transition is affected by the baseline policy and the system states of APs which could not be decoupled.
+% \begin{align}
+%     \mathbb{E}^{\Baseline}[ Q_{m,j}({t+i+1}) | \Stat(t+i)] &\define
+%         \vecG{\nu}_{m,j}(t) \mat{P}^{\Baseline}_{m,j}(t+i) \vec{h}',
+% \end{align}
+% where $\vecG{h} \define [0,1,\dots,L_{max}]$.
+
+% Moreover, we notice that under the fixed baseline policy, the arrival process on edge servers would be stationary after the maximum uploading latency from the initial interval and thus the transition matrix is invariant of system states of APs.
+% Let $\hat{\mat{P}}_{m,j}(\hat{\beta}^{\Baseline}_{m,j}(t,n))$ be the transition matrix for the stationary arrival process under baseline policy $\Baseline$ and
+% {\small
+% \begin{align}
+%     \beta_{m,j}(t,n) &\define \sum_{k\in\apSet} \lambda_{k,j}I[\omega_{k,j}(t)=m] \times \Pr\{ \xi<U_{k,m,j}\le\xi+1 \}
+%     \nonumber\\
+%     &= \sum_{k\in\apSet} \lambda_{k,j}I[\omega_{k,j}(t)=m] (\forall n),
+% \end{align}
+% }where $U_{k,m,j}$ denotes the random variable of job uploading latency (with the unit of time slot).
+
+% Let
+% $\mat{P}^{\Baseline}_{m,j}(t) \define \big( \hat{\mat{P}}_{m,j}(\hat{\beta}^{\Baseline}_{m,j}(t,n)) \big)^{t_B}$
+% denote the transition matrix under baseline policy $\Baseline$ between adjacent broadcast intervals, we could express the cost raised on edge server under baseline policy $\Baseline$ as follows.
+% {\small
+% \begin{align}
+%     &\tilde{W}^{\ES}_{m,j}\Paren{\Stat(t+1)}
+%     = \sum_{i=0,\dots,\frac{\Xi}{T}} \gamma^{i} \mathbb{E}^{\Baseline}[ Q_{m,j}({t+i+1}) ]
+%     \nonumber\\
+%     &~~~~~~~~~~~~+ \gamma^{\frac{\Xi}{T}} 
+%     \vecG{\nu}({t+\frac{\Xi}{T}+1})
+%     \Paren{
+%         \mat{I} - \gamma \mat{P}^{\Baseline}_{m,j}(t)
+%     }^{-1} \vec{g}',
+% \end{align}   
+% }
+% where $\vec{g}$ is the cost vector whose definition is given in equation (\ref{eqn:g_vec}).
+% %----------------------------------------------------------------------------------------%
+
+\section{ Proof of Lemma \ref{lemma:bound} }
+\label{append_3}
+ Since the proposed policy $\tilde{\Policy}$ is not optimal policy and $W_{\tilde{\Policy}}(\Stat)$ represents the average system cost with the proposed policy $\tilde{\Policy}$, $V(\Stat) \leq W_{\tilde{\Policy}}(\Stat)$ is straightforward.
+Let 
+{\small
+\begin{align*}
+    \Delta(t) \triangleq &
+    \sum_{t'=1}^{\infty} \gamma^{t'-1}\\\nonumber
+    &\mathbb{E}^{ \tilde{\Policy} } \Bracket{
+        g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t-1)}
+        -  g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t)}
+    }
+\end{align*}
+}
+denote the improvement of the $t$-th policy update.
+According to Proposition 2.3.3 (a) in \cite{dp-control}, we have $\Delta(t)\geq 0$, $\forall t$.
+
+Hence, we have
+{\small
+\begin{align*}
+&W_{\Baseline}(\Stat)- W_{\tilde{\Policy}}(\Stat)\\
+&= 
+\underbrace{\sum_{t'=1}^{N} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
+	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),0)}
+	- 	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t')}
+}}_{\mathfrak{F}(N)}\\
+&+\sum_{t'=N+1}^{+\infty} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
+	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),0)}
+	- 	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t')}
+}\\
+&\geq \mathfrak{F}(N) + \underbrace{\sum_{t'=N+1}^{+\infty} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
+	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),0)}
+	- 	g_{\max}
+}}_{\mathfrak{G}(N)},
+\end{align*}
+}where $g_{\max}$ denotes the upper-bound of the per-stage cost $g(\cdot)$.
+Because  $\mathfrak{F}(N)=\sum_{t=1}^{N}\gamma^{t-1}\Delta(t)\geq 0$, $\mathfrak{F}(N)$ increases as $N$ increases.
+It is obvious that $\mathfrak{G}(N)$ increases as $N$ increases, and 
+\begin{align*}
+\lim\limits_{N\to+\infty}\mathfrak{G}(N)=0
+\end{align*}
+Hence, 
+\begin{align*}
+\exists N,\ \mbox{s.t. }\ W_{\Baseline}(\Stat)- W_{\tilde{\Policy}}(\Stat)\geq \mathfrak{F}(N)-\mathfrak{G}(N) \geq 0.
+\end{align*}
+
+%----------------------------------------------------------------------------------------%

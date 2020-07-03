@@ -1,0 +1,157 @@
+% \documentclass[journal, 12pt, onecolumn, draftclsnofoot]{IEEEtran} %JSAC 20'
+% \documentclass[sigconf]{acmart} %ACM Mobihoc 20'
+% \documentclass[conference]{IEEEtran} %ICDCS 20'
+\documentclass[10pt,conference]{IEEEtran} %TMC 20'
+% \IEEEoverridecommandlockouts
+\usepackage[linesnumbered,vlined,ruled]{algorithm2e}
+\usepackage{algorithmic}
+\usepackage{etoolbox}
+\usepackage{cite}
+% \usepackage[noend]{algpseudocode}
+\usepackage{graphicx}
+\graphicspath{ {./images/} }
+\usepackage{amsmath,amsthm,amssymb,amsfonts}
+\usepackage{mathtools}
+\usepackage[dvipsnames]{xcolor}
+\usepackage{dcolumn}
+\usepackage[utf8]{inputenc}
+\usepackage{soul}
+\usepackage{array}
+\usepackage{tabulary}
+\usepackage{blindtext} %FIXME: to be removed
+% \renewcommand{\algorithmicforall}{\textbf{for all}}
+%---------------------------------------------------------------%
+\newtheorem{definition}{Definition}   % 
+\theoremstyle{definition}             % alter theorem style: <definition>
+\newtheorem{program}{Program}         % [program]
+\newtheorem{assumption}{Assumption}   % [assumption]
+\newtheorem{example}{Example}         % [example]
+\newtheorem{Algorithm}{Algorithm}     % [algorithm]
+\newtheorem{policy}{Policy}           % [policy]
+\newtheorem{problem}{Problem}         % [problem]
+\theoremstyle{remark}                 % alter theorem style: <remark>
+\newtheorem{remark}{Remark}           % [remark]
+\theoremstyle{plain}                  % alter theorem style: <plain>
+\newtheorem{theorem}{Theorem}         % [theorem]
+\newtheorem{lemma}{Lemma}             % [lemma]
+\newtheorem{corollary}{Corollary}     % [corollary]
+%---------------------------------------------------------------%
+\newcommand{\eq}{=}
+\newcommand{\domZ}{\mathbb{Z}_{*}}
+\newcommand{\domP}{\mathbb{Z}_{*}}
+\newcommand{\vecOne}{\mathbf{1}}
+\newcommand{\ind}{\mathbf{I}}
+\newcommand{\mat}{\mathbf}
+\newcommand{\Poisson}{\text{Poisson}}
+\newcommand{\Bernoulli}{\text{Bernoulli}}
+\newcommand{\define}{\triangleq}
+\newcommand{\leadto}{\Rightarrow}
+\newcommand{\vecG}{\boldsymbol}
+\renewcommand{\vec}{\mathbf}
+\DeclarePairedDelimiter{\set}{\{}{\}}
+\DeclarePairedDelimiter{\norm}{|}{|}
+\DeclarePairedDelimiter{\Inorm}{\|}{\|_1}
+\DeclarePairedDelimiter{\Paren}{\bigg(}{\bigg)}
+\DeclarePairedDelimiter{\Bracket}{\bigg[}{\bigg]}
+\DeclarePairedDelimiter{\Brace}{\bigg\{}{\bigg\}}
+%---------------------------------------------------------------%
+\newcommand{\fixit}[1]{{\leavevmode\color{red}#1}}
+\newcommand{\comments}[1]{{\leavevmode\color{blue}#1}}
+\newcommand{\accept}[1]{#1}
+\newcommand{\deny}[1]{}
+\newcommand{\delete}[2]{}
+\newcommand{\needref}[1]{\text{[#1]}}
+%---------------------------------------------------------------%
+\newcommand{\AP}{\dagger}
+\newcommand{\ES}{\ddagger}
+\newcommand{\apSet}{\mathcal{K}}
+\newcommand{\esSet}{\mathcal{M}}
+\newcommand{\ccSet}{\mathcal{X}}
+\newcommand{\jSpace}{\mathcal{J}}
+\newcommand{\Stat}{\mathbf{S}}
+\newcommand{\Obsv}{\mathcal{Y}}
+\newcommand{\Policy}{\vecG{\Omega}}
+\newcommand{\Delay}{\vecG{\mathcal{D}}}
+\newcommand{\Baseline}{\vecG{\Pi}}
+\newcommand{\algname}{Solver}
+
+\newcommand{\wangr}[1]{{\leavevmode\color{orange}#1}}
+\newcommand{\hongyc}[1]{{\leavevmode\color{purple}#1}}
+\newcommand{\tann}[1]{{\leavevmode\color{blue}#1}}
+%---------------------------------------------------------------%
+\newcommand{\brlatency}{signaling latency}
+
+%---------------------------------------------------------------%
+% \def\BibTeX{{\rm B\kern-.05em{\sc i\kern-.025em b}\kern-.08em
+%     T\kern-.1667em\lower.7ex\hbox{E}\kern-.125emX}}
+%---------------------------------------------------------------%
+
+\begin{document}
+    \title{Distributed Job Dispatching in Edge Computing Networks with Random Uploading Latency: A Low-Complexity POMDP Approach
+    }
+
+    \author{
+        Yuncong~Hong,%~\IEEEmembership{Student Member,~IEEE,}
+        Bojie~Lv,%~\IEEEmembership{Student Member,~IEEE,}
+        Rui~Wang,%~\IEEEmembership{Member,~IEEE,}
+        Haisheng~Tan,%~\IEEEmembership{Senior Member,~IEEE,}
+        Zhenhua~Han,%~\IEEEmembership{Member,~IEEE,}
+        and~Francis~C.M.~Lau%~\IEEEmembership{Member,~IEEE,}
+    }%
+    % \author{
+    %     \IEEEauthorblockN{
+    %         Yuncong Hong\IEEEauthorrefmark{1}\IEEEauthorrefmark{2},
+    %         Bojie Lv\IEEEauthorrefmark{1},
+    %         Rui Wang\IEEEauthorrefmark{1},
+    %         Haisheng Tan\IEEEauthorrefmark{3},
+    %         Zhenhua Han\IEEEauthorrefmark{2},
+    %         Francis C.M. Lau\IEEEauthorrefmark{2}
+    %     }
+    %     \IEEEauthorblockA{\IEEEauthorrefmark{1}
+    %         Department of Electrical and Electronic Engineering, Southern University of Science and Technology, Shenzhen, China \\
+    %     }
+    %     \IEEEauthorblockA{\IEEEauthorrefmark{2}
+    %         Department of Computer Science, The University of Hong Kong, Hong Kong, China \\
+    %     }
+    %     \IEEEauthorblockA{\IEEEauthorrefmark{3}
+    %        LINKE Lab, University of Science and Technology of China, Hefei, China \\
+    %     }
+    % }
+    % \thanks{Manuscript received April 19, 2005; revised August 26, 2015.}}
+
+    % \markboth{Journal of \LaTeX\ Class Files,~Vol.~14, No.~8, August~2015}%
+    % {Shell \MakeLowercase{\textit{et al.}}: Bare Demo of IEEEtran.cls for Computer Society Journals}
+
+    \maketitle
+    
+    \input{src/00-abstract}    
+    \input{src/01-intro}
+    % \input{src/02a-background}
+    % \input{src/02b-motivation}
+
+    \input{src/03a-model}
+    \input{src/03b-formulation}
+
+    \input{src/04-algorithm}
+    \input{src/05-evaluation}
+    \input{src/06-conclusion}
+
+    \input{src/99-appendix}
+    % \ifCLASSOPTIONcompsoc
+    %     % The Computer Society usually uses the plural form
+    %     \section*{Acknowledgments}
+    % \else
+    %     % regular IEEE prefers the singular form
+    %     \section*{Acknowledgment}
+    % \fi
+    % The authors would like to thank...
+
+    \ifCLASSOPTIONcaptionsoff
+        \newpage
+    \fi
+
+    \bibliographystyle{IEEEtrans}
+    \bibliography{references/final.bib}
+
+    % \input{src/100-biography}
+\end{document}

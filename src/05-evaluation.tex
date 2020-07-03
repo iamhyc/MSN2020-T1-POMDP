@@ -1,0 +1,195 @@
+\section{Performance Evaluation}
+\label{sec:evaluation}
+In this section, we evaluate the performance of the proposed low-complexity dispatching policy $\tilde{\Policy}$ by numerical simulations.
+The experiment setup and performance benchmarks are elaborated in Section \ref{subsec:setup}.
+The simulation results are illustrated in Section \ref{subsec:basic}.
+The sensitivity study on parameters is also applied to provide some insights on the robustness of the proposed policy in Section \ref{subsec:advance}.
+
+\subsection{Experiment Setup}
+\label{subsec:setup}
+In the simulation, we assume that there are $K=15$ APs, $M=10$ edge servers and $J=10$ types of jobs in the system.
+The time slot duration is $20$ milliseconds and one broadcast interval consists of $t_{B}=25$ time slots, i.e., its duration is $1$ second.
+\comments{
+    The Barab\'asi-Albert (BA) model is widely-used when modeling large social networks \needref{BA model}.
+    The BA model is parameterized by $n$ and $m$ and produces a graph with $n$ vertices and $m$ edges such that the degree distribution follows a power-law.
+}
+% Each AP would have at most $3$ edge servers in its candidate set, and the adjacency matrix for generated bipartite map between APs and edge servers is illustrated in Fig.\ref{fig:bipartite}.
+
+% arbitrarily generated with: summed average arrival \emph{smaller than} summed departure rate, for each job type.
+{
+    The other parameters for signaling, job processing and uploading are generated arbitrarily following no presumed distributions.
+    Specifically, the job processing related parameters are chosen to satisfy the system stability, i.e., the average arrival rate is always smaller than the departure rate on one edge server for each job type.
+}
+The \brlatency~is a discrete random variable with an integer support from $12$ to $20$ time slots.
+The maximum uploading latency is $3$ seconds, i.e., $\Xi = 3t_B$, and the distribution of $\mathbb{U}_{k,m,j}(\Xi)$ ($\forall k\in\apSet, m\in\esSet_{k}, j\in\jSpace$) is arbitrarily generated within the support $\set{0, 1, \dots, \Xi}$.
+The expected computation time $c_{m,j}$ ($\forall m\in\esSet, j\in\jSpace$) is an integer uniformly generated in the range $[50,125]$ (with the unit of time slot) in each figure.
+Each queue for VMs on edge server is with maximum queue length $L_{max}=50$, i.e., there would be at most $50$ jobs on one edge server.
+The arrival rate in each time slot is uniformly generated from the range $[0.02, 0.03]$ for each job type at each AP in each figure.
+The discount factor $\gamma$ is $0.95$ and the penalty weight $\beta$ is $30$.
+% The arrival rate is taken as small probability with enough APs in the system, and correspondingly enough edge servers for the processing.
+
+%FIXME: need a BA-model graph
+% %-----------------------------------------------------------------------%
+% \begin{figure}[ht]                                                      %
+%     \centering                                                          %
+%     \includegraphics[width=0.45\textwidth]{sim-bipartite.pdf}           %
+%     \caption{The illustration of adjacency matrix between APs and edge servers in the simulation.}
+%     \label{fig:bipartite}                                               %
+% \end{figure}                                                            %
+% %-----------------------------------------------------------------------%
+
+%-----------------------------------------------------------------------%
+\begin{figure}[ht]                                                      %
+    \centering                                                          %
+    \includegraphics[width=0.45\textwidth]{the-bar-graph.pdf}               %
+    \caption{Illustration of performance metrics comparison with benchmarks.}
+    \label{fig:bar_plot}                                                %
+\end{figure}                                                            %
+%-----------------------------------------------------------------------%
+
+%NOTE: Benchmark Elaboration
+We also propose {three heuristic benchmarks to profile the performance of the proposed MDP policy}, which are listed as follows.
+\begin{itemize}
+    \item \textbf{Random Dispatching Policy}:
+            Randomly choose a dispatching edge server in each time slot; 
+    \item \textbf{Selfish Policy}:
+            Always choose the edge server with the minimum sum of the expected uploading time and processing time;
+    \item \textbf{Queue-aware Policy}:
+            Always choose the edge server with the minimum sum of expected uploading time, processing time and queueing time based on the observation of outdated queue states.
+\end{itemize}
+Moreover, we choose the Selfish Policy as the initial dispatching action for our proposed algorithm (Algorithm \ref{alg_1}).
+
+%NOTE: Basic Performance
+\subsection{Performance Analysis}
+\label{subsec:basic}
+% \comments{
+%     Firstly, as illustradted in Fig.\ref{fig:update}, we show that our parallel update algorithm could outperform the serial polling policy update (i.e., without subset partition Algorithm \ref{alg_0}).
+% }
+% %---------------------------------------------------------------------------------------------%
+% \begin{figure}[ht!]                                                                           %
+%     \centering                                                                                %
+%     \includegraphics[width=0.45\textwidth]{the-update-compare.pdf}                            %
+%     \caption{Compare of number of jobs in the system with parallel and serial policy update.} %
+%     \label{fig:update}                                                                        %
+% \end{figure}                                                                                  %
+% %---------------------------------------------------------------------------------------------%
+
+As illustrated in Fig.\ref{fig:bar_plot}(a), the proposed algorithm (MDP Policy) outperforms all the benchmarks in the average system cost.
+Moreover, the Queue-aware Policy has better performance than the other benchmarks due to its capability of adapting dispatching action according to the outdated observation of queueing state.
+More insights on the performance comparison are provided in Fig.\ref{fig:bar_plot}(b) and (c).
+In the former figure, the average job response times, measuring the average number of broadcast intervals from job's arrival at one AP to the completeness of computation at one edge server, are compared.
+It can be observed that the proposed policy still outperforms all the benchmarks.
+In Fig.\ref{fig:bar_plot}(c), the job dropping rates, measuring the ratio of jobs dropped by edge servers due to queue overflow, are also compared.
+\comments{
+    It is shown that the proposed policy can process the approximately the same number of jobs as Queue-aware Policy, while with the minimum average cost and job response time.
+}
+Finally, an realization of job dispatching is illustrated in Fig.\ref{fig:general_timeline}, where the number of jobs in the system is plot versus the index of broadcast interval.
+It can be observed that the proposed policy manage to keep the number of jobs in lower level, compared with the benchmarks.
+This demonstrates its high dispatching efficiency.
+
+%-----------------------------------------------------------------------------------------------%
+\begin{figure}[ht!]                                                                             %
+    \centering                                                                                  %
+    \includegraphics[width=0.45\textwidth]{the-cost-timeline.pdf}                     %
+    \caption{Illustration of number of jobs on all the APs and edge servers versus index of broadcast interval.}
+    \label{fig:general_timeline}                                                                %
+\end{figure}                                                                                    %
+%-----------------------------------------------------------------------------------------------%
+
+\subsection{Sensitivity Study}
+\label{subsec:advance}
+%-----------------------------------------------------------------------------------%
+\begin{figure*}[ht!]                                                                %
+    \centering                                                                      %
+    \begin{minipage}[b]{0.30\textwidth}                                             %
+        \includegraphics[width=\textwidth]{the-delay-fixed-cdf.pdf} \\              %
+        {(a) Fixed \brlatency~as $15$}                                              %
+        \\ %NOTE: extra filling line                                                %
+    \end{minipage}                                                                  %
+    \begin{minipage}[b]{0.30\textwidth}                                             %
+        \includegraphics[width=\textwidth]{the-delay-normal-cdf.pdf} \\             %
+        {(b) Signaling latency with small support $\set{10,11,\dots,16}$}           %
+    \end{minipage}                                                                  %
+    \begin{minipage}[b]{0.30\textwidth}                                             %
+        \includegraphics[width=\textwidth]{the-delay-full-cdf.pdf} \\               %
+        {(c) Signaling latency with large support $\set{8,9,\dots,20}$}             %
+    \end{minipage}                                                                  %
+    \caption{Algorithm Robustness versus Signaling Latency.}                        %
+    \label{fig:ss_signal}                                                           %
+\end{figure*}                                                                       %
+%-----------------------------------------------------------------------------------%
+
+
+%-------------------------------------------------------------------%
+\begin{figure}[hbt]                                                 %
+    \centering                                                      %
+    \includegraphics[width=0.45\textwidth]{the-arrival-study.pdf}   %
+    \caption{Illustration of average system cost versus the number of APs.}
+    \label{fig:ss_scale}                                            %
+\end{figure}                                                        %
+%-------------------------------------------------------------------%
+
+%-------------------------------------------------------------------%
+\begin{figure}[hbt]                                                 %
+    \centering                                                      %
+    \includegraphics[width=0.45\textwidth]{the-proc-study.pdf}      %
+    \caption{Illustration of average system cost versus the processing time distributions.}
+    \label{fig:ss_dist}                                             %
+\end{figure}                                                        %
+%-------------------------------------------------------------------%
+
+% %-------------------------------------------------------------------%
+% \begin{figure}[hbt]                                                 %
+%     \centering                                                      %
+%     \includegraphics[width=0.45\textwidth]{bar_graph.pdf}           %
+%     \caption{Illustration of impact of penalty factors on algorithms.}
+%     \label{fig:ss_penalty}                                          %
+% \end{figure}                                                        %
+% %-------------------------------------------------------------------%
+
+%NOTE: sensitivity study
+\textbf{Signaling Latency.}
+The simulation results with different distributions of \brlatency~$\mathcal{D}_{k}$ ($\forall k\in\apSet$) are illustrated in Fig.\ref{fig:ss_signal}, where the cumulative distribution function (CDF) of the job number in the system is plotted.
+Specifically, the \brlatency~of all the APs is set to zero and $20$ time slots in Fig.\ref{fig:ss_signal}(a) and Fig.\ref{fig:ss_signal}(c), respectively, and the \brlatency~is a random variable with integer support from $10$ to $16$ time slots in Fig.\ref{fig:ss_signal}(b).
+It can be observed from Fig.\ref{fig:ss_signal}(a) and Fig.\ref{fig:ss_signal}(c) that, with the increasing \brlatency, the performance of Queue-aware Policy becomes worse.
+It outperforms Random Policy in Fig.5(a) with zero \brlatency~(achieving a smaller number of jobs in the system), and becomes worse in Fig.5(c) with large \brlatency.
+This demonstrates that the Queue-aware Policy is sensitive to the \brlatency.
+In all the figures, the proposed policy performs better than the benchmarks, which demonstrates the robustness of its performance versus signaling latency.
+
+\textbf{Arrival rate.} \comments{(task arrival density)}
+\comments{
+    We adjust the task arrival density by proportionally re-sizing the \emph{timestamp} field of the Google Cluster data set.
+}
+The average system cost versus the number of APs is illustrated in Fig.\ref{fig:ss_scale}.
+With the increasing AP numbers, the average system cost increases in all the benchmarks and our proposed policy.
+It can be observed that the proposed policy has better performance than the benchmarks for all numbers of APs.
+Moreover, the performance gain becomes significant when the computation load is heavy ($K$ is large).
+This demonstrates the dispatching efficiency of the proposed policy with heavy load.
+On the other hand, the gain is negligible for light load ($K=3$), where the computation capability is sufficient and dispatcher optimization may not be necessary.
+
+\textbf{Processing Time Distributions.}
+The simulation results of various distributions of processing time are illustrated in Fig.\ref{fig:ss_dist}, where the $c_{m,j}$ of the processing time distribution $\mathbb{G}(1/c_{m,j})$ ($\forall m\in\esSet,j\in\jSpace$) is generated within different ranges.
+Generally speaking, with the increasing average processing time, the average system cost increases in all the benchmarks and our proposed policy.
+The simulation results are consistent with that in Fig.\ref{fig:ss_scale}.
+It can be observed that the proposed policy has better performance than the benchmarks.
+Moreover, the performance gain becomes significant when the computation time is long (the computation load is heavy).
+On the other hand, the gain is negligible for short computation time (the computation load is light).
+
+\textbf{Number of Edge Servers.}
+\comments{It would show small performance gap when increasing the placement of edge servers, because the affect of \brlatency would decrease.}
+
+%----------------------------------------------------------------------------------------%
+\delete{v20}{
+    The CDF of cost is illustrated in Fig.\ref{fig:cdf_cost} where the cost of \emph{SQF policy} is nearly the same as the \emph{selfish policy}, however, the \emph{SQF policy} actually have very poor job departure rate (, throughput) compared with the other's.
+    This is because the broadcast information is periodically and outdated, and SQF could not handle the penalty brought by job rejection properly.
+    And we take \emph{CDF of number of jobs} other than \emph{CDF of cost} which could better reflect the performance of the average JCT target in the simulation when job rejection considered.
+}
+\delete{v20.2}{
+    As illustrated in Fig.\ref{fig:general_timeline}, the simulation results straightly show that the proposed algorithm outperforms other benchmarks all the time with less pending jobs in the system, and the system converges fast from the start of the time.
+    The detailed analysis is provided in Fig.\ref{fig:bar_plot} where three metrics are taken to demonstrate different profiles of the benchmarks.
+    Firstly, the \emph{average cost} in Fig.\ref{fig:bar_plot}(a) shows that the proposed algorithm collects less cost than other algorithms within the same time duration.
+    % Moreover, 
+    Secondly, the \emph{average JCT} of all the jobs in Fig.\ref{fig:bar_plot}(b) resembles the shape of Fig.\ref{fig:bar_plot}(a) which proves the correctness of the cost function selection.
+    Finally, The \emph{average throughput} in Fig.\ref{fig:bar_plot}(c) is defined as the division of the total number of computed jobs (i.e., the jobs being accepted by edge servers and finishing the computation) over the time duration, and the results show that the proposed algorithm have the most of jobs computed in the system.
+}
+%----------------------------------------------------------------------------------------%
