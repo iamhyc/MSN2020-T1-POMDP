@@ -24,12 +24,14 @@ In this paper, we would like to shed some lights on the above challenging distri
 Our main contributions in this new optimization scenario are summarized as follows.
 %FIXME: the expression of contributions 
 \begin{itemize}
-    \item We propose a novel low-complexity distributed solution framework for the dispatcher design at the APs, \comments{which avoids complicated POMDP solution by leverage the distributed and partial-observing attributes.}
+    \item %NOTE: novel solution framework
+    We propose a novel low-complexity distributed solution framework for the dispatcher design at the APs, \comments{which avoids complicated POMDP solution by leverage the distributed and partial-observing attributes.}
     % Different from the conventional iteration for the value function of the Bellman's equations where global system state is requested in numerical calculation,
     % we directly derive the expression of approximate value function and the distributed dispatching policies at all the edge servers which can be facilitated via partial and local knowledge of the approximate value function.
     % Thus, the complicated POMDP solution is avoided.
     To our best knowledge, this is the first work to address the cooperative distributed multi-agent optimization problem {with outdated and partial information} under MDP framework.
-    \item We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above novel solution framework. In the conventional approximate MDP methods, the performance is usually evaluated via numerical method, and it is hard to obtain analytical performance bound.
+    \item %NOTE: performance guarantee
+    We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above novel solution framework. In the conventional approximate MDP methods, the performance is usually evaluated via numerical method, and it is hard to obtain analytical performance bound.
 \end{itemize}
 
 The remainder of this paper is organized as follows.
@@ -83,7 +85,10 @@ Hence, the existence of \brlatency~may not raise significant challenge to the al
 However, the design of distributed dispatchers with \brlatency~could be more challenging.
 For example, the signaling latencies at distributed dispatchers could be different, and the synchronization of their dispatching decisions become infeasible.
 %FIXME: a motivating example needed
-% A motivating example. (about AoI, about partially observable)
+\comments{
+    why distributed: hard for fully observable (given information sharing/broadcast in edge networks); 
+    why hard to handle under MDP framework: POMDP problem, of huge complexity.
+}
 Furthermore, taking the signaling overhead and the possibility of packet drop in the consideration, it is of more practical significance favor for the distributed dispatchers to make scheduling decisions based on locally observable system state information, instead of global system state information.
 % To our best knowledge, there is no appropriate optimization framework for the distributed dispatcher design with both \brlatency~and partially observable system state information to date.
 %----------------------------------------------------------------------------------------%
