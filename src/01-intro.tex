@@ -24,7 +24,6 @@ Specifically, we consider a practical scenario where the signaling latency among
 Our main contributions in this new optimization scenario are summarized as follows.
 \begin{itemize}
     \item We propose a novel low-complexity distributed solution framework for the dispatcher design at the APs.
-    \deny{where each AP collects the information only from the APs and edge servers in close proximity and make dispatching decisions with random signaling latency.}
     Different from the conventional iteration for the value function of the Bellman's equations where global system state is requested in numerical calculation,
     we directly derive the expression of approximate value function and the distributed dispatching policies at all the edge servers which can be facilitated via partial and local knowledge of the approximate value function.
     Thus, the complicated POMDP solution is avoided.
@@ -47,21 +46,22 @@ The numerical analysis of the proposed solution is provided in Section \ref{sec:
 % Using these notations, $[\mathbf{A}]_{i,j}$ and $\mathbf{A}'$ denotes the $(i,j)$-th element and transpose of matrix $\mathbf{A}$, respectively.
 % $\mathbf{I}$ denotes the identity matrix.
 
-\section{Background}
+\section{Motivation}
 \label{sec:review}
-\delete{v1}{
-    %NOTE: resource placement (cache-like problem), service migration
-    There have been a number of works focusing on the resource allocation, job dispatching and service migration of edge computing system.
-    For example, in \cite{TON19-WangSq}, the edge servers are one-to-one bound to the base stations (BSs), and the job migration could be applied according to users' mobility traces via the backhaul network connecting the BSs.
-    However, according to a recent research \cite{INFOCOM19-WuC}, the resource re-allocation for running jobs on servers is hard to implement in practice, as it is hard for jobs migration among heterogeneous edge servers with different resource configurations.
-    Hence, it might be more important to optimize the job dispatching strategy at their arrival time.
-}
+%NOTE: resource placement (cache-like problem), service migration
+% {
+%     There have been a number of works focusing on the resource allocation, job dispatching and service migration of edge computing system.
+%     For example, in \cite{TON19-WangSq}, the edge servers are one-to-one bound to the base stations (BSs), and the job migration could be applied according to users' mobility traces via the backhaul network connecting the BSs.
+%     However, according to a recent research \cite{INFOCOM19-WuC}, the resource re-allocation for running jobs on servers is hard to implement in practice, as it is hard for jobs migration among heterogeneous edge servers with different resource configurations.
+%     Hence, it might be more important to optimize the job dispatching strategy at their arrival time.
+% }
+
 %NOTE: single-agent dispatching, single UE/server
 There have been a number of works considering the centralized job dispatching with instant and complete knowledge on the states of edge computing systems.
 For example, in order to minimize the average job response time in the worst case, the authors in \cite{tan-online} designed an online algorithm for job dispatching in edge computing systems with fixed uploading latency.
 In the scenario that BSs and edge servers are connected via software defined network (SDN), the authors in \cite{IOTJ18-FanQ} proposed a heuristic algorithm to dispatch the jobs to the closest edge servers according to geographical locations.
 Considering random jobs arrival and job offloading to a single edge server, the authors in \cite{mdp-globecom,mdp-tvt} formulate the offloading problem as an infinite-horizon Markov decision process (MDP).
-When the jobs can be dispatched to either edge servers or cloud servers with fixed uploading latency, the authors in \cite{MASS18-MengZ} formulated job dispatching problem as an integer linear programming to minimize the total uploading latency.
+% When the jobs can be dispatched to either edge servers or cloud servers with fixed uploading latency, the authors in \cite{MASS18-MengZ} formulated job dispatching problem as an integer linear programming to minimize the total uploading latency.
 In the above works, a centralized dispatcher with complete and instant knowledge of the system status was assumed in the edge computing systems, which might be impractical.
 
 Hence, there are also some works considering the distributed job dispatching in edge computing systems.
@@ -78,13 +78,12 @@ For example, the authors in \cite{JSAC17-LyuX} proposed a randomized policy via 
 In \cite{TWC18-LyuX}, the above approach was applied to the scenario that mobile devices offload jobs to each others via D2D link.
 In the above two works, there is one centralized dispatcher in the system and the objective is to stabilize the transmission queues.
 Hence, the existence of \brlatency~may not raise significant challenge to the algorithm design with Lyapunov optimization.
+
 However, the design of distributed dispatchers with \brlatency~could be more challenging.
 For example, the signaling latencies at distributed dispatchers could be different, and the synchronization of their dispatching decisions become infeasible.
-Furthermore, taking the signaling overhead and the possibility of packet drop in the consideration, it is of more practical significance favor for the distributed dispatchers to make scheduling decisions based on locally observable system state information, instead of global system state information.
-To our best knowledge, there is no appropriate optimization framework for the distributed dispatcher design with both \brlatency~and partially observable system state information to date.
-
 \comments{
     A motivating example. (about AoI, about partially observable)
-    Without loss of generanality, we assume the network topology among APs are generated following \emph{Bar\'abasi-Albert model}, and each AP could only access to the neighbor edge server within one hop (i.e., the routing for multi-hops are unacceptable for information propagation).
 }
+Furthermore, taking the signaling overhead and the possibility of packet drop in the consideration, it is of more practical significance favor for the distributed dispatchers to make scheduling decisions based on locally observable system state information, instead of global system state information.
+To our best knowledge, there is no appropriate optimization framework for the distributed dispatcher design with both \brlatency~and partially observable system state information to date.
 %----------------------------------------------------------------------------------------%

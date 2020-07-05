@@ -22,6 +22,7 @@ We refer to $\esSet_{k}$ as the \emph{candidate server set} of the $k$-th AP, an
 Different APs may have different candidate servers according to their locations in the network, as illustrated in Fig.\ref{fig:system}.
 In this edge computing network, each AP and edge server periodically broadcast their state information (the state information is defined in the Section \ref{subsec:broadcast}), and one AP updates its strategy of job dispatching when receiving the broadcast state information.
 In this paper, we shall optimize the job dispatching strategy distributed at APs with partially observable state information, where both job uploading and state information broadcasting suffer from random transmission latency.
+\comments{Without loss of generanality, we assume the network topology among APs are generated following \emph{Bar\'abasi-Albert model}, and each AP could only access to the neighbor edge server within one hop (i.e., the routing for multi-hops are unacceptable for information propagation).}
 %NOTE: [job space support and arrival process]
 Without loss of generality, it is assumed that there are $J$ types of jobs computed in this system, which are denoted via the set $\jSpace \define \set{1,\dots,J}$.
 \deny{
