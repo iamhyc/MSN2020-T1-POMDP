@@ -2,13 +2,13 @@
 \label{sec:algorithm}
 
 In this section, we shall introduce a novel approximation method to decouple the centralized optimization on the RHS of the Bellman's equations in equation (\ref{eqn:sp_0}) to each AP for arbitrary system state.
-%FIXME:
-\comments{
-    For the APs outside the conflict AP sets of each other, the update of dispatching actions at one AP will not affect the task computation originated from other APs.
-    On the other hand, for the APs within the same conflict AP set, the optimization of their dispatching actions is coupled.
-    Due to the unknown signaling latency, it is difficult for one AP (say the $k$-th AP) to predict the update of the dispatching actions at the other APs ($\forall k' \in\ccSet_{k}$).
-    Hence, cooperative optimization of dispatching actions for the APs within the same conflict AP set is infeasible.
-}
+%FIXME: fix the following comments for short
+% \comments{
+%     For the APs outside the conflict AP sets of each other, the update of dispatching actions at one AP will not affect the task computation originated from other APs.
+%     On the other hand, for the APs within the same conflict AP set, the optimization of their dispatching actions is coupled.
+%     Due to the unknown signaling latency, it is difficult for one AP (say the $k$-th AP) to predict the update of the dispatching actions at the other APs ($\forall k' \in\ccSet_{k}$).
+%     Hence, cooperative optimization of dispatching actions for the APs within the same conflict AP set is infeasible.
+% }
 In this section, we introduce an alternative algorithm to optimize the dispatching actions of one AP in a conflict AP set in each broadcast interval periodically, while other APs maintain their dispatching actions in the previous broadcast interval.
 Specifically, the proposed distributed algorithm consists of the following two steps:
 %\hongyc{(move two steps adjacent in the following subsections)}
@@ -18,7 +18,7 @@ Specifically, the proposed distributed algorithm consists of the following two s
     Moreover, the analytical performance bound is also derived in Section \ref{subsec:analysis}.
 \end{enumerate}
 As a remark notice that solving the value function and then the RHS of the Bellman's equations are the two standard steps to solve an MDP problem with complete knowledge on system state.
-In our proposed approximate solution framework, we extend this procedure to the POMDP problem in P1 by exploiting the structure of partially connected edge computing systems.
+In our proposed approximate solution framework, we extend this procedure to the POMDP problem in P1 by exploiting the structure of \comments{partially observed edge computing networks}.
 To the best knowledge of authors, a POMDP can hardly be solved via the Bellman's equations of full system state knowledge in the existing literature.
 
 \subsection{Baseline Policy and Approximate Value Function}
@@ -170,7 +170,7 @@ Hence, we first define the following sequence of AP subsets, where each subset a
         \label{eqn:subset_disjoint}
     \end{align}
 \end{definition}
-The condition in equation (\ref{eqn:subset_cup}) is to ensure all the APs can update their dispatching actions periodically; whereas the condition in equation (\ref{eqn:subset_disjoint}) is to ensure APs in the conflict AP sets of each other will not update their dispatching actions in the same broadcast interval.
+The condition in equation (\ref{eqn:subset_cup}) is to ensure all the APs can update their dispatching actions periodically, whereas the condition in equation (\ref{eqn:subset_disjoint}) is to ensure APs in the conflict AP sets of each other will not update their dispatching actions in the same broadcast interval.
 For example, as illustrated in Fig.\ref{fig:system}, the AP set $\apSet$ could be decomposed of two subsets as $\set{1,3}$ and $\set{2}$.
 The subset partition is not trivial and {a partition minimizing the update period $N$ is preferred}.
 A heuristic greedy algorithm is given in Algorithm \ref{alg_0}.
@@ -293,7 +293,7 @@ This conclusion is summarized below.
         W_{\tilde{\Policy}}(\Stat) \define
         \sum_{t'=1}^{\infty} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
             g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t')} \Big| \Stat(1)=\Stat
-        },
+        },  
     \end{align}
     we have
     \begin{align}
@@ -304,7 +304,8 @@ This conclusion is summarized below.
     \end{align}
 \end{lemma}
 \begin{proof}
-    Please refer to Appendix \ref{append_3}.
+    %FIXME: fix with small inspiration
+    \comments{The complete proof is provided in another version, and here the short inspiration is given.}
 \end{proof}
 Therefore, $W_{\Baseline}(\Stat)$ derived in equation (\ref{eqn:baseline}) can be used as the analytical cost upper bound of the proposed policy $\Baseline$.
 Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fixed service edge server for each AP, as long as the {static dispatching policy} is used as the baseline policy.

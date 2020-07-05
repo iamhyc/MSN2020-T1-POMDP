@@ -99,24 +99,23 @@ This demonstrates its high dispatching efficiency.
 \subsection{Sensitivity Study}
 \label{subsec:advance}
 %-----------------------------------------------------------------------------------%
-\begin{figure*}[ht!]                                                                %
+\begin{figure}[ht!]                                                                %
     \centering                                                                      %
-    \begin{minipage}[b]{0.30\textwidth}                                             %
+    \begin{minipage}[b]{0.15\textwidth}                                             %
         \includegraphics[width=\textwidth]{the-delay-fixed-cdf.pdf} \\              %
         {(a) Fixed \brlatency~as $15$}                                              %
-        \\ %NOTE: extra filling line                                                %
     \end{minipage}                                                                  %
-    \begin{minipage}[b]{0.30\textwidth}                                             %
+    \begin{minipage}[b]{0.15\textwidth}                                             %
         \includegraphics[width=\textwidth]{the-delay-normal-cdf.pdf} \\             %
-        {(b) Signaling latency with small support $\set{10,11,\dots,16}$}           %
+        {(b) Fixed \brlatency~as $15$}           %
     \end{minipage}                                                                  %
-    \begin{minipage}[b]{0.30\textwidth}                                             %
+    \begin{minipage}[b]{0.15\textwidth}                                             %
         \includegraphics[width=\textwidth]{the-delay-full-cdf.pdf} \\               %
-        {(c) Signaling latency with large support $\set{8,9,\dots,20}$}             %
+        {(c)Fixed \brlatency~as $15$}             %
     \end{minipage}                                                                  %
     \caption{Algorithm Robustness versus Signaling Latency.}                        %
     \label{fig:ss_signal}                                                           %
-\end{figure*}                                                                       %
+\end{figure}                                                                       %
 %-----------------------------------------------------------------------------------%
 
 
@@ -156,7 +155,7 @@ It outperforms Random Policy in Fig.5(a) with zero \brlatency~(achieving a small
 This demonstrates that the Queue-aware Policy is sensitive to the \brlatency.
 In all the figures, the proposed policy performs better than the benchmarks, which demonstrates the robustness of its performance versus signaling latency.
 
-\textbf{Arrival rate.} \comments{(task arrival density)}
+\textbf{Task Arrival Density.}
 \comments{
     We adjust the task arrival density by proportionally re-sizing the \emph{timestamp} field of the Google Cluster data set.
 }

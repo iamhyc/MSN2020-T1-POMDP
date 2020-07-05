@@ -20,13 +20,14 @@ Secondly, the cooperation of distributed dispatchers suffers from significant si
 
 %NOTE: Our contributions
 In this paper, we would like to shed some lights on the above challenging distributed dispatcher design via POMDP problem formulation and a novel low-complexity approximate MDP solution framework.
-Specifically, we consider a practical scenario where the signaling latency among APs and edge servers and job uploading latency from APs to edge servers are assumed to be random, and each AP can only {receive the broadcast state information from part of the APs} with random latency (i.e., the global system state is not available at the APs).
+% Specifically, we consider a practical scenario where the signaling latency among APs and edge servers and job uploading latency from APs to edge servers are assumed to be random, and each AP can only {receive the broadcast state information from part of the APs} with random latency (i.e., the global system state is not available at the APs).
 Our main contributions in this new optimization scenario are summarized as follows.
+%FIXME: the expression of contributions 
 \begin{itemize}
-    \item We propose a novel low-complexity distributed solution framework for the dispatcher design at the APs.
-    Different from the conventional iteration for the value function of the Bellman's equations where global system state is requested in numerical calculation,
-    we directly derive the expression of approximate value function and the distributed dispatching policies at all the edge servers which can be facilitated via partial and local knowledge of the approximate value function.
-    Thus, the complicated POMDP solution is avoided.
+    \item We propose a novel low-complexity distributed solution framework for the dispatcher design at the APs, \comments{which avoids complicated POMDP solution by leverage the distributed and partial-observing attributes.}
+    % Different from the conventional iteration for the value function of the Bellman's equations where global system state is requested in numerical calculation,
+    % we directly derive the expression of approximate value function and the distributed dispatching policies at all the edge servers which can be facilitated via partial and local knowledge of the approximate value function.
+    % Thus, the complicated POMDP solution is avoided.
     To our best knowledge, this is the first work to address the cooperative distributed multi-agent optimization problem {with outdated and partial information} under MDP framework.
     \item We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above novel solution framework. In the conventional approximate MDP methods, the performance is usually evaluated via numerical method, and it is hard to obtain analytical performance bound.
 \end{itemize}
@@ -81,9 +82,8 @@ Hence, the existence of \brlatency~may not raise significant challenge to the al
 
 However, the design of distributed dispatchers with \brlatency~could be more challenging.
 For example, the signaling latencies at distributed dispatchers could be different, and the synchronization of their dispatching decisions become infeasible.
-\comments{
-    A motivating example. (about AoI, about partially observable)
-}
+%FIXME: a motivating example needed
+% A motivating example. (about AoI, about partially observable)
 Furthermore, taking the signaling overhead and the possibility of packet drop in the consideration, it is of more practical significance favor for the distributed dispatchers to make scheduling decisions based on locally observable system state information, instead of global system state information.
-To our best knowledge, there is no appropriate optimization framework for the distributed dispatcher design with both \brlatency~and partially observable system state information to date.
+% To our best knowledge, there is no appropriate optimization framework for the distributed dispatcher design with both \brlatency~and partially observable system state information to date.
 %----------------------------------------------------------------------------------------%
