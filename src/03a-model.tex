@@ -1,20 +1,25 @@
 \section{System Model}
 \label{sec:model}
-In this section, we elaborate the model of edge computing networks with random job arrivals, uploading latency and computation time,
+In this section, we elaborate the model of edge computing systems with random job arrivals, uploading latency and computation time,
 as well as the signaling mechanism with periodic broadcast.
 % as well as the signaling model with periodic broadcast which introduce the job dispatching actions making under partially observable system state at each AP.
 %----------------------------------------------------------------------------------------%
 \subsection{System Model}
-\begin{figure*}[htp!]
+\begin{figure}[htp!]
     \centering
-    \includegraphics[width=0.60\textwidth]{system-model.pdf}
+    \includegraphics[width=0.45\textwidth]{system-model.pdf}
     \caption{The Illustration of System Model}
     \label{fig:system}
-\end{figure*}
-
-We consider an edge computing system with $K$ Access Points (APs) and $M$ edge servers, which are connected in a network as illustrated in Fig.\ref{fig:system}.
-The sets of APs and edge servers are denoted as $\apSet \define \set{1,\dots,K}$ and $\esSet \define \set{1,\dots,M}$, respectively.
-The communication latency among these APs and edge servers is random.
+\end{figure}
+\comments{
+    We consider an edge computing system with $K$ Access Points (APs) and $M$ edge servers, and $1$ cloud server as illustrated  in Fig.\ref{fig:system}
+    The set of APs and servers set are denoted as $\apSet \define \set{1,\dots,K}$ and $\esSet \define \set{0,\dots,M}$, respectively.
+    Specifically, the zero-th server denotes the cloud server, and the remaining elements of $\esSet$ denote the edge servers.
+    The placement of edge servers are assumed co-located with APs
+    % which would suffer from heavy communication overhead with other AP nodes but with powerful computation capacity.
+}
+% The sets of APs and edge servers are denoted as $\apSet \define \set{1,\dots,K}$ and $\esSet \define \set{1,\dots,M}$, respectively.
+% The communication latency among these APs and edge servers is random.
 Each AP collects the computation jobs from the mobile users within its coverage, and makes dispatching action on the processing edge servers for each job.
 It is assumed that the $k$-th AP only dispatches the computation jobs to the edge servers within a certain number of hops.
 Let $\esSet_{k} \subseteq \esSet$ be the subset of edge servers which can compute the jobs from the $k$-th AP, and $\apSet_{m}$ be the subset of APs, which may upload jobs to the $m$-th edge server.
@@ -160,45 +165,3 @@ An example is given below to demonstrate how the \brlatency~affects the receptio
     At the beginning of the $(t+1)$-th broadcast interval, it will firstly keep the previous actions, and then updates the actions $\mathcal{D}_{1}(t+1)$ time slots later based on $\Stat_{1}(t+1)$ which is denotes as $\mathcal{A}_{1}(t+2)$.
     The signaling latency $\mathcal{D}_1(t)$ and $\mathcal{D}_1(t+1)$ can be different.
 \end{example}
-
-% The major notations used throughout this paper are summarized as in Table \ref{table:symbols}.
-% \begin{table}[htp!]
-%     % \footnotesize
-%     \centering
-%     \caption{Table of major notations and their descriptions throughout this paper.}
-%     \label{table:symbols}
-%     \begin{tabulary}{0.9\linewidth}{|p{1.8cm}|L|}
-%         \hline
-%         Notation                        & Description \\
-%         \hline
-%         $\mathcal{K}$                   & The denotation of AP set \\
-%         $\mathcal{M}$                   & The denotation of edge server set \\
-%         $\mathcal{K}_{m}$               & The potential AP set of the $m$-th edge server \\
-%         $\mathcal{M}_{k}$               & The candidate edge server set of the $k$-th AP \\
-%         $\ccSet_{k}$                    & The conflict AP set of the $k$-th AP  \\
-%         $\mathcal{J}$                   & The denotation of job types set \\
-%         $\lambda_{k,j}$                 & The average arrival job rate for the type-$j$ job on the $k$-th AP \\
-%         $c_{m,j}$                       & The average computation time for the type-$j$ job on the $m$-th edge server \\
-%         $L_{max}$                       & The maximum job number for each VM \\
-%         $t_B$                           & The number of time slots of a broadcast interval \\
-%         $\Xi$                           & The maximum uploading time \\
-%         $\xi$                           & The index of time slot of uploading time for one job \\
-%         $\mathbb{U}_{k,m,j}(\Xi)$       & The uploading latency distribution of the type-$j$ jobs from the $k$-th AP to the $m$-th edge server \\
-%         $\mathcal{R}_{k}(t)$            & The LSI of the $k$-th AP at the beginning of the $t$-th broadcast interval \\
-%         $\mathcal{Q}_{m}(t)$            & The LSI of the $m$-th edge server at the beginning of the $t$-th broadcast interval \\
-%         $D_{k}(t)$                      & The \brlatency~for the $k$-th AP at the $t$-th broadcast interval \\
-%         $\mathbb{D}(t)$                 & The vector of all \brlatency~ at the $t$-th broadcast interval \\
-%         $\Stat_{k}(t)$                  & The OSI of the $k$-th PA at the $t$-th broadcast interval \\
-%         $\Stat(t)$                      & The GSI at the $t$-th broadcast interval \\
-%         $\omega_{k,j}(t)$               & The dispatching action for type-$j$ job on the $k$-th AP at the beginning of $t$-th broadcast interval \\
-%         $\mathcal{A}_{k}(t)$               & The dispatching actions of the $k$-th AP at the beginning of $t$-th broadcast interval \\
-%         $\Policy(\Stat(t),\Delay(t))$   & The aggregation of individual policy all APs \\
-%         $\Baseline(\Stat(t),\Delay(t))$ & The proposed baseline policy \\
-%         $\gamma$                        & The discount factor \\
-%         $\beta$                         & The weight of overflow penalty \\
-%         $\mathcal{Y}_{n}$               & The $n$-th subset partition in which the APs update their dispatching actions parallelly \\
-%         $\tilde{\mathcal{A}}(t)$        & The aggregation of dispatching actions of the APs in the subset $\mathcal{Y}_{n}$, where $n \define t \pmod{N}$  \\
-%         $\hat{\mathcal{A}}(t)$          & The aggregation of dispatching actions of the APs not in the subset $\mathcal{Y}_{n}$, where $n \define t \pmod{N}$ \\
-%         \hline
-%     \end{tabulary}
-% \end{table}

@@ -2,9 +2,8 @@
 \label{sec:algorithm}
 
 In this section, we shall introduce a novel approximation method to decouple the centralized optimization on the RHS of the Bellman's equations in equation (\ref{eqn:sp_0}) to each AP for arbitrary system state.
-\comments{Thus, the optimization of their dispatching actions can be decoupled.}
-%FIXME: temporarily delete those descriptions
-\delete{v1}{
+%FIXME:
+\comments{
     For the APs outside the conflict AP sets of each other, the update of dispatching actions at one AP will not affect the task computation originated from other APs.
     On the other hand, for the APs within the same conflict AP set, the optimization of their dispatching actions is coupled.
     Due to the unknown signaling latency, it is difficult for one AP (say the $k$-th AP) to predict the update of the dispatching actions at the other APs ($\forall k' \in\ccSet_{k}$).
