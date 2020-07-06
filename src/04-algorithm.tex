@@ -39,12 +39,14 @@ Specifically, the baseline policy is elaborated below.
     \end{align}
     }
     where
+    {\small
     \begin{align}
         \Pi_{k}\Paren{\Stat_{k}(t),\mathcal{D}_{k}(t)}
         &= \Brace{
             {\omega}_{k,j}(t+1) \Big| \forall j\in\jSpace
         }, \forall k\in\apSet.
     \end{align}
+    }
 \end{policy}
 
 Let $W_{\Baseline}(\cdot)$ be the value function of the baseline policy $\Baseline$, we shall approximate the value function of the optimal policy $V(\cdot)$ via $W_{\Baseline}$, i.e.,
