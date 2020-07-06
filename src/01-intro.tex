@@ -32,7 +32,8 @@ Our main contributions in this new optimization scenario are summarized as follo
     Thus, the complicated POMDP solution is avoided.
     To our best knowledge, this is the first work to address the cooperative distributed multi-agent optimization problem with outdated and partial information under MDP framework.
     \item %NOTE: performance guarantee
-    We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above novel solution framework. In the conventional approximate MDP methods, the performance is usually evaluated via numerical method, and it is hard to obtain analytical performance bound.
+    We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above novel solution framework.
+    In the conventional approximate MDP methods, the performance is usually evaluated via numerical method, and it is hard to obtain analytical performance bound.
 \end{itemize}
 
 The remainder of this paper is organized as follows.
@@ -85,11 +86,9 @@ Hence, the existence of \brlatency~may not raise significant challenge to the al
 
 However, the design of distributed dispatchers with \brlatency~could be more challenging.
 For example, the signaling latencies at distributed dispatchers could be different, and the synchronization of their dispatching decisions become infeasible.
-%FIXME: a motivating example needed
-% \comments{
-%     why distributed: hard for fully observable (given information sharing/broadcast in edge networks); 
-%     why hard to handle under MDP framework: POMDP problem, of huge complexity.
-% }
-% Furthermore, taking the signaling overhead and the possibility of packet drop in the consideration, it is of more practical significance favor for the distributed dispatchers to make scheduling decisions based on locally observable system state information, instead of global system state information.
-% To our best knowledge, there is no appropriate optimization framework for the distributed dispatcher design with both \brlatency~and partially observable system state information to date.
+Furthermore, taking the signaling overhead in consideration, it is of more practical significance favor for the distributed dispatchers to make decisions based on locally observed system state information, instead of global system state information.
+To our best knowledge, there is no appropriate optimization framework for the distributed dispatcher design with both \brlatency~and partially observable system state information to date.
+
+% why distributed: hard for fully observable (given information sharing/broadcast in edge networks); 
+% why hard to handle under MDP framework: POMDP problem, of huge complexity.
 %----------------------------------------------------------------------------------------%
