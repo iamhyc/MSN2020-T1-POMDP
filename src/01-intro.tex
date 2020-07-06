@@ -17,19 +17,20 @@ However, there are only a few works considering random signaling latency of coop
 In fact, it is challenging to consider random transmission latency in both job delivery and signaling.
 Firstly, the centralized dispatcher design is discouraged for outdated system information and unpredictable signaling latency.
 Secondly, the cooperation of distributed dispatchers suffers from significant signaling overhead, and the random transmission latency causes the inconsistency of system information at different dispatchers.
+\comments{
+    Last but not least, 
+}%
 
 %NOTE: Our contributions
 In this paper, we would like to shed some lights on the above challenging distributed dispatcher design via POMDP problem formulation and a novel low-complexity approximate MDP solution framework.
 Specifically, we consider a practical scenario where the signaling latency among APs and edge servers and job uploading latency from APs to edge servers are assumed to be random, and each AP can only receive the broadcast state information from part of the APs with random latency (i.e., the global system state is not available at the APs).
 Our main contributions in this new optimization scenario are summarized as follows.
-%FIXME: the expression of contributions 
 \begin{itemize}
     \item %NOTE: novel solution framework
-    We propose a novel low-complexity distributed solution framework for the dispatcher design at the APs, \comments{which avoids complicated POMDP solution by leverage the distributed and partial-observing attributes.}
-    % Different from the conventional iteration for the value function of the Bellman's equations where global system state is requested in numerical calculation,
+    We propose a novel low-complexity distributed solution framework for the dispatcher design at the APs. \comments{ By leveraging partial observation at each dispatcher, we derive the expression of approximate value function under MDP framework and decouple the optimization problem onto each AP.}
     % we directly derive the expression of approximate value function and the distributed dispatching policies at all the edge servers which can be facilitated via partial and local knowledge of the approximate value function.
-    % Thus, the complicated POMDP solution is avoided.
-    To our best knowledge, this is the first work to address the cooperative distributed multi-agent optimization problem {with outdated and partial information} under MDP framework.
+    Thus, the complicated POMDP solution is avoided.
+    To our best knowledge, this is the first work to address the cooperative distributed multi-agent optimization problem with outdated and partial information under MDP framework.
     \item %NOTE: performance guarantee
     We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above novel solution framework. In the conventional approximate MDP methods, the performance is usually evaluated via numerical method, and it is hard to obtain analytical performance bound.
 \end{itemize}

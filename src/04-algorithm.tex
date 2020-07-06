@@ -78,86 +78,86 @@ Their definitions are given below.
 \end{align}
 }
 
-Moreover, the explicit expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and $\tilde{W}^{\ES}_{m,j}(\Stat(t+1))$ are derived in the following lemmas, respectively.
+% Moreover, the explicit expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and $\tilde{W}^{\ES}_{m,j}(\Stat(t+1))$ are derived in the following lemmas, respectively.
 
-\begin{lemma}[Analytical Expression of $\tilde{W}^{\AP}_{k,m,j}$]
-    \label{lemma:w_ap}
-    {\small
-    \begin{align}
-        &\tilde{W}^{\AP}_{k,m,j}\Paren{\Stat(t+1)} =
-        \bigg\|
-            \vecG{\Theta}^{(k, \Baseline)}_{m,j}(t+1) \times
-            \Bracket{
-                \mat{I} - \gamma \Gamma^{(k)}_{m,j}
-            }^{-1}
-        \bigg\|,
-        \label{w_ap}
-    \end{align}
-    }
-    where $\mat{I}$ is the identity matrix, and $\vecG{\Theta}^{(k, \Baseline)}_{m,j}(t)$ and $\Gamma^{(k)}_{m,j}$ are defined below.
-    \begin{itemize}
-        \item {\small $\vecG{\Theta}^{(k,\Baseline)}_{m,j}(t) \define \Bracket{
-            \theta^{(k,\Baseline)}_{m,j}(0,t),
-            \theta^{(k,\Baseline)}_{m,j}(1,t),
-            \dots,
-            \theta^{(k,\Baseline)}_{m,j}(\Xi,t)
-            }$},
-        where 
-        \begin{align}
-            \theta^{(k,\Baseline)}_{m,j}(\xi,t) \define 
-            \begin{cases}
-                \lambda_{k,j} I[\omega_{k,j}(t)=m], & \xi=0
-                \\
-                \Pr\{R^{(k)}_{m,j}(\xi,t,0) = 1\}, & \text{otherwise}
-            \end{cases}
-        \end{align}
-        denotes the probability that there is one type-$j$ job have been delivered from $k$-th AP to $m$-th edge server for $\xi$ time slots at the very beginning of the $t$-th broadcast interval, when the baseline policy $\Baseline$ is adopted;
-        \item $\Gamma^{(k)}_{m,j} \in \mathbb{R}^{(\Xi+1)\times(\Xi+1)}$ denotes the transition matrix of $\vecG{\Theta}^{(k,\Baseline)}_{m,j}(t)$ ($\forall t$) under baseline policy $\Baseline$. %whose entries are provided in Appendix \ref{append_1}.
-    \end{itemize}
-\end{lemma}
-\begin{proof}
-    \comments{Due to page limits, the proof shall be provided in another full version online.}
-    % Please refer to Appendix \ref{append_1}.
-\end{proof}
+% \begin{lemma}[Analytical Expression of $\tilde{W}^{\AP}_{k,m,j}$]
+%     \label{lemma:w_ap}
+%     {\small
+%     \begin{align}
+%         &\tilde{W}^{\AP}_{k,m,j}\Paren{\Stat(t+1)} =
+%         \bigg\|
+%             \vecG{\Theta}^{(k, \Baseline)}_{m,j}(t+1) \times
+%             \Bracket{
+%                 \mat{I} - \gamma \Gamma^{(k)}_{m,j}
+%             }^{-1}
+%         \bigg\|,
+%         \label{w_ap}
+%     \end{align}
+%     }
+%     where $\mat{I}$ is the identity matrix, and $\vecG{\Theta}^{(k, \Baseline)}_{m,j}(t)$ and $\Gamma^{(k)}_{m,j}$ are defined below.
+%     \begin{itemize}
+%         \item {\small $\vecG{\Theta}^{(k,\Baseline)}_{m,j}(t) \define \Bracket{
+%             \theta^{(k,\Baseline)}_{m,j}(0,t),
+%             \theta^{(k,\Baseline)}_{m,j}(1,t),
+%             \dots,
+%             \theta^{(k,\Baseline)}_{m,j}(\Xi,t)
+%             }$},
+%         where 
+%         \begin{align}
+%             \theta^{(k,\Baseline)}_{m,j}(\xi,t) \define 
+%             \begin{cases}
+%                 \lambda_{k,j} I[\omega_{k,j}(t)=m], & \xi=0
+%                 \\
+%                 \Pr\{R^{(k)}_{m,j}(\xi,t,0) = 1\}, & \text{otherwise}
+%             \end{cases}
+%         \end{align}
+%         denotes the probability that there is one type-$j$ job have been delivered from $k$-th AP to $m$-th edge server for $\xi$ time slots at the very beginning of the $t$-th broadcast interval, when the baseline policy $\Baseline$ is adopted;
+%         \item $\Gamma^{(k)}_{m,j} \in \mathbb{R}^{(\Xi+1)\times(\Xi+1)}$ denotes the transition matrix of $\vecG{\Theta}^{(k,\Baseline)}_{m,j}(t)$ ($\forall t$) under baseline policy $\Baseline$. %whose entries are provided in Appendix \ref{append_1}.
+%     \end{itemize}
+% \end{lemma}
+% \begin{proof}
+%     \comments{Due to page limits, the proof shall be provided in another full version online.}
+%     % Please refer to Appendix \ref{append_1}.
+% \end{proof}
 
-\begin{lemma}[Analytical Expression of $\tilde{W}^{\ES}_{m,j}$]
-    \label{lemma:w_es}
-    {\small
-    \begin{align}
-        &\tilde{W}^{\ES}_{m,j}\Paren{\Stat(t+1)}
-    = \sum_{i=0,\dots,\frac{\Xi}{T}} \gamma^{i} \mathbb{E}^{\Baseline}[ Q_{m,j}({t+i+1}) | \Stat(t+i)]
-    \nonumber\\
-    &~~~~~~~~~~~~+ \gamma^{\frac{\Xi}{T}} 
-    \vecG{\nu}_{m,j}({t+\frac{\Xi}{T}+1})
-    \Paren{
-        \mat{I} - \gamma \mat{P}^{\Baseline}_{m,j}(t+\frac{\Xi}{T}+1)
-    }^{-1} \vec{g}',
-        \label{w_es}
-    \end{align}   
-    }
-    where $\vecG{\nu}_{m,j}(t)$, $\mat{P}_{m,j}(\beta_{m,j}(t))$, $\beta_{m,j}(t)$ and $\vec{g}$ are defined below.
-    \begin{itemize}
-        \item {\small
-        $\vecG{\nu}_{m,j}(t) \define [\Pr\{Q_{m,j}(t)=0\}, \dots, \Pr\{Q_{m,j}(t)=L_{max}\}]$
-        } denotes the PMF (probability mass function) vector of $Q_{m,j}(t)$.
-        \item $\vec{g} \in \mathbb{R}^{(L_{max}+1) \times 1}$ denotes the cost vector of edge server, and its $i$-th entry is
-        \begin{align}
-            [\vec{g}]_{i} \define 
-            \begin{cases}
-                i, & i=0,1,\dots,L_{max}-1
-                \\
-                L_{max}+\beta, & \text{otherwise}
-            \end{cases}.
-            \label{eqn:g_vec}
-        \end{align}
-        % \item The expression of $\mathbb{E}^{\Baseline}[ Q_{m,j}({t+i+1}) | \Stat(t+i)]$ is elaborated in Appendix \ref{append_2}.
-        \item $\mat{P}^{\Baseline}_{m,j}(t) \in \mathbb{R}^{(L_{max}+1) \times (L_{max}+1)}$ denotes the transition matrix of $\vecG{\nu}_{m,j}(t)$ under baseline policy $\Baseline$. %whose entries are described in Appendix \ref{append_2}.
-    \end{itemize}   
-\end{lemma}
-\begin{proof}
-    \comments{Due to page limits, the proof shall be provided in another full version online.}
-    % Please refer to Appendix \ref{append_2}.
-\end{proof}
+% \begin{lemma}[Analytical Expression of $\tilde{W}^{\ES}_{m,j}$]
+%     \label{lemma:w_es}
+%     {\small
+%     \begin{align}
+%         &\tilde{W}^{\ES}_{m,j}\Paren{\Stat(t+1)}
+%     = \sum_{i=0,\dots,\frac{\Xi}{T}} \gamma^{i} \mathbb{E}^{\Baseline}[ Q_{m,j}({t+i+1}) | \Stat(t+i)]
+%     \nonumber\\
+%     &~~~~~~~~~~~~+ \gamma^{\frac{\Xi}{T}} 
+%     \vecG{\nu}_{m,j}({t+\frac{\Xi}{T}+1})
+%     \Paren{
+%         \mat{I} - \gamma \mat{P}^{\Baseline}_{m,j}(t+\frac{\Xi}{T}+1)
+%     }^{-1} \vec{g}',
+%         \label{w_es}
+%     \end{align}   
+%     }
+%     where $\vecG{\nu}_{m,j}(t)$, $\mat{P}_{m,j}(\beta_{m,j}(t))$, $\beta_{m,j}(t)$ and $\vec{g}$ are defined below.
+%     \begin{itemize}
+%         \item {\small
+%         $\vecG{\nu}_{m,j}(t) \define [\Pr\{Q_{m,j}(t)=0\}, \dots, \Pr\{Q_{m,j}(t)=L_{max}\}]$
+%         } denotes the PMF (probability mass function) vector of $Q_{m,j}(t)$.
+%         \item $\vec{g} \in \mathbb{R}^{(L_{max}+1) \times 1}$ denotes the cost vector of edge server, and its $i$-th entry is
+%         \begin{align}
+%             [\vec{g}]_{i} \define 
+%             \begin{cases}
+%                 i, & i=0,1,\dots,L_{max}-1
+%                 \\
+%                 L_{max}+\beta, & \text{otherwise}
+%             \end{cases}.
+%             \label{eqn:g_vec}
+%         \end{align}
+%         % \item The expression of $\mathbb{E}^{\Baseline}[ Q_{m,j}({t+i+1}) | \Stat(t+i)]$ is elaborated in Appendix \ref{append_2}.
+%         \item $\mat{P}^{\Baseline}_{m,j}(t) \in \mathbb{R}^{(L_{max}+1) \times (L_{max}+1)}$ denotes the transition matrix of $\vecG{\nu}_{m,j}(t)$ under baseline policy $\Baseline$. %whose entries are described in Appendix \ref{append_2}.
+%     \end{itemize}   
+% \end{lemma}
+% \begin{proof}
+%     \comments{Due to page limits, the proof shall be provided in another full version online.}
+%     % Please refer to Appendix \ref{append_2}.
+% \end{proof}
 
 \subsection{Distributed Actions Update}
 \label{subsec:ap_alg}

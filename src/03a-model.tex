@@ -17,7 +17,10 @@ as well as the signaling mechanism with periodic broadcast.
     Specifically, the zero-th server denotes the cloud server, and the remaining elements of $\esSet$ denote the edge servers.
     The placement of edge servers are assumed co-located with APs
     % which would suffer from heavy communication overhead with other AP nodes but with powerful computation capacity.
-}Each AP collects the computation jobs from the mobile users within its coverage, and makes dispatching action on the processing edge servers for each job.
+}%
+
+%FIXME: [colocation] dispatchers are implemented on APs.
+Each AP collects the computation jobs from the mobile users within its coverage, and makes dispatching action on the processing edge servers for each job.
 \comments{
     It is assumed the the AP could only access to its own edge server, and the neighbor edge server without further routing (to express the partial observable information).
 }
@@ -63,99 +66,99 @@ For each job type, the uploaded jobs are computed in a First-Come-First-Serve (F
 The arrival jobs will be discarded when the processing queue is full.
 %----------------------------------------------------------------------------------------%
 %FIXME: Rewrite this section, for integration
-% \subsection{{Signaling Mechanism with Periodic Broadcast}}
-% \label{subsec:broadcast}
-% In order to facilitate distributed dispatching for the APs, {the signaling mechanism with periodic broadcast is introduced.}
-% We refer to every $t_B$ time slots as a broadcast interval.
-% As illustrated in Fig.\ref{fig:brd_timeline}, at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast, and each AP updates its dispatching strategy of job dispatching when observing the broadcast LSI s from some APs and edge servers.
-% As a remark notice that the observable LSI may be outdated due to transmission latency among APs and edge servers.
-% The LSI at the APs and edge servers, global state information, and observable state information at the APs are defined below, respectively.
+\subsection{{Signaling Mechanism with Periodic Broadcast}}
+\label{subsec:broadcast}
+In order to facilitate distributed dispatching for the APs, {the signaling mechanism with periodic broadcast is introduced.}
+We refer to every $t_B$ time slots as a broadcast interval.
+As illustrated in Fig.\ref{fig:brd_timeline}, at the beginning of each broadcast interval, the local state information (LSI) of APs and edge servers are broadcast, and each AP updates its dispatching strategy of job dispatching when observing the broadcast LSI s from some APs and edge servers.
+As a remark notice that the observable LSI may be outdated due to transmission latency among APs and edge servers.
+The LSI at the APs and edge servers, global state information, and observable state information at the APs are defined below, respectively.
 
-% %NOTE: State and Broadcast Information for AP
-% \begin{definition}[LSI of APs]
-%     Let $R^{(k)}_{m,j}(\xi,t,n) \in \set{0,1}$ be the indicator of the type-$j$ jobs at the $n$-th time slot of the $t$-th interval.
-%     Its value is $1$ when there is one job being uploaded from the $k$-th AP to the $m$-th server which has been delivered for $\xi$ time slots, and $0$ otherwise.
-%     Let $\omega_{k,j}(t)$ be the target edge server for the type-$j$ jobs of the $k$-th AP at the very beginning of the $t$-th broadcast interval, and $\omega_{k,j}(t+1)$ be the updated target edge server when the $k$-th AP observes a number of the broadcast LSIs of the $t$-th broadcast interval.
-%     The LSI of the $k$-th AP at the beginning of the $t$-th broadcast interval is defined as
-%     {\small
-%     \begin{align}
-%         \mathcal{R}_{k}(t) \define
-%         \Paren{
-%             \Brace{\vec{R}^{(k)}_{m,j}(t,0) \Big| \forall m\in\esSet,j\in\jSpace},
-%             \mathcal{A}_{k}(t)
-%         },
-%     \end{align}
-%     }
-%     where
-%     \begin{align}
-%         \vec{R}^{(k)}_{m,j}(t,0) \define \Paren{
-%             R^{(k)}_{m,j}(0,t,0), \dots, R^{(k)}_{m,j}(\Xi,t,0)
-%         },
-%     \end{align}
-%     and
-%     \begin{align}
-%         \mathcal{A}_{k}(t) &\define \Brace{\omega_{k,j}(t) \Big| \forall j\in\jSpace}
-%     \end{align}
-%     are referred as status of the type-$j$ job type uploading from the $k$-th AP to $m$-th edge server and the dispatching actions of the $k$-th AP at the beginning of the $t$-th broadcast interval, respectively.
-% \end{definition}
+%NOTE: State and Broadcast Information for AP
+\begin{definition}[LSI of APs]
+    Let $R^{(k)}_{m,j}(\xi,t,n) \in \set{0,1}$ be the indicator of the type-$j$ jobs at the $n$-th time slot of the $t$-th interval.
+    Its value is $1$ when there is one job being uploaded from the $k$-th AP to the $m$-th server which has been delivered for $\xi$ time slots, and $0$ otherwise.
+    Let $\omega_{k,j}(t)$ be the target edge server for the type-$j$ jobs of the $k$-th AP at the very beginning of the $t$-th broadcast interval, and $\omega_{k,j}(t+1)$ be the updated target edge server when the $k$-th AP observes a number of the broadcast LSIs of the $t$-th broadcast interval.
+    The LSI of the $k$-th AP at the beginning of the $t$-th broadcast interval is defined as
+    {\small
+    \begin{align}
+        \mathcal{R}_{k}(t) \define
+        \Paren{
+            \Brace{\vec{R}^{(k)}_{m,j}(t,0) \Big| \forall m\in\esSet,j\in\jSpace},
+            \mathcal{A}_{k}(t)
+        },
+    \end{align}
+    }
+    where
+    \begin{align}
+        \vec{R}^{(k)}_{m,j}(t,0) \define \Paren{
+            R^{(k)}_{m,j}(0,t,0), \dots, R^{(k)}_{m,j}(\Xi,t,0)
+        },
+    \end{align}
+    and
+    \begin{align}
+        \mathcal{A}_{k}(t) &\define \Brace{\omega_{k,j}(t) \Big| \forall j\in\jSpace}
+    \end{align}
+    are referred as status of the type-$j$ job type uploading from the $k$-th AP to $m$-th edge server and the dispatching actions of the $k$-th AP at the beginning of the $t$-th broadcast interval, respectively.
+\end{definition}
 
-% %NOTE: State and Broadcast Information for Edge Server
-% \begin{definition}[LSI of Edge Servers]
-%     Let $Q_{m,j}({t,n})$ be the number of type-$j$ jobs on the $m$-th edge server at the $n$-th time slot of the $t$-th interval ($\forall m\in\esSet, j\in\jSpace$).
-%     The LSI of the $m$-th edge server at the $t$-th broadcast interval is defined as
-%     \begin{align}
-%         \mathcal{Q}_{m}(t) \define \Brace{
-%             Q_{m,j}(t, 0) \Big| \forall j\in\jSpace
-%         }.
-%     \end{align}
-% \end{definition}
+%NOTE: State and Broadcast Information for Edge Server
+\begin{definition}[LSI of Edge Servers]
+    Let $Q_{m,j}({t,n})$ be the number of type-$j$ jobs on the $m$-th edge server at the $n$-th time slot of the $t$-th interval ($\forall m\in\esSet, j\in\jSpace$).
+    The LSI of the $m$-th edge server at the $t$-th broadcast interval is defined as
+    \begin{align}
+        \mathcal{Q}_{m}(t) \define \Brace{
+            Q_{m,j}(t, 0) \Big| \forall j\in\jSpace
+        }.
+    \end{align}
+\end{definition}
 
-% \begin{definition}[Global State Information]
-%     The global state information (GSI) of the $t$-th broadcast interval is defined as the aggregation of the broadcast LSIs from all the APs and edge servers, i.e.,
-%     \begin{align}
-%         \Stat(t) \define
-%             \Paren{
-%                 \Brace{\mathcal{R}_{k}(t) \Big| \forall k\in\apSet},
-%                 \Brace{\mathcal{Q}_{m}(t) \Big| \forall m\in\esSet}
-%             }.
-%     \end{align}
-% \end{definition}
+\begin{definition}[Global State Information]
+    The global state information (GSI) of the $t$-th broadcast interval is defined as the aggregation of the broadcast LSIs from all the APs and edge servers, i.e.,
+    \begin{align}
+        \Stat(t) \define
+            \Paren{
+                \Brace{\mathcal{R}_{k}(t) \Big| \forall k\in\apSet},
+                \Brace{\mathcal{Q}_{m}(t) \Big| \forall m\in\esSet}
+            }.
+    \end{align}
+\end{definition}
 
-% %NOTE: Conflict of AP set and partial information definition
-% As the APs and edge servers may reside in different locations of a MAN, the transmission latency of LSI is not negligible.
-% It might be inefficient for one AP (say the $k$-th AP) to collect the complete GSI before update the dispatching policy.
-% For example, the transmission latency of the LSI from the edge servers out of its \emph{candidate server set} $\esSet_{k}$ may be large, and some broadcast information may be discarded by the routers after a certain number of hops.
-% In this paper, we shall investigate the dispatching design based on the \emph{observable state information} at each AP.
-% Specifically, the \emph{conflict AP sets} and the \emph{observable state information} are defined below, respectively.
-% \begin{definition}[Conflict AP Set]
-%     The conflict AP set to the $k$-th AP consists of the neighboring APs who have direct impact on the queueing time of the jobs dispatched from the $k$-th AP, i.e.,
-%     \begin{align}
-%         \ccSet_{k} \define \bigcup_{m\in\esSet_{k}} \apSet_{m}.
-%     \end{align}
-% \end{definition}
+%NOTE: Conflict of AP set and partial information definition
+As the APs and edge servers may reside in different locations of a MAN, the transmission latency of LSI is not negligible.
+It might be inefficient for one AP (say the $k$-th AP) to collect the complete GSI before update the dispatching policy.
+For example, the transmission latency of the LSI from the edge servers out of its \emph{candidate server set} $\esSet_{k}$ may be large, and some broadcast information may be discarded by the routers after a certain number of hops.
+In this paper, we shall investigate the dispatching design based on the \emph{observable state information} at each AP.
+Specifically, the \emph{conflict AP sets} and the \emph{observable state information} are defined below, respectively.
+\begin{definition}[Conflict AP Set]
+    The conflict AP set to the $k$-th AP consists of the neighboring APs who have direct impact on the queueing time of the jobs dispatched from the $k$-th AP, i.e.,
+    \begin{align}
+        \ccSet_{k} \define \bigcup_{m\in\esSet_{k}} \apSet_{m}.
+    \end{align}
+\end{definition}
 
-% \begin{definition}[Observable State Information]
-%     The observable state information (OSI) of the $k$-th AP ($\forall k\in\apSet$) at the $t$-th broadcast interval is defined as the aggregation of LSIs of the APs in {conflict AP set} and the edge servers in {candidate server set} of the $k$-th AP, i.e.,
-%     \begin{align}
-%         \Stat_{k}(t) &\define
-%         \Paren{
-%             \Brace{\mathcal{R}_{k'}(t) \Big| \forall k'\in\ccSet_{k}},
-%             \Brace{\mathcal{Q}_{m}(t) \Big| \forall m\in\esSet_{k}}
-%         }.
-%     \end{align}
-%     \label{def:OSI}
-% \end{definition}
+\begin{definition}[Observable State Information]
+    The observable state information (OSI) of the $k$-th AP ($\forall k\in\apSet$) at the $t$-th broadcast interval is defined as the aggregation of LSIs of the APs in {conflict AP set} and the edge servers in {candidate server set} of the $k$-th AP, i.e.,
+    \begin{align}
+        \Stat_{k}(t) &\define
+        \Paren{
+            \Brace{\mathcal{R}_{k'}(t) \Big| \forall k'\in\ccSet_{k}},
+            \Brace{\mathcal{Q}_{m}(t) \Big| \forall m\in\esSet_{k}}
+        }.
+    \end{align}
+    \label{def:OSI}
+\end{definition}
 
-% \begin{figure*}[t]
-%     \centering
-%     \includegraphics[width=0.60\textwidth]{brd-timeline.pdf}
-%     \caption{The timeline illustration of reception of OSI for the $1$-st AP where $2$-nd AP is in its \emph{conflict AP set} and $1$-st server is in its \emph{candidate server set}.}
-%     \label{fig:brd_timeline}
-% \end{figure*}
+\begin{figure*}[t]
+    \centering
+    \includegraphics[width=0.60\textwidth]{brd-timeline.pdf}
+    \caption{The timeline illustration of reception of OSI for the $1$-st AP where $2$-nd AP is in its \emph{conflict AP set} and $1$-st server is in its \emph{candidate server set}.}
+    \label{fig:brd_timeline}
+\end{figure*}
 
-% The $k$-th AP is able to collect its OSI $\Stat_{k}(t)$ at the $\mathcal{D}_{k}(t)$-th time slots of the $t$-th broadcast interval, where the \brlatency~$\mathcal{D}_{k}(t)$ is a random variable.
-% It is assumed that $\mathcal{D}_{k}(t)$ follows identical and independent distribution in different broadcast interval.
-% We refer to $\mathcal{D}_{k}(t)$ as the \brlatency~of the $k$-th AP at the $t$-th broadcast interval.
+The $k$-th AP is able to collect its OSI $\Stat_{k}(t)$ at the $\mathcal{D}_{k}(t)$-th time slots of the $t$-th broadcast interval, where the \brlatency~$\mathcal{D}_{k}(t)$ is a random variable.
+It is assumed that $\mathcal{D}_{k}(t)$ follows identical and independent distribution in different broadcast interval.
+We refer to $\mathcal{D}_{k}(t)$ as the \brlatency~of the $k$-th AP at the $t$-th broadcast interval.
 An example is given below to demonstrate how the \brlatency~affects the reception of OSI and the update of the dispatching strategy.
 
 \begin{example}
