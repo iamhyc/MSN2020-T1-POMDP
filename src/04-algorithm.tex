@@ -14,12 +14,13 @@ Specifically, the proposed distributed algorithm consists of the following two s
 %\hongyc{(move two steps adjacent in the following subsections)}
 \begin{enumerate}
     \item We first introduce a baseline policy, use its value function to approximate the value function of the optimal policy $\Policy^*$, and derive the analytical expression of the approximate value function for arbitrary GSI in Section \ref{subsec:baseline}.
-    \item With the approximate value function, an alternative action update algorithm, where only a subset of APs are selected to update their dispatching actions distributedly in each broadcast interval, is proposed in Section \ref{subsec:ap_alg}.
+    \item With the approximate value function, an alternative actions update algorithm, where only a subset of APs are selected to update their dispatching actions distributedly in each broadcast interval, is proposed in Section \ref{subsec:ap_alg}.
     Moreover, the analytical performance bound is also derived in Section \ref{subsec:analysis}.
 \end{enumerate}
-As a remark notice that solving the value function and then the RHS of the Bellman's equations are the two standard steps to solve an MDP problem with complete knowledge on system state.
-In our proposed approximate solution framework, we extend this procedure to the POMDP problem in P1 by exploiting the structure of \comments{partially observed edge computing networks}.
-To the best knowledge of authors, a POMDP can hardly be solved via the Bellman's equations of full system state knowledge in the existing literature.
+%FIXME: review this deletion
+% As a remark notice that solving the value function and then the RHS of the Bellman's equations are the two standard steps to solve an MDP problem with complete knowledge on system state.
+% In our proposed approximate solution framework, we extend this procedure to the POMDP problem in P1 by exploiting the structure of {partially observed edge computing networks}.
+% To the best knowledge of authors, a POMDP can hardly be solved via the Bellman's equations of full system state knowledge in the existing literature.
 
 \subsection{Baseline Policy and Approximate Value Function}
 \label{subsec:baseline}
@@ -79,6 +80,7 @@ Moreover, the explicit expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and 
 
 \begin{lemma}[Analytical Expression of $\tilde{W}^{\AP}_{k,m,j}$]
     \label{lemma:w_ap}
+    {\small
     \begin{align}
         &\tilde{W}^{\AP}_{k,m,j}\Paren{\Stat(t+1)} =
         \bigg\|
@@ -89,6 +91,7 @@ Moreover, the explicit expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and 
         \bigg\|,
         \label{w_ap}
     \end{align}
+    }
     where $\mat{I}$ is the identity matrix, and $\vecG{\Theta}^{(k, \Baseline)}_{m,j}(t)$ and $\Gamma^{(k)}_{m,j}$ are defined below.
     \begin{itemize}
         \item {\small $\vecG{\Theta}^{(k,\Baseline)}_{m,j}(t) \define \Bracket{
@@ -154,7 +157,7 @@ Moreover, the explicit expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and 
     % Please refer to Appendix \ref{append_2}.
 \end{proof}
 
-\subsection{Distributed Action Update}
+\subsection{Distributed Actions Update}
 \label{subsec:ap_alg}
 Although the optimal value function has been approximated via the baseline policy in the previous part, it is still infeasible for all the APs to solve the RHS of the Bellman's equations in a distributed manner with OSI and local \brlatency~only.
 This is because the evaluation of equation (\ref{w_ap}) and (\ref{w_es}) requires the knowledge of GSI and \brlatency~at all APs.
@@ -283,7 +286,7 @@ As a remark notice that since in Algorithm \ref{alg_1}, the computation complexi
 \label{subsec:analysis}
 In most of the existing approximate MDP solutions \cite{mdp-bound1,mdp-bound2,mdp-bound3}, the performance is difficult to bound analytically as the approximate value function has no accurate meaning on the system cost or utility.
 In the proposed algorithm, however, we derive the analytical expression for the baseline policy as the approximate.
-Hence, the alternative dispatching action update can ensure to achieve a better performance than the baseline policy.
+Hence, the alternative dispatching actions update can ensure to achieve a better performance than the baseline policy.
 This conclusion is summarized below.
 % We have the following conclusion on the performance of the above proposed algorithm.
 \begin{lemma}[Analytical Cost Upper Bound]

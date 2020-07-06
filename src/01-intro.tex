@@ -3,9 +3,9 @@
 %NOTE: General Background of MEC and Motivation
 Edge computing is a promising solution for increasing computation-intensive and energy-hungry applications on mobile devices.
 Large amount of mobile devices can connect to the access points (APs) which function as gateways to aggregate and dispatch jobs to the edge servers \cite{MEC-SURVEY}.
-The edge servers are deployed {in closer proximity} to APs than cloud infrastructure, which alleviate the communication overhead and enable the computation of time-sensitive jobs.
+The edge servers are deployed in closer proximity to APs than cloud infrastructure, which alleviate the communication overhead and enable the computation of time-sensitive jobs.
 However, the edge servers are usually deployed with limited computation resources.
-The establishment of efficient cooperation among edge servers is one of the major design challenges, {given the signaling overhead and latency of distributed information exchange and decision making.}
+The establishment of efficient cooperation among edge servers is one of the major design challenges, given the signaling overhead and latency of distributed information exchange and decision making.
 %given the network transmission latency and signaling overhead
 
 %NOTE: Motivation with MAN
@@ -20,7 +20,7 @@ Secondly, the cooperation of distributed dispatchers suffers from significant si
 
 %NOTE: Our contributions
 In this paper, we would like to shed some lights on the above challenging distributed dispatcher design via POMDP problem formulation and a novel low-complexity approximate MDP solution framework.
-% Specifically, we consider a practical scenario where the signaling latency among APs and edge servers and job uploading latency from APs to edge servers are assumed to be random, and each AP can only {receive the broadcast state information from part of the APs} with random latency (i.e., the global system state is not available at the APs).
+Specifically, we consider a practical scenario where the signaling latency among APs and edge servers and job uploading latency from APs to edge servers are assumed to be random, and each AP can only receive the broadcast state information from part of the APs with random latency (i.e., the global system state is not available at the APs).
 Our main contributions in this new optimization scenario are summarized as follows.
 %FIXME: the expression of contributions 
 \begin{itemize}
@@ -49,7 +49,7 @@ The numerical analysis of the proposed solution is provided in Section \ref{sec:
 % Using these notations, $[\mathbf{A}]_{i,j}$ and $\mathbf{A}'$ denotes the $(i,j)$-th element and transpose of matrix $\mathbf{A}$, respectively.
 % $\mathbf{I}$ denotes the identity matrix.
 
-\section{Motivation}
+\section{Background}
 \label{sec:review}
 %NOTE: resource placement (cache-like problem), service migration
 % {
@@ -85,10 +85,10 @@ Hence, the existence of \brlatency~may not raise significant challenge to the al
 However, the design of distributed dispatchers with \brlatency~could be more challenging.
 For example, the signaling latencies at distributed dispatchers could be different, and the synchronization of their dispatching decisions become infeasible.
 %FIXME: a motivating example needed
-\comments{
-    why distributed: hard for fully observable (given information sharing/broadcast in edge networks); 
-    why hard to handle under MDP framework: POMDP problem, of huge complexity.
-}
-Furthermore, taking the signaling overhead and the possibility of packet drop in the consideration, it is of more practical significance favor for the distributed dispatchers to make scheduling decisions based on locally observable system state information, instead of global system state information.
+% \comments{
+%     why distributed: hard for fully observable (given information sharing/broadcast in edge networks); 
+%     why hard to handle under MDP framework: POMDP problem, of huge complexity.
+% }
+% Furthermore, taking the signaling overhead and the possibility of packet drop in the consideration, it is of more practical significance favor for the distributed dispatchers to make scheduling decisions based on locally observable system state information, instead of global system state information.
 % To our best knowledge, there is no appropriate optimization framework for the distributed dispatcher design with both \brlatency~and partially observable system state information to date.
 %----------------------------------------------------------------------------------------%

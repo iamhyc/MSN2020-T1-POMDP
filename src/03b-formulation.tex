@@ -89,11 +89,11 @@ where the value function $V(\Stat(t))$ of the optimal policy $\Policy^{*}$ (if G
 \end{align}
 Moreover, the optimal policy $\Omega^{*}$ can be obtained by solving the right-hand-side (RHS) of the above Bellman's equations.
 
+%FIXME: 
 \comments{
-    However, due to the constrain of broadcast information sharing on network topology, each AP only has its own OSI, however the optimal dispatching actions depends on the GSI and global \brlatency~information according to the RHS of equation (\ref{eqn:sp_0}).
+    However, due to the constraint of broadcast information sharing on network topology, each AP only has its own OSI, however the optimal dispatching actions depends on the GSI and global \brlatency~information according to the RHS of equation (\ref{eqn:sp_0}).
     Thus, problem P1 is actually a POMDP, whose general solution is of huge complexity \cite{IJCAI03-NairR,IJCAI99-BoutilierC}.
     % \deny{as all the historical system states should be traced back in the current system state}
-    
 }
 % However, it is infeasible to solve the above Bellman's equations {and achieve the performance of $\Policy^*$ in our considered dispatching system.}
 % This is because each AP (say the $k$-th AP) only has the knowledge of its own OSI $\Stat_{k}(t)$ and local \brlatency~$\mathcal{D}_{k}(t)$, but the optimal solution (dispatching actions of all APs) for the RHS of equation (\ref{eqn:sp_0}) depends on the GSI and global \brlatency~information.
