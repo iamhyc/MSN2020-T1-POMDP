@@ -1,20 +1,18 @@
 \begin{abstract}
-    In this paper, we consider the distributed job dispatching problem in an edge computing network residing in a Metropolitan Area Network (MAN).
-    % distributed problem, outdated information and hard for fully-observable
+    In this paper, we consider the online distributed job dispatching problem in an edge computing network residing in a Metropolitan Area Network (MAN).
+    Specifically, dispatchers are implemented on multiple access points (APs) which collect jobs from the mobile users and distribute each uploaded job to one edge server or cloud server for computation.
+    A signaling mechanism with periodic broadcast is introduced to facilitate cooperation among APs.
+    The signaling and transmission latency is random and non-negligible in MAN.
     \comments{
-        Specifically, multiple access points (APs) collect jobs from the mobile users, and upload each job to one edge server for computation.
-        A signaling mechanism with periodic broadcast is introduced to facilitate cooperation among APs.
-    }
-    \comments{
-        The signaling and job dispatching latency is random and non-negligible in MAN, and the APs have to update their job dispatching strategies according to partially received and outdated broadcast information.
-        A distributed planning problem is thus formulated.
-    }
-    Hence, we formulate the distributed optimization of job dispatching strategies at all the APs as a partially observable Markov decision process (POMDP).
-    % , whose minimization objective is a discounted measurement of job delivery and computation time.
-    \comments{
-        The conventional solution for POMDP is impractical due to huge complexity, we propose a novel low-complexity solution framework of the distributed job dispatching to address the issue of algorithm complexity.
-    }
-    Based on it, the optimization of job dispatching policy can be decoupled via an alternative policy iteration algorithm, so that the distributed policy iteration of each AP can be made according to partial and outdated observation.
+        % and the APs have to update their job dispatching strategies according to partially received and outdated broadcast information.
+        Suffering from random transmission latency and information sharing outdated, it is hard for a distributed dispatcher to obtain updated system information.
+        %and establish cooeperation with other dispatchers.
+        The fully-observed system state is also prevented as reception of all broadcast in a MAN is unacceptable.
+    }%
+    % A distributed planning problem is thus formulated.
+    Hence, we formulate the distributed optimization of job dispatching strategies at all the APs as a partially observable Markov decision process (POMDP), with partial and outdated system state.
+    The conventional solution for POMDP is impractical due to huge complexity, we propose a novel low-complexity solution framework of the distributed job dispatching to address the issue of algorithm complexity.
+    % Based on it, the optimization of job dispatching policy can be decoupled via an alternative policy iteration algorithm, so that the distributed policy iteration of each AP can be made according to partial and outdated observation.
     Finally, an analytical performance lower bound is provided for the approximate MDP solution.
 \end{abstract}
 
