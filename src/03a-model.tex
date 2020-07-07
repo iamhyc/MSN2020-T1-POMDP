@@ -1,34 +1,33 @@
 \section{System Model}
 \label{sec:model}
-In this section, we elaborate the model of edge computing systems with random job arrivals, uploading latency and computation time,
-as well as the signaling mechanism with periodic broadcast.
-% as well as the signaling model with periodic broadcast which introduce the job dispatching actions making under partially observable system state at each AP.
+% In this section, we elaborate the model of edge computing systems with random job arrivals, uploading latency and computation time,
+% as well as the signaling mechanism with periodic broadcast.
 %----------------------------------------------------------------------------------------%
-\subsection{System Model}
-\begin{figure*}[htp!]
+\subsection{Network Model}
+\begin{figure}[htp!]
     \centering
-    \includegraphics[width=0.60\textwidth]{system-model.pdf}
+    \includegraphics[width=0.45\textwidth]{system-model.pdf}
     \caption{\comments{(not altered yet)} The Illustration of System Model}
     \label{fig:system}
-\end{figure*}
-\comments{
-    We consider an edge computing system with $K$ Access Points (APs) and $M$ edge servers, and $1$ cloud server as illustrated  in Fig.\ref{fig:system}
-    The set of APs and servers set are denoted as $\apSet \define \set{1,\dots,K}$ and $\esSet \define \set{0,\dots,M}$, respectively.
-    Specifically, the zero-th server denotes the cloud server, and the remaining elements of $\esSet$ denote the edge servers.
-    The placement of edge servers are assumed co-located with APs
-    % which would suffer from heavy communication overhead with other AP nodes but with powerful computation capacity.
-}%
+\end{figure}
 
-%FIXME: [colocation] dispatchers are implemented on APs.
+We consider an edge computing system with $K$ Access Points (APs) and $M$ edge servers, and $1$ cloud server as illustrated  in Fig.\ref{fig:system}
+The set of APs and servers set are denoted as $\apSet \define \set{1,\dots,K}$ and $\esSet \define \set{0,\dots,M}$, respectively.
+Specifically, the edge servers are assumed deployed collocated with APs and there are at most one edge server on one AP; the zero-th server denotes the cloud server always.
 Each AP collects the computation jobs from the mobile users within its coverage, and makes dispatching action on the processing edge servers for each job.
 \comments{
-    It is assumed the the AP could only access to its own edge server, and the neighbor edge server without further routing (to express the partial observable information).
-}
+    Furthermore, it is assumed that one AP could only access to some neighbor edge servers due to transmission and signaling latency limitation.
+}%
 % It is assumed that the $k$-th AP only dispatches the computation jobs to the edge servers within a certain number of hops.
-Let $\esSet_{k} \subseteq \esSet$ be the subset of edge servers which can compute the jobs from the $k$-th AP, and $\apSet_{m}$ be the subset of APs, which may upload jobs to the $m$-th edge server.
-We refer to $\esSet_{k}$ as the \emph{candidate server set} of the $k$-th AP, and $\apSet_{m}$ as the \emph{potential AP set} of the $m$-th edge server ($\forall k\in\apSet, m\in\esSet$).
+% Let $\esSet_{k} \subseteq \esSet$ be the subset of edge servers which can compute the jobs from the $k$-th AP, and $\apSet_{m}$ be the subset of APs, which may upload jobs to the $m$-th edge server.
+We refer to $\esSet_{k} \subseteq \esSet$ as the \emph{candidate server set} of the $k$-th AP, and $\apSet_{m} \subseteq \apSet$ as the \emph{potential AP set} of the $m$-th edge server ($\forall k\in\apSet, m\in\esSet$).
 Different APs may have different candidate servers according to their locations in the network, as illustrated in Fig.\ref{fig:system}.
-In this edge computing network, each AP and edge server periodically broadcast their state information (the state information is defined in the Section \ref{subsec:broadcast}), and one AP updates its strategy of job dispatching when receiving the broadcast state information.
+% In this edge computing network, each AP and edge server periodically broadcast their state information (the state information is defined in the Section \ref{subsec:broadcast}), and one AP updates its strategy of job dispatching when receiving the broadcast state information.
+
+\comments{
+    The job dispatchers are implemented distributedly on APs.
+    % which would suffer from heavy communication overhead with other AP nodes but with powerful computation capacity.
+}%
 In this paper, we shall optimize the job dispatching strategy distributed at APs with partially observable state information, where both job uploading and state information broadcasting suffer from random transmission latency.
 \comments{Without loss of generanality, we assume the network topology among APs are generated following \emph{Bar\'abasi-Albert model}, and each AP could only access to the neighbor edge server within one hop (i.e., the routing for multi-hops are unacceptable for information propagation).}
 %NOTE: [job space support and arrival process]
