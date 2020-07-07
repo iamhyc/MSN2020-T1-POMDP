@@ -131,7 +131,7 @@ The LSI at the APs and processing servers, global state information, and observa
 \end{definition}
 
 %NOTE: Conflict of AP set and partial information definition
-As the APs and processing servers may reside in different locations of a MAN, the transmission latency of LSI is not negligible, \comments{which is referred as \emph{signaling latency} in the following context}.
+As the APs and processing servers may reside in different locations of a MAN, the transmission latency of LSI is not negligible, \comments{which contributes to the \emph{signaling latency}}.
 It might be inefficient for one AP (say the $k$-th AP) to collect the complete GSI before update the dispatching policy.
 For example, the transmission latency of the LSI from the edge servers out of its \emph{candidate server set} $\esSet_{k}$ may be large, and some broadcast information may be discarded by the routers after a certain number of hops.
 In this paper, we shall investigate the dispatching design based on the \emph{observable state information} at each AP.
