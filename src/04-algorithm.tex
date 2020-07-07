@@ -69,6 +69,7 @@ Their definitions are given below.
         \sum_{i=0}^{\infty} \gamma^{i+1} \mathbb{E}^{\Baseline}\Bracket{
             \Inorm{\vec{R}^{(k)}_{m,j}(t+i+1)}
         },
+    \label{w_ap}
     \\    
     \tilde{W}^{\ES}_{m,j} \Paren{\Stat(t+1)} &\define
         \sum_{i=0}^{\infty} \gamma^{i+1} \mathbb{E}^{\Baseline}\Bracket{
@@ -76,6 +77,7 @@ Their definitions are given below.
             \nonumber\\
             &~~~~~~~~~~\beta I[Q_{m,j}(t+i+1) = L_{max}]
         }.
+    \label{w_es}
 \end{align}
 }%
 
@@ -242,7 +244,7 @@ Moreover, we have the following conclusion on the decomposition of P2.
 \end{lemma}
 \begin{proof}
     At the $t$-th broadcast interval, the $y$-th AP in the subset $\mathcal{Y}_{n}$ updates its dispatching actions, which could only affect the future cost raised on itself and its corresponding \emph{candidate server set}, i.e., the part of its OSI.
-    Hence, it's obvious that the expression of equation (\ref{w_ap}) and equation (\ref{w_es}) on the RHS of the Bellman's equations could be reduced into the form based only on the OSI of the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$).
+    Hence, it's obvious that the equation (\ref{w_ap}) and equation (\ref{w_es}) on the RHS of the Bellman's equations could be reduced into the form based only on the OSI of the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$).
 \end{proof}
 
 The optimization of {dispatching actions $\mathcal{A}_{y}(t+1)$} for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in $\esSet_{y}$, {whose computational complexity is $O(J|\mathcal{M}_{y}|)$}.
