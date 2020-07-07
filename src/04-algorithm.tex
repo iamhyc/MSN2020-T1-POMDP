@@ -55,7 +55,7 @@ Let $W_{\Baseline}(\cdot)$ be the value function of the baseline policy $\Baseli
     \label{eqn:baseline}
 \end{align}
 }%
-where $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ denotes the cost raised by the type-$j$ jobs which are being transmitted from the $k$-th AP to the $m$-th edge server with the baseline policy $\Baseline$ and initial system state $\Stat(t+1)$, and $\tilde{W}^{\ES}_{m,j}(\Stat(t+1))$ denotes the cost raised by the type-$j$ jobs on the $m$-th server.
+where $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ denotes the cost raised by the type-$j$ jobs which are being transmitted from the $k$-th AP to the $m$-th processing server with the baseline policy $\Baseline$ and initial system state $\Stat(t+1)$, and $\tilde{W}^{\ES}_{m,j}(\Stat(t+1))$ denotes the cost raised by the type-$j$ jobs on the $m$-th server.
 Their definitions are given below.
 {\small
 \begin{align}
@@ -78,8 +78,9 @@ Their definitions are given below.
 
 \subsection{Distributed Actions Update}
 \label{subsec:ap_alg}
-Although the optimal value function has been approximated via the baseline policy in the previous part, it is still infeasible for all the APs to solve the RHS of the Bellman's equations in a distributed manner with OSI and local \brlatency~only.
-This is because the evaluation of equation (\ref{w_ap}) and (\ref{w_es}) requires the knowledge of GSI and \brlatency~at all APs.
+Although the optimal value function has been approximated via the baseline policy in the previous part, it is still infeasible to solve the RHS of the Bellman's equations as the evaluation of equation (\ref{w_ap}) and (\ref{w_es}) requires the knowledge of GSI and \brlatency~at all APs.
+% for all the APs to solve the RHS of the Bellman's equations in a distributed manner with OSI and local \brlatency~only.
+% This is because the evaluation of equation (\ref{w_ap}) and (\ref{w_es}) requires the knowledge of GSI and \brlatency~at all APs.
 Instead, it is feasible for part of APs to update their dispatching actions distributedly in each broadcast interval and achieve a better performance compared with baseline policy.
 Hence, we first define the following sequence of AP subsets, where each subset are selected to update dispatching actions periodically.
 \begin{definition}[Subsets Partition]
@@ -94,9 +95,9 @@ Hence, we first define the following sequence of AP subsets, where each subset a
     \end{align}
     }%
 \end{definition}
-The condition in equation (\ref{eqn:subset_cup}) is to ensure all the APs can update their dispatching actions periodically, whereas the condition in equation (\ref{eqn:subset_disjoint}) is to ensure APs in the conflict AP sets of each other will not update their dispatching actions in the same broadcast interval.
-For example, as illustrated in Fig.\ref{fig:system}, the AP set $\apSet$ could be decomposed of two subsets as $\set{1,3}$ and $\set{2}$.
-The subset partition is not trivial and {a partition minimizing the update period $N$ is preferred}.
+% The condition in equation (\ref{eqn:subset_cup}) is to ensure all the APs can update their dispatching actions periodically, whereas the condition in equation (\ref{eqn:subset_disjoint}) is to ensure APs in the conflict AP sets of each other will not update their dispatching actions in the same broadcast interval.
+% For example, as illustrated in Fig.\ref{fig:system}, the AP set $\apSet$ could be decomposed of two subsets as $\set{1,3}$ and $\set{2}$.
+The subset partition is not trivial and a partition to minimize the update period $N$ is preferred.
 A heuristic greedy algorithm is given in Algorithm \ref{alg_0}.
 \begin{algorithm}[ht]
     \caption{Greedy Subset Partition Algorithm}\label{alg_0}
@@ -104,7 +105,7 @@ A heuristic greedy algorithm is given in Algorithm \ref{alg_0}.
     \KwIn{$\apSet, \set{\esSet_{k}, \forall k\in\apSet}$ }
     \KwOut{a subset partition $\set{ \mathcal{Y}_{n} }$}
     Initialize a subset partition as $\mathcal{Y}_{n} = \set{n}$ ($\forall n\in\apSet$).\;
-    \While{ $\exists \mathcal{Y}_a$ and $\mathcal{Y}_b$ ($a \neq b$), $\cup\set{ \esSet_{y}|y\in\mathcal{Y}_a } \bigcap \cup\set{ \esSet_{y}|y\in\mathcal{Y}_b } \neq \emptyset$ }
+    \While{ $\exists \mathcal{Y}_a$ and $\mathcal{Y}_b$ ($a \neq b$) that $\cup\set{ \esSet_{y}|y\in\mathcal{Y}_a } \bigcap \cup\set{ \esSet_{y}|y\in\mathcal{Y}_b } \neq \emptyset$ }
     {
         Count number of subsets in the current subset partition which have disjoint candidate set with $\mathcal{Y}_n$ ($\forall n$), denoted the number as $I_{n}$.\;
         $\tilde{n} \gets \arg\min_{n} I_{n}$\;
@@ -141,7 +142,7 @@ Moreover, we have the following conclusion on the decomposition of P2.
 \begin{lemma}[]
     The optimization problem in P2 can be equivalently decoupled into local optimization problems at APs {for each subset partition}.
     Specifically, {the local optimization for each AP (say the $y$-th AP) in the $n$-th subset ($\forall n$) can be written as}
-    \small{
+    {\small
     \begin{align}
         &\textbf{P3:}~
         \min_{ {\mathcal{A}}_{y}(t+1) }
@@ -161,7 +162,7 @@ Moreover, we have the following conclusion on the decomposition of P2.
     Hence, it's obvious that the equation (\ref{w_ap}) and equation (\ref{w_es}) on the RHS of the Bellman's equations could be reduced into the form based only on the OSI of the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$).
 \end{proof}
 
-The optimization of {dispatching actions $\mathcal{A}_{y}(t+1)$} for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the edge servers in $\esSet_{y}$, {whose computational complexity is $O(J|\mathcal{M}_{y}|)$}.
+The optimization of {dispatching actions $\mathcal{A}_{y}(t+1)$} for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the processing servers in $\esSet_{y}$, {whose computational complexity is $O(J|\mathcal{M}_{y}|)$}.
 As a result, the overall algorithm of job dispatching is elaborated in Algorithm \ref{alg_1}.
 \begin{algorithm}[ht]
     \caption{Online Alternative Actions Update Algorithm}\label{alg_1}
@@ -202,11 +203,6 @@ As a result, the overall algorithm of job dispatching is elaborated in Algorithm
 %     \end{figure*}
 % \end{example}
 
-% As a remark notice that Algorithm \ref{alg_1} leads to a time-variant policy, which is referred as the proposed policy $\tilde{\Policy}$.
-% At the $t$-th broadcast interval, the dispatching actions is given by
-% \begin{align}
-%     \tilde{\Policy}(\Stat(t), \Delay(t)) \define \tilde{\mathcal{A}}(t+1) \cup \hat{\mathcal{A}}(t+1).
-% \end{align}
 As a remark notice that since in Algorithm \ref{alg_1}, the computation complexity at each AP scales linearly with respect to {the size of candidate edge server set}, it can be deployed in a scenario with massive APs and edge servers, as long as the {the available number of edge servers for each AP} is limited.
 
 \subsection{Analytical Performance Bound}
@@ -239,7 +235,7 @@ This conclusion is summarized below.
 \end{lemma}
 \begin{proof}
     $V(\Stat) \leq W_{\tilde{\Policy}}(\Stat)$ is straightforward as $\tilde{\Policy}$ is not optimal policy.
-    And the proof of $W_{\tilde{\Policy}}(\Stat) \leq W_{\Baseline}(\Stat)$ is similar to the proof of \emph{Policy Improvement Property} in Chapter II of \cite{dp-control}.
+    The proof of $W_{\tilde{\Policy}}(\Stat) \leq W_{\Baseline}(\Stat)$ is equal to prove the improvement of one-step policy iteration, which is similar to the proof of \emph{Policy Improvement Property} in \cite{dp-control}.
 \end{proof}
 Therefore, $W_{\Baseline}(\Stat)$ derived in equation (\ref{eqn:baseline}) can be used as the analytical cost upper bound of the proposed policy $\Baseline$.
 Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fixed service edge server for each AP, as long as the {static dispatching policy} is used as the baseline policy.
