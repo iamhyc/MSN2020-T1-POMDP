@@ -7,26 +7,20 @@ The sensitivity study on parameters is also applied to provide some insights on 
 
 \subsection{Experiment Setup}
 \label{subsec:setup}
-In the simulation, we assume that there are $K=15$ APs, $M=10$ edge servers and $J=10$ types of jobs in the system.
-The time slot duration is $20$ milliseconds and one broadcast interval consists of $t_{B}=25$ time slots, i.e., its duration is $1$ second.
 %FIXME: Google data trace reference, BA model reference
+In the simulation, we assume that there are $K=15$ APs, $M=10$ processing servers and $J=10$ types of jobs in the system.
+The time slot duration is $20$ milliseconds and one broadcast interval consists of $t_{B}=25$ time slots, i.e., its duration is $1$ second.
 \comments{
-    The Barab\'asi-Albert (BA) model is widely-used when modeling large social networks \needref{BA model}.
-    The BA model is parameterized by $n$ and $m$ and produces a graph with $n$ vertices and $m$ edges such that the degree distribution follows a power-law.
+    The network topology among APs is generated according to Barab\'asi-Albert (BA) model \cite{albert1999diameter} and randomly place the processing servers collocated with the APs.
+    % The BA model is parameterized by $n$ and $m$ and produces a graph with $n$ vertices and $m$ edges such that the degree distribution follows a power-law.
+    The arrival traces on APs and job processing time on processing servers are extracted,  and randomly chosen from \cite{clusterdata:Reiss2011}.
 }
-% Each AP would have at most $3$ edge servers in its candidate set, and the adjacency matrix for generated bipartite map between APs and edge servers is illustrated in Fig.\ref{fig:bipartite}.
-
-% arbitrarily generated with: summed average arrival \emph{smaller than} summed departure rate, for each job type.
-{
-    The other parameters for signaling, job processing and uploading are generated arbitrarily following no presumed distributions.
-    Specifically, the job processing related parameters are chosen to satisfy the system stability, i.e., the average arrival rate is always smaller than the departure rate on one edge server for each job type.
-}
-The \brlatency~is a discrete random variable with an integer support from $12$ to $20$ time slots.
-The maximum uploading latency is $3$ seconds, i.e., $\Xi = 3t_B$, and the distribution of $\mathbb{U}_{k,m,j}(\Xi)$ ($\forall k\in\apSet, m\in\esSet_{k}, j\in\jSpace$) is arbitrarily generated within the support $\set{0, 1, \dots, \Xi}$.
-The expected computation time $c_{m,j}$ ($\forall m\in\esSet, j\in\jSpace$) is an integer uniformly generated in the range $[50,125]$ (with the unit of time slot) in each figure.
+The maximum uploading latency is $\Xi = 3t_B$, and the distribution of $\mathbb{U}_{k,m,j}(\Xi)$ ($\forall k\in\apSet, m\in\esSet_{k}, j\in\jSpace$) is arbitrarily generated within the support $\set{0, 1, \dots, \Xi}$.
+The \brlatency~ is with an integer support from $0.6t_B$ to $0.9t_B$ time slots.
+% The expected computation time $c_{m,j}$ ($\forall m\in\esSet, j\in\jSpace$) is an integer uniformly generated in the range $[50,125]$ (with the unit of time slot) in each figure.
 Each queue for VMs on edge server is with maximum queue length $L_{max}=50$, i.e., there would be at most $50$ jobs on one edge server.
-The arrival rate in each time slot is uniformly generated from the range $[0.02, 0.03]$ for each job type at each AP in each figure.
-The discount factor $\gamma$ is $0.95$ and the penalty weight $\beta$ is $30$.
+% The arrival rate in each time slot is uniformly generated from the range $[0.02, 0.03]$ for each job type at each AP in each figure.
+The discount factor $\gamma$ is $0.95$ and the penalty weight $\beta$ is $120$.
 % The arrival rate is taken as small probability with enough APs in the system, and correspondingly enough edge servers for the processing.
 
 % %-----------------------------------------------------------------------%
