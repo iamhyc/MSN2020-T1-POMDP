@@ -83,17 +83,21 @@ The LSI at the APs and edge servers, global state information, and observable st
             \mathcal{A}_{k}(t)
         },
     \end{align}
-    }
+    }%
     where
+    {\small
     \begin{align}
         \vec{R}^{(k)}_{m,j}(t,0) \define \Paren{
             R^{(k)}_{m,j}(0,t,0), \dots, R^{(k)}_{m,j}(\Xi,t,0)
         },
     \end{align}
+    }%
     and
+    {\small
     \begin{align}
         \mathcal{A}_{k}(t) &\define \Brace{\omega_{k,j}(t) \Big| \forall j\in\jSpace}
     \end{align}
+    }%
     are referred as status of the type-$j$ job type uploading from the $k$-th AP to $m$-th edge server and the dispatching actions of the $k$-th AP at the beginning of the $t$-th broadcast interval, respectively.
 \end{definition}
 
@@ -101,15 +105,18 @@ The LSI at the APs and edge servers, global state information, and observable st
 \begin{definition}[LSI of Edge Servers]
     Let $Q_{m,j}({t,n})$ be the number of type-$j$ jobs on the $m$-th edge server at the $n$-th time slot of the $t$-th interval ($\forall m\in\esSet, j\in\jSpace$).
     The LSI of the $m$-th edge server at the $t$-th broadcast interval is defined as
+    {\small
     \begin{align}
         \mathcal{Q}_{m}(t) \define \Brace{
             Q_{m,j}(t, 0) \Big| \forall j\in\jSpace
         }.
     \end{align}
+    }%
 \end{definition}
 
 \begin{definition}[Global State Information]
     The global state information (GSI) of the $t$-th broadcast interval is defined as the aggregation of the broadcast LSIs from all the APs and edge servers, i.e.,
+    {\small
     \begin{align}
         \Stat(t) \define
             \Paren{
@@ -117,6 +124,7 @@ The LSI at the APs and edge servers, global state information, and observable st
                 \Brace{\mathcal{Q}_{m}(t) \Big| \forall m\in\esSet}
             }.
     \end{align}
+    }%
 \end{definition}
 
 %NOTE: Conflict of AP set and partial information definition
@@ -127,13 +135,16 @@ In this paper, we shall investigate the dispatching design based on the \emph{ob
 Specifically, the \emph{conflict AP sets} and the \emph{observable state information} are defined below, respectively.
 \begin{definition}[Conflict AP Set]
     The conflict AP set to the $k$-th AP consists of the neighboring APs who have direct impact on the queueing time of the jobs dispatched from the $k$-th AP, i.e.,
+    {\small
     \begin{align}
         \ccSet_{k} \define \bigcup_{m\in\esSet_{k}} \apSet_{m}.
     \end{align}
+    }%
 \end{definition}
 
 \begin{definition}[Observable State Information]
     The observable state information (OSI) of the $k$-th AP ($\forall k\in\apSet$) at the $t$-th broadcast interval is defined as the aggregation of LSIs of the APs in {conflict AP set} and the edge servers in {candidate server set} of the $k$-th AP, i.e.,
+    {\small
     \begin{align}
         \Stat_{k}(t) &\define
         \Paren{
@@ -141,6 +152,7 @@ Specifically, the \emph{conflict AP sets} and the \emph{observable state informa
             \Brace{\mathcal{Q}_{m}(t) \Big| \forall m\in\esSet_{k}}
         }.
     \end{align}
+    }%
     \label{def:OSI}
 \end{definition}
 

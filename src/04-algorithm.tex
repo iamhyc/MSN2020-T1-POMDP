@@ -37,7 +37,7 @@ Specifically, the baseline policy is elaborated below.
             \Pi_{K}(\Stat_{K}(t),\mathcal{D}_{K}(t))
         },
     \end{align}
-    }
+    }%
     where
     {\small
     \begin{align}
@@ -46,7 +46,7 @@ Specifically, the baseline policy is elaborated below.
             {\omega}_{k,j}(t+1) \Big| \forall j\in\jSpace
         }, \forall k\in\apSet.
     \end{align}
-    }
+    }%
 \end{policy}
 
 Let $W_{\Baseline}(\cdot)$ be the value function of the baseline policy $\Baseline$, we shall approximate the value function of the optimal policy $V(\cdot)$ via $W_{\Baseline}$, i.e.,
@@ -60,7 +60,8 @@ Let $W_{\Baseline}(\cdot)$ be the value function of the baseline policy $\Baseli
     },
     \label{eqn:baseline}
 \end{align}
-}where $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ denotes the cost raised by the type-$j$ jobs which are being transmitted from the $k$-th AP to the $m$-th edge server with the baseline policy $\Baseline$ and initial system state $\Stat(t+1)$, and $\tilde{W}^{\ES}_{m,j}(\Stat(t+1))$ denotes the cost raised by the type-$j$ jobs on the $m$-th server.
+}%
+where $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ denotes the cost raised by the type-$j$ jobs which are being transmitted from the $k$-th AP to the $m$-th edge server with the baseline policy $\Baseline$ and initial system state $\Stat(t+1)$, and $\tilde{W}^{\ES}_{m,j}(\Stat(t+1))$ denotes the cost raised by the type-$j$ jobs on the $m$-th server.
 Their definitions are given below.
 {\small
 \begin{align}
@@ -76,7 +77,7 @@ Their definitions are given below.
             &~~~~~~~~~~\beta I[Q_{m,j}(t+i+1) = L_{max}]
         }.
 \end{align}
-}
+}%
 
 % Moreover, the explicit expressions of $\tilde{W}^{\AP}_{k,m,j}(\Stat(t+1))$ and $\tilde{W}^{\ES}_{m,j}(\Stat(t+1))$ are derived in the following lemmas, respectively.
 
@@ -167,6 +168,7 @@ Instead, it is feasible for part of APs to update their dispatching actions dist
 Hence, we first define the following sequence of AP subsets, where each subset are selected to update dispatching actions periodically.
 \begin{definition}[Subsets Partition]
     Let $\mathcal{Y}_{1}, \dots, \mathcal{Y}_{N} \subseteq \apSet$ be a collection of subsets of AP set $\apSet$, which satisfy
+    {\small
     \begin{align}
         &\bigcup_{n=0,\dots,N-1} \mathcal{Y}_{n} = \apSet
         \label{eqn:subset_cup}
@@ -174,6 +176,7 @@ Hence, we first define the following sequence of AP subsets, where each subset a
         \esSet_{y} \cap \esSet_{y'} &=\emptyset, y' \neq y~(\forall y',y \in \mathcal{Y}_{n}).
         \label{eqn:subset_disjoint}
     \end{align}
+    }%
 \end{definition}
 The condition in equation (\ref{eqn:subset_cup}) is to ensure all the APs can update their dispatching actions periodically, whereas the condition in equation (\ref{eqn:subset_disjoint}) is to ensure APs in the conflict AP sets of each other will not update their dispatching actions in the same broadcast interval.
 For example, as illustrated in Fig.\ref{fig:system}, the AP set $\apSet$ could be decomposed of two subsets as $\set{1,3}$ and $\set{2}$.
@@ -195,13 +198,17 @@ A heuristic greedy algorithm is given in Algorithm \ref{alg_0}.
 
 At the $t$-th broadcast interval, the APs in the subset indexed with $n \define t \pmod{N}$ update their dispatching actions, while the other APs keep the same dispatching actions as the previous broadcast interval.
 Hence, let
+{\small
 \begin{align}
     \tilde{\mathcal{A}}(t) \define \Brace{ {\omega}_{y,j}(t+1) \Big| \forall y\in\mathcal{Y}_{n},j\in\jSpace }
 \end{align}
+}%
 be the aggregation of dispatching actions of the APs in the subset $\mathcal{Y}_{n}$, and
+{\small
 \begin{align}
     \hat{\mathcal{A}}(t) \define \Brace{ {\omega}_{y,j}(t+1) \Big| \forall y\notin\mathcal{Y}_{n}, j\in\jSpace}
 \end{align}
+}%
 be the aggregation of dispatching actions of the rest APs, which are the same as the previous broadcast interval.
 At the $t$-th broadcast interval, the optimization of $\tilde{\mathcal{A}}(t)$ at the RHS of the Bellman's equations can be rewritten as the following problem.
 {\small
@@ -212,13 +219,14 @@ At the $t$-th broadcast interval, the optimization of $\tilde{\mathcal{A}}(t)$ a
         \Stat(t+1) \Big| \Stat(t), \hat{\mathcal{A}}(t), \tilde{\mathcal{A}}(t)
     } \cdot W_{\Baseline}\Paren{\Stat(t+1)}.
 \end{align}
-}
+}%
 
 Moreover, we have the following conclusion on the decomposition of P2.
 \begin{lemma}[]
     The optimization problem in P2 can be equivalently decoupled into local optimization problems at APs {for each subset partition}.
     Specifically, {the local optimization for each AP (say the $y$-th AP) in the $n$-th subset ($\forall n$) can be written as}
-    \small{\begin{align}
+    \small{
+    \begin{align}
         &\textbf{P3:}~
         \min_{ {\mathcal{A}}_{y}(t+1) }
         \mathbb{E}_{\set{ \Stat_{y}(t+1)|\Stat_{y}(t), \hat{\mathcal{A}}(t), {\mathcal{A}}_{y}(t+1) }}
@@ -228,7 +236,8 @@ Moreover, we have the following conclusion on the decomposition of P2.
             +\tilde{W}^{\ES}_{m,j}\Paren{\Stat_{y}(t+1)}
         }.
         \label{eqn:partial}
-    \end{align} }
+    \end{align}
+    }%
     \label{lemma:w_partial}
 \end{lemma}
 \begin{proof}
@@ -294,23 +303,27 @@ This conclusion is summarized below.
 \begin{lemma}[Analytical Cost Upper Bound]
     \label{lemma:bound}
     Let $W_{\tilde{\Policy}}(\cdot)$ be the value function (average cost) of the proposed policy $\tilde{\Omega}$, i.e.,
+    {\small
     \begin{align}
         W_{\tilde{\Policy}}(\Stat) \define
         \sum_{t'=1}^{\infty} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
             g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t')} \Big| \Stat(1)=\Stat
         },  
     \end{align}
+    }%
     we have
+    {\small
     \begin{align}
         V(\Stat)
         \leq W_{\tilde{\Policy}}(\Stat)
         \leq W_{\Baseline}(\Stat),
         \forall \Stat.
     \end{align}
+    }%
 \end{lemma}
 \begin{proof}
     %FIXME: fix with small inspiration
-    \comments{The complete proof is provided in another version, and here the short inspiration is given.}
+    \fixit{not shorten yet.}
 \end{proof}
 Therefore, $W_{\Baseline}(\Stat)$ derived in equation (\ref{eqn:baseline}) can be used as the analytical cost upper bound of the proposed policy $\Baseline$.
 Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fixed service edge server for each AP, as long as the {static dispatching policy} is used as the baseline policy.

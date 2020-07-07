@@ -7,15 +7,17 @@ Specifically, the individual dispatching policy of one AP, the system dispatchin
 
 \begin{definition}[Dispatching Policy]
     The individual dispatching policy of the $k$-th AP, denoted as $\Omega_{k}$ ($\forall k \in\apSet$), maps from its OSI $\Stat_{k}$ and its \brlatency~$\mathcal{D}_{k}$ to the dispatching action for each job type, i.e.,
+    {\small
     \begin{align}
         \Omega_{k} \Paren{ \Stat_{k}(t), \mathcal{D}_{k}(t) }
         &\define \mathcal{A}_{k}(t+1)
-        \nonumber\\
-        &= \Brace{
-            \omega_{k,j}(t+1) \Big| \forall j\in\jSpace
-        }.
+        % \nonumber\\
+        % &= \Brace{
+        %     \omega_{k,j}(t+1) \Big| \forall j\in\jSpace
+        % }.
         \label{def:action}
     \end{align}
+    }%
 
     The aggregation of individual policy of all APs is referred to as the system dispatching policy $\Policy$.
     Thus,
@@ -25,7 +27,7 @@ Specifically, the individual dispatching policy of one AP, the system dispatchin
             \Omega_{1}(\Stat_{1}(t), \mathcal{D}_{1}(t)), \dots, \Omega_{K}(\Stat_{K}(t),\mathcal{D}_{K}(t))
         },
     \end{align}
-    }
+    }%
     where $\Delay(t) \define \set{ \mathcal{D}_{1}(t), \dots, \mathcal{D}_{K}(t) }$.
 \end{definition}
 
@@ -44,15 +46,13 @@ Hence, we define the cost function per broadcast interval as follows, {given the
                 &~~~~~+ \beta \cdot I[Q_{m,j}(t,0)=L_{max}]
             },
     \end{align}
-    }
+    }%
     where $\Inorm{\vec{x}}$ denotes the $L^1$-norm of the vector $\vec{x}$, and $\beta$ is the weight of overflow penalty.
-    \deny{
-        The cost function per broadcast interval could be taken as a uniform sampling of cost function per time slot.
-    }
 \end{definition}
 
 Since the job dispatching in one broadcast interval will affect the GSI of the following broadcast intervals, we should consider the joint minimization of the costs of all the broadcast intervals.
 Specifically, we consider the following discounted sum of the costs of all the broadcast intervals as the system objective.
+{\small
 \begin{align}
     &\bar{G}(\Stat, \Policy) \define
     \lim_{T \to \infty} \mathbb{E}^{\Policy}_{\set{\Stat(t)|\forall t}}
@@ -60,14 +60,18 @@ Specifically, we consider the following discounted sum of the costs of all the b
         \sum_{t=1}^{T} \gamma^{t-1} g\Paren{\Stat(t)} \Big| \Stat(1)
     },
 \end{align}
+}%
 where $\mathbb{E}^{\Policy}_{\set{\Stat(t)|\forall t}}[\cdot]$ denotes the expectation with respect to all possible system state in the future given scheduling policy $\Policy$, and $\gamma \in (0,1)$ is the discount factor.
 Hence, the optimization of job dispatching policy can be formulated as the following minimization problem.
+{\small
 \begin{align}
     \textbf{P1:}~
     \min_{\Policy} \bar{G}(\Stat, \Policy).
 \end{align}
+}%
 
 If the GSI $\Stat(t)$ and \brlatency~$\Delay(t)$ are known to all the APs, the MDP in problem P1 can be solved via the following Bellman's equations as in \cite{sutton1998}.
+{\small
 \begin{align}
     &V\Paren{\Stat(t)} =g\Paren{\Stat(t)}
         + \gamma\mathbb{E}_{\Delay}\bigg\{
@@ -78,7 +82,9 @@ If the GSI $\Stat(t)$ and \brlatency~$\Delay(t)$ are known to all the APs, the M
             \bigg\},
     \label{eqn:sp_0}
 \end{align}
+}%
 where the value function $V(\Stat(t))$ of the optimal policy $\Policy^{*}$ (if GSI and \brlatency~are known to all the APs) is defined as follows.
+{\small
 \begin{align}
     &V\Paren{\Stat(t)} \define
     \lim_{T\to\infty} 
@@ -87,6 +93,7 @@ where the value function $V(\Stat(t))$ of the optimal policy $\Policy^{*}$ (if G
     }.
     \label{eqn:val_f}
 \end{align}
+}%
 Moreover, the optimal policy $\Omega^{*}$ can be obtained by solving the right-hand-side (RHS) of the above Bellman's equations.
 
 %FIXME: 

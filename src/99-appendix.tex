@@ -164,50 +164,50 @@
 % where $\vec{g}$ is the cost vector whose definition is given in equation (\ref{eqn:g_vec}).
 % %----------------------------------------------------------------------------------------%
 
-\section{ Proof of Lemma \ref{lemma:bound} }
-\label{append_3}
- Since the proposed policy $\tilde{\Policy}$ is not optimal policy and $W_{\tilde{\Policy}}(\Stat)$ represents the average system cost with the proposed policy $\tilde{\Policy}$, $V(\Stat) \leq W_{\tilde{\Policy}}(\Stat)$ is straightforward.
-Let 
-{\small
-\begin{align*}
-    \Delta(t) \triangleq &
-    \sum_{t'=1}^{\infty} \gamma^{t'-1}\\\nonumber
-    &\mathbb{E}^{ \tilde{\Policy} } \Bracket{
-        g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t-1)}
-        -  g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t)}
-    }
-\end{align*}
-}
-denote the improvement of the $t$-th policy update.
-According to Proposition 2.3.3 (a) in \cite{dp-control}, we have $\Delta(t)\geq 0$, $\forall t$.
+% \section{ Proof of Lemma \ref{lemma:bound} }
+% \label{append_3}
+%  Since the proposed policy $\tilde{\Policy}$ is not optimal policy and $W_{\tilde{\Policy}}(\Stat)$ represents the average system cost with the proposed policy $\tilde{\Policy}$, $V(\Stat) \leq W_{\tilde{\Policy}}(\Stat)$ is straightforward.
+% Let 
+% {\small
+% \begin{align*}
+%     \Delta(t) \triangleq &
+%     \sum_{t'=1}^{\infty} \gamma^{t'-1}\\\nonumber
+%     &\mathbb{E}^{ \tilde{\Policy} } \Bracket{
+%         g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t-1)}
+%         -  g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t)}
+%     }
+% \end{align*}
+% }
+% denote the improvement of the $t$-th policy update.
+% According to Proposition 2.3.3 (a) in \cite{dp-control}, we have $\Delta(t)\geq 0$, $\forall t$.
 
-Hence, we have
-{\small
-\begin{align*}
-&W_{\Baseline}(\Stat)- W_{\tilde{\Policy}}(\Stat)\\
-&= 
-\underbrace{\sum_{t'=1}^{N} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
-	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),0)}
-	- 	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t')}
-}}_{\mathfrak{F}(N)}\\
-&+\sum_{t'=N+1}^{+\infty} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
-	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),0)}
-	- 	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t')}
-}\\
-&\geq \mathfrak{F}(N) + \underbrace{\sum_{t'=N+1}^{+\infty} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
-	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),0)}
-	- 	g_{\max}
-}}_{\mathfrak{G}(N)},
-\end{align*}
-}where $g_{\max}$ denotes the upper-bound of the per-stage cost $g(\cdot)$.
-Because  $\mathfrak{F}(N)=\sum_{t=1}^{N}\gamma^{t-1}\Delta(t)\geq 0$, $\mathfrak{F}(N)$ increases as $N$ increases.
-It is obvious that $\mathfrak{G}(N)$ increases as $N$ increases, and 
-\begin{align*}
-\lim\limits_{N\to+\infty}\mathfrak{G}(N)=0
-\end{align*}
-Hence, 
-\begin{align*}
-\exists N,\ \mbox{s.t. }\ W_{\Baseline}(\Stat)- W_{\tilde{\Policy}}(\Stat)\geq \mathfrak{F}(N)-\mathfrak{G}(N) \geq 0.
-\end{align*}
+% Hence, we have
+% {\small
+% \begin{align*}
+% &W_{\Baseline}(\Stat)- W_{\tilde{\Policy}}(\Stat)\\
+% &= 
+% \underbrace{\sum_{t'=1}^{N} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
+% 	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),0)}
+% 	- 	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t')}
+% }}_{\mathfrak{F}(N)}\\
+% &+\sum_{t'=N+1}^{+\infty} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
+% 	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),0)}
+% 	- 	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t')}
+% }\\
+% &\geq \mathfrak{F}(N) + \underbrace{\sum_{t'=N+1}^{+\infty} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
+% 	g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),0)}
+% 	- 	g_{\max}
+% }}_{\mathfrak{G}(N)},
+% \end{align*}
+% }where $g_{\max}$ denotes the upper-bound of the per-stage cost $g(\cdot)$.
+% Because  $\mathfrak{F}(N)=\sum_{t=1}^{N}\gamma^{t-1}\Delta(t)\geq 0$, $\mathfrak{F}(N)$ increases as $N$ increases.
+% It is obvious that $\mathfrak{G}(N)$ increases as $N$ increases, and 
+% \begin{align*}
+% \lim\limits_{N\to+\infty}\mathfrak{G}(N)=0
+% \end{align*}
+% Hence, 
+% \begin{align*}
+% \exists N,\ \mbox{s.t. }\ W_{\Baseline}(\Stat)- W_{\tilde{\Policy}}(\Stat)\geq \mathfrak{F}(N)-\mathfrak{G}(N) \geq 0.
+% \end{align*}
 
 %----------------------------------------------------------------------------------------%
