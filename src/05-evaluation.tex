@@ -11,6 +11,7 @@ In the simulation, we assume that there are $K=15$ APs, $M=10$ processing server
 The time slot duration is $20$ milliseconds and one broadcast interval consists of $t_{B}=25$ time slots, i.e., its duration is $1$ second.
 \comments{
     The network topology among APs is generated according to Barab\'asi-Albert (BA) model \cite{albert1999diameter} and randomly place the processing servers collocated with the APs.
+    After the execution of Algorithm \ref{alg_0}, the update period $N$ is $6$ reduced from $15$ before the subset partition.
     % The BA model is parameterized by $n$ and $m$ and produces a graph with $n$ vertices and $m$ edges such that the degree distribution follows a power-law.
     The arrival traces on APs and job processing time on processing servers are extracted,  and randomly chosen from \cite{clusterdata:Reiss2011}.
 }
