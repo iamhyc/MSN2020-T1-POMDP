@@ -17,23 +17,21 @@ However, there are only a few works considering random signaling latency of coop
 In fact, it is challenging to consider random transmission latency in both job delivery and signaling.
 Firstly, the centralized dispatcher design is discouraged for outdated system information and unpredictable signaling latency.
 Secondly, the cooperation of distributed dispatchers suffers from significant signaling overhead, and the random transmission latency causes the inconsistency of system information at different dispatchers.
-\comments{
-    Last but not least, 
-}%
 
 %NOTE: Our contributions
-In this paper, we would like to shed some lights on the above challenging distributed dispatcher design via POMDP problem formulation and a novel low-complexity approximate MDP solution framework.
+In this paper, we would like to shed some lights on the above challenging distributed dispatcher design via POMDP (partially observable Markov decision process) problem formulation and a novel low-complexity approximate MDP solution framework.
 Specifically, we consider a practical scenario where the signaling latency among APs and edge servers and job uploading latency from APs to edge servers are assumed to be random, and each AP can only receive the broadcast state information from part of the APs with random latency (i.e., the global system state is not available at the APs).
 Our main contributions in this new optimization scenario are summarized as follows.
 \begin{itemize}
     \item %NOTE: novel solution framework
-    We propose a novel low-complexity distributed solution framework for the dispatcher design at the APs. \comments{ By leveraging partial observation at each dispatcher, we derive the expression of approximate value function under MDP framework and decouple the optimization problem onto each AP.}
+    We propose a novel low-complexity distributed solution framework for the dispatcher design at APs.
+    By leveraging partial observation at each dispatcher, we derive the expression of approximate value function under MDP framework and decouple the optimization problem onto each AP.
     % we directly derive the expression of approximate value function and the distributed dispatching policies at all the edge servers which can be facilitated via partial and local knowledge of the approximate value function.
     Thus, the complicated POMDP solution is avoided.
     To our best knowledge, this is the first work to address the cooperative distributed multi-agent optimization problem with outdated and partial information under MDP framework.
     \item %NOTE: performance guarantee
-    We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above novel solution framework.
-    In the conventional approximate MDP methods, the performance is usually evaluated via numerical method, and it is hard to obtain analytical performance bound.
+    We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above low-complexity solution framework.
+    In the conventional approximate MDP methods, the solution is usually evaluated via numerical method which and hard to obtain analytical performance bound.
 \end{itemize}
 
 % The remainder of this paper is organized as follows.
@@ -42,14 +40,6 @@ Our main contributions in this new optimization scenario are summarized as follo
 % In Section \ref{sec:formulation}, we formulate the global optimization of dispatching decisions at all APs as an POMDP.
 % In Section \ref{sec:algorithm}, we introduce the novel low-complexity distributed solution framework for the above POMDP.
 % The numerical analysis of the proposed solution is provided in Section \ref{sec:evaluation}, and the conclusion is drawn in Section \ref{sec:conclusion}.
-
-% We use the following notations throughout this paper: 
-% non-bold letters (e.g., $a, A$) are used to denote scalar values,
-% bold lowercase letters (e.g., $\mathbf{a}$) are used to denote column vectors,
-% bold uppercase letters (e.g., $\mathbf{A}$) are used to denote matrices,
-% and calligraphic letters (e.g., $\mathcal{A}$) are used to denote sets.
-% Using these notations, $[\mathbf{A}]_{i,j}$ and $\mathbf{A}'$ denotes the $(i,j)$-th element and transpose of matrix $\mathbf{A}$, respectively.
-% $\mathbf{I}$ denotes the identity matrix.
 
 \section{Background}
 \label{sec:review}
@@ -82,10 +72,10 @@ To the best of our knowledge, there are very limited works investigating this is
 For example, the authors in \cite{JSAC17-LyuX} proposed a randomized policy via Lyapunov optimization approach to stabilize the queues in a MEC system with multiple IoT devices offloading jobs to one edge server, where \brlatency~is considered. 
 In \cite{TWC18-LyuX}, the above approach was applied to the scenario that mobile devices offload jobs to each others via D2D link.
 In the above two works, there is one centralized dispatcher in the system and the objective is to stabilize the transmission queues.
-Hence, the existence of \brlatency~may not raise significant challenge to the algorithm design with Lyapunov optimization.
+Hence, the existence of \brlatency~may not raise significant challenge to the algorithm designs.
 
 However, the design of distributed dispatchers with \brlatency~could be more challenging.
-For example, the signaling latencies at distributed dispatchers could be different, and the synchronization of their dispatching decisions become infeasible.
+For example, the signaling latency at distributed dispatchers could be different, and the synchronization of their dispatching decisions become infeasible.
 Furthermore, taking the signaling overhead in consideration, it is of more practical significance favor for the distributed dispatchers to make decisions based on locally observed system state information, instead of global system state information.
 To our best knowledge, there is no appropriate optimization framework for the distributed dispatcher design with both \brlatency~and partially observable system state information to date.
 

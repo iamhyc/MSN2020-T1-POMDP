@@ -9,7 +9,7 @@ Hence, we introduce an alternative actions update algorithm to optimize the disp
 Specifically, the proposed distributed algorithm consists of the following two steps:
 %\hongyc{(move two steps adjacent in the following subsections)}
 \begin{enumerate}
-    \item We first introduce a baseline policy, use its value function to approximate the value function of the optimal policy $\Policy^*$, and derive the analytical expression of the approximate value function for arbitrary GSI in Section \ref{subsec:baseline}.
+    \item We first introduce a time-variant baseline policy, use its value function to approximate the value function of the optimal policy $\Policy^*$ in each broadcast interval, and derive the analytical expression of the approximate value function for arbitrary GSI in Section \ref{subsec:baseline}.
     \item With the approximate value function, an alternative actions update algorithm, where only a subset of APs are selected to update their dispatching actions distributedly in each broadcast interval, is proposed in Section \ref{subsec:ap_alg}.
     Moreover, the analytical performance bound is derived in Section \ref{subsec:analysis}.
 \end{enumerate}
@@ -18,11 +18,11 @@ Specifically, the proposed distributed algorithm consists of the following two s
 
 \subsection{Baseline Policy and Approximate Value Function}
 \label{subsec:baseline}
-To alleviate the curse of dimensionality, we first use the baseline policy with fixed dispatching actions to approximate value function at the RHS of the Bellman's equations in equation (\ref{eqn:val_f}).
-Specifically, the baseline policy is elaborated below.
+To alleviate the curse of dimensionality, we first use the baseline policy with fixed dispatching actions to approximate the value function at the RHS of the Bellman's equations in equation (\ref{eqn:val_f}).
+The baseline policy is elaborated below.
 
 \begin{policy}[Baseline Policy]
-    In the baseline policy $\Baseline$, each AP fixes the target processing server for each job type as the previous broadcast interval. Specifically, at the $t$-th broadcast interval,
+    In the baseline policy $\Baseline$, each AP fixes their dispatching actions as in the previous broadcast interval. Specifically, at the $t$-th broadcast interval,
     {\small
     \begin{align}
         \Baseline\Paren{\Stat(t),\Delay(t)} &\define \Brace{ 
@@ -126,8 +126,8 @@ be the aggregation of dispatching actions of the APs in the subset $\mathcal{Y}_
     \hat{\mathcal{A}}(t) \define \Brace{ {\omega}_{y,j}(t+1) \Big| \forall y\notin\mathcal{Y}_{n}, j\in\jSpace}
 \end{align}
 }%
-be the aggregation of dispatching actions of the rest APs, which are the same as the previous broadcast interval.
-At the $t$-th broadcast interval, the optimization of $\tilde{\mathcal{A}}(t)$ at the RHS of the Bellman's equations can be rewritten as the following problem.
+be the aggregation of dispatching actions of the rest APs, which are same as in the previous broadcast interval.
+At the $t$-th broadcast interval, the optimization of dispatching actions $\tilde{\mathcal{A}}(t)$ at the RHS of the Bellman's equations can be rewritten as the following problem.
 {\small
 \begin{align}
     \textbf{P2:}~
