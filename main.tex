@@ -1,7 +1,7 @@
 % \documentclass[journal, 12pt, onecolumn, draftclsnofoot]{IEEEtran} %JSAC 20'
 % \documentclass[sigconf]{acmart} %ACM Mobihoc 20'
 % \documentclass[conference]{IEEEtran} %ICDCS 20'
-\documentclass[10pt,conference]{IEEEtran} %TMC 20'
+\documentclass[10pt,conference]{IEEEtran} %MSN 20'
 % \IEEEoverridecommandlockouts
 \usepackage[linesnumbered,vlined,ruled]{algorithm2e}
 \usepackage{algorithmic}
@@ -18,6 +18,8 @@
 \usepackage{soul}
 \usepackage{array}
 \usepackage{tabulary}
+\usepackage{enumitem}
+
 % \renewcommand{\algorithmicforall}{\textbf{for all}}
 %---------------------------------------------------------------%
 \newtheorem{definition}{Definition}   % 
@@ -35,6 +37,11 @@
 \newtheorem{lemma}{Lemma}             % [lemma]
 \newtheorem{corollary}{Corollary}     % [corollary]
 %---------------------------------------------------------------%
+
+\newcommand{\tann}[1]{\textcolor{black}{#1}}
+\newcommand{\wangr}[1]{{\leavevmode\color{orange}#1}}
+\newcommand{\hongyc}[1]{{\leavevmode\color{purple}#1}}
+
 \newcommand{\eq}{=}
 \newcommand{\domZ}{\mathbb{Z}_{*}}
 \newcommand{\domP}{\mathbb{Z}_{*}}
@@ -55,7 +62,7 @@
 \DeclarePairedDelimiter{\Brace}{\bigg\{}{\bigg\}}
 %---------------------------------------------------------------%
 \newcommand{\fixit}[1]{{\leavevmode\color{red}(#1)}}
-\newcommand{\comments}[1]{{\leavevmode\color{blue}#1}}
+\newcommand{\comments}[1]{{\leavevmode\color{black}#1}}
 \newcommand{\accept}[1]{#1}
 \newcommand{\deny}[1]{}
 \newcommand{\delete}[2]{}
@@ -73,10 +80,6 @@
 \newcommand{\Delay}{\vecG{\mathcal{D}}}
 \newcommand{\Baseline}{\vecG{\Pi}}
 \newcommand{\algname}{Solver}
-
-\newcommand{\wangr}[1]{{\leavevmode\color{orange}#1}}
-\newcommand{\hongyc}[1]{{\leavevmode\color{purple}#1}}
-\newcommand{\tann}[1]{{\leavevmode\color{blue}#1}}
 %---------------------------------------------------------------%
 \newcommand{\brlatency}{signaling latency}
 
@@ -88,7 +91,8 @@
 \begin{document}
     \title{
         % POMDP-based 
-        Online Distributed Job Dispatching in Edge Computing with Outdated and Partial Information
+        %Online Distributed Job Dispatching in Edge Computing with Outdated and Partial Information
+         Online Distributed Job Dispatching with Outdated and Partially-Observable Information
         % Distributed Job Dispatching in Edge Computing Networks with Outdated and Partially-observable Information Uploading Latency: A Low-Complexity POMDP Approach
     }
 
@@ -102,7 +106,7 @@
     % }%
     \author{
         \IEEEauthorblockN{
-            Yuncong Hong\IEEEauthorrefmark{1}\IEEEauthorrefmark{2},
+            Yuncong Hong\IEEEauthorrefmark{1}\IEEEauthorrefmark{2}\IEEEauthorrefmark{3},
             Bojie Lv\IEEEauthorrefmark{1},
             Rui Wang\IEEEauthorrefmark{1},
             Haisheng Tan\IEEEauthorrefmark{3},

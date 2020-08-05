@@ -1,9 +1,3 @@
-\section{System Model}
-\label{sec:model}
-% In this section, we elaborate the model of edge computing systems with random job arrivals, uploading latency and computation time,
-% as well as the signaling mechanism with periodic broadcast.
-%----------------------------------------------------------------------------------------%
-\subsection{Network Model}
 \begin{figure}[htp!]
     \centering
     \includegraphics[width=0.45\textwidth]{system-model.pdf}
@@ -11,6 +5,12 @@
     \label{fig:system}
 \end{figure}
 
+\section{System Model}
+\label{sec:model}
+% In this section, we elaborate the model of edge computing systems with random job arrivals, uploading latency and computation time,
+% as well as the signaling mechanism with periodic broadcast.
+%----------------------------------------------------------------------------------------%
+\subsection{Network Model}
 We consider an edge computing system with $K$ Access Points (APs), $M$ edge servers, and $1$ cloud server as illustrated in Fig.\ref{fig:system}
 The set of APs and processing servers are denoted as $\apSet \define \set{1,\dots,K}$ and $\esSet \define \set{0,\dots,M}$, respectively.
 Specifically, the edge servers are assumed deployed collocated with APs and there are at most one edge server on one AP; the zero-th server denotes the cloud server always.
@@ -60,7 +60,8 @@ The arrival jobs will be discarded on processing server when the processing queu
 \label{subsec:broadcast}
 In order to facilitate distributed dispatching for the APs, the signaling mechanism with periodic broadcast is introduced.
 We refer to every $t_B$ time slots as a broadcast interval.
-As illustrated in Fig.\ref{fig:brd_timeline}, at the beginning of each broadcast interval, the local state information (LSI) of APs and processing servers are broadcast, and each AP updates its dispatching strategy of job dispatching when observing the broadcast LSIs from some APs and processing servers.
+% As illustrated in Fig.\ref{fig:brd_timeline}, a
+At the beginning of each broadcast interval, the local state information (LSI) of APs and processing servers are broadcast, and each AP updates its dispatching strategy of job dispatching when observing the broadcast LSIs from some APs and processing servers.
 As a remark notice that the observable LSI may be outdated due to signaling latency among APs and processing servers.
 The LSI at the APs and processing servers, global state information, and observable state information at the APs are defined below, respectively.
 
@@ -152,22 +153,22 @@ Specifically, the \emph{conflict AP sets} and the \emph{observable state informa
     \label{def:OSI}
 \end{definition}
 
-\begin{figure*}[t]
-    \centering
-    \includegraphics[width=0.60\textwidth]{brd-timeline.pdf}
-    \caption{The timeline illustration of reception of OSI for the $1$-st AP where $2$-nd AP is in its \emph{conflict AP set} and $1$-st server is in its \emph{candidate server set}.}
-    \label{fig:brd_timeline}
-\end{figure*}
+% \begin{figure*}[t]
+%     \centering
+%     \includegraphics[width=0.60\textwidth]{brd-timeline.pdf}
+%     \caption{The timeline illustration of reception of OSI for the $1$-st AP where $2$-nd AP is in its \emph{conflict AP set} and $1$-st server is in its \emph{candidate server set}.}
+%     \label{fig:brd_timeline}
+% \end{figure*}
 
 The $k$-th AP is able to collect its OSI $\Stat_{k}(t)$ at the $\mathcal{D}_{k}(t)$-th time slots of the $t$-th broadcast interval, where the \brlatency~$\mathcal{D}_{k}(t)$ is a random variable.
 It is assumed that $\mathcal{D}_{k}(t)$ follows identical and independent distribution in different broadcast interval.
 We refer to $\mathcal{D}_{k}(t)$ as the \brlatency~of the $k$-th AP at the $t$-th broadcast interval.
 An example is given below to demonstrate how the \brlatency~affects the reception of OSI and the update of the dispatching strategy.
 
-\begin{example}
-    In Fig.\ref{fig:brd_timeline}, the $2$-nd AP and $1$-st server are in the \emph{conflict AP set} and \emph{candidate server set} of the $1$-st AP, respectively.
-    At the beginning of the $t$-th broadcast interval, the dispatching actions $\mathcal{A}_{1}(t)$ is adopted by the $1$-st AP.
-    After $\mathcal{D}_{1}(t)$ time slots, it updates the dispatching actions to $\mathcal{A}_{1}(t+1)$ based on the OSI $\Stat_{1}(t)$.
-    At the beginning of the $(t+1)$-th broadcast interval, it will firstly keep the previous actions, and then updates the actions $\mathcal{D}_{1}(t+1)$ time slots later based on $\Stat_{1}(t+1)$ which is denotes as $\mathcal{A}_{1}(t+2)$.
-    The signaling latency $\mathcal{D}_1(t)$ and $\mathcal{D}_1(t+1)$ can be different.
-\end{example}
+% \begin{example}
+%     In Fig.\ref{fig:brd_timeline}, the $2$-nd AP and $1$-st server are in the \emph{conflict AP set} and \emph{candidate server set} of the $1$-st AP, respectively.
+%     At the beginning of the $t$-th broadcast interval, the dispatching actions $\mathcal{A}_{1}(t)$ is adopted by the $1$-st AP.
+%     After $\mathcal{D}_{1}(t)$ time slots, it updates the dispatching actions to $\mathcal{A}_{1}(t+1)$ based on the OSI $\Stat_{1}(t)$.
+%     At the beginning of the $(t+1)$-th broadcast interval, it will firstly keep the previous actions, and then updates the actions $\mathcal{D}_{1}(t+1)$ time slots later based on $\Stat_{1}(t+1)$ which is denotes as $\mathcal{A}_{1}(t+2)$.
+%     The signaling latency $\mathcal{D}_1(t)$ and $\mathcal{D}_1(t+1)$ can be different.
+% \end{example}

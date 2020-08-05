@@ -10,17 +10,22 @@ The establishment of efficient cooperation among edge servers is one of the majo
 
 %NOTE: Motivation with MAN
 We consider an edge computing system with multiple APs and edge servers residing in the Metropolitan Area Network (MAN).
-The APs should collect jobs offloaded from the mobile users in its service area and make dispatching decisions for each job.
-According to the MAN performance analysis in \cite{MAN-LATENCY}, the transmission latency {among APs and edge servers} varies a lot with respect to different hours of day and devices' locations in a MAN.
-There has been a number of existing literature considering random transmission latency of job delivery in the edge computing network \cite{latency-EDGE19,MOBIHOC19-ZhouZ,IOTJ18-FanQ,TOC19-LiuC,JSAC19-AlameddineHA}.
-However, there are only a few works considering random signaling latency of cooperation among distributed dispatchers \cite{tan-online,TWC18-LyuX}.
-In fact, it is challenging to consider random transmission latency in both job delivery and signaling.
-Firstly, the centralized dispatcher design is discouraged for outdated system information and unpredictable signaling latency.
-Secondly, the cooperation of distributed dispatchers suffers from significant signaling overhead, and the random transmission latency causes the inconsistency of system information at different dispatchers.
+The APs collect jobs offloaded from the mobile users in its service area and make dispatching decision for each job. According to the MAN performance analysis in \cite{MAN-LATENCY}, the data transmission latency {among APs and edge servers} varies a lot with respect to different hours of day and devices' locations in a MAN. \comments{In addition, each AP also suffer from signaling latency, which is the time consumed for each AP to collect system state information under some signaling mechanism.}
+There has been a number of existing literature considering random transmission latency of job delivery in edge computing networks (e.g., \cite{latency-EDGE19,MOBIHOC19-ZhouZ,IOTJ18-FanQ,TOC19-LiuC,JSAC19-AlameddineHA}). 
+\tann{However, there are only a few works considering signaling latency of cooperation among distributed job dispatchers \cite{JSAC17-LyuX,TWC18-LyuX}.}
+In fact, it is full of challenge to consider latency in {both job delivery and} signaling. The cooperation of distributed dispatchers suffers from significant unpredictable signaling and transmission overhead. Therefore, aggregating the global system state information at each AP is not practical, and a centralized dispatcher design is discouraged. Moreover, the latency will also lead to outdated information at each dispatcher and information inconsistency among different dispatchers.
+%\setlength{\leftmargini}{0pt}
+% \begin{enumerate}[leftmargin=*]
+%     \item Firstly, the centralized dispatcher design is discouraged for outdated system information and unpredictable \tann{signaling latency}.
+%     \item Secondly, the cooperation of distributed dispatchers suffers from significant signaling overhead. Therefore, aggregating the global system state information at each AP is not practical.
+%     \item  Finally, the transmission latency causes the inconsistency of system information at different dispatchers.
+% \end{enumerate}
+
+
 
 %NOTE: Our contributions
-In this paper, we would like to shed some lights on the above challenging distributed dispatcher design via POMDP (partially observable Markov decision process) problem formulation and a novel low-complexity approximate MDP solution framework.
-Specifically, we consider a practical scenario where the signaling latency among APs and edge servers and job uploading latency from APs to edge servers are assumed to be random, and each AP can only receive the broadcast state information from part of the APs with random latency (i.e., the global system state is not available at the APs).
+In this paper, we would like to shed some lights on the above challenging distributed dispatcher design via proposing POMDP (partially observable Markov decision process) problem formulation and a novel low-complexity approximate MDP solution framework.
+Specifically, we consider a practical scenario where the signaling latency among APs and edge servers as well as job uploading latency from APs to edge servers are assumed to be random, and each AP can only receive the broadcast state information from part of the APs with random latency (i.e., the global system state is not available at the APs).
 Our main contributions in this new optimization scenario are summarized as follows.
 \begin{itemize}
     \item %NOTE: novel solution framework
@@ -32,16 +37,17 @@ Our main contributions in this new optimization scenario are summarized as follo
     \item %NOTE: performance guarantee
     We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above low-complexity solution framework.
     In the conventional approximate MDP methods, the solution is usually evaluated via numerical method which and hard to obtain analytical performance bound.
+    \item We conduct extensive simulations based on the Google Cluster trace, compared with three heuristic benchmarks. The evaluation results show that our proposed job dispatching policy can achieve $20.67\%$ decreasing in average job response time, and our algorithm consistently performs well under various parameter settings of signaling latency, job arrival intensity and processing time.
 \end{itemize}
 
-% The remainder of this paper is organized as follows.
-% In Section \ref{sec:review}, the related works are elaborated.
-% In Section \ref{sec:model}, we illustrate the system model and the signaling model with random latency.
-% In Section \ref{sec:formulation}, we formulate the global optimization of dispatching decisions at all APs as an POMDP.
-% In Section \ref{sec:algorithm}, we introduce the novel low-complexity distributed solution framework for the above POMDP.
-% The numerical analysis of the proposed solution is provided in Section \ref{sec:evaluation}, and the conclusion is drawn in Section \ref{sec:conclusion}.
+\noindent \textbf{Paper Organization: }The remainder of this paper is organized as follows.
+In Section \ref{sec:review}, the related works are elaborated.
+In Section \ref{sec:model}, we illustrate the system model and the signaling model with random latency.
+In Section \ref{sec:formulation}, we formulate the global optimization of dispatching decisions at all APs as an POMDP.
+In Section \ref{sec:algorithm}, we introduce the novel low-complexity distributed solution framework for the above POMDP.
+The numerical analysis of the proposed solution is provided in Section \ref{sec:evaluation}, and the conclusion is drawn in Section \ref{sec:conclusion}.
 
-\section{Background}
+\section{Related Work}
 \label{sec:review}
 %NOTE: resource placement (cache-like problem), service migration
 % {
