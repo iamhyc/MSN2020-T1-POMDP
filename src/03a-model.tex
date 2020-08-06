@@ -1,3 +1,8 @@
+\section{System Model}
+\label{sec:model}
+% In this section, we elaborate the model of edge computing systems with random job arrivals, uploading latency and computation time,
+% as well as the signaling mechanism with periodic broadcast.
+%----------------------------------------------------------------------------------------%
 \begin{figure}[htp!]
     \centering
     \includegraphics[width=0.45\textwidth]{system-model.pdf}
@@ -5,17 +10,13 @@
     \label{fig:system}
 \end{figure}
 
-\section{System Model}
-\label{sec:model}
-% In this section, we elaborate the model of edge computing systems with random job arrivals, uploading latency and computation time,
-% as well as the signaling mechanism with periodic broadcast.
-%----------------------------------------------------------------------------------------%
 \subsection{Network Model}
 We consider an edge computing system with $K$ Access Points (APs), $M$ edge servers, and $1$ cloud server as illustrated in Fig.\ref{fig:system}
 The set of APs and processing servers are denoted as $\apSet \define \set{1,\dots,K}$ and $\esSet \define \set{0,\dots,M}$, respectively.
-Specifically, the edge servers are assumed deployed collocated with APs and there are at most one edge server on one AP; the zero-th server denotes the cloud server always.
+Specifically, we have the $0$-th processing server denote the cloud server and the edge server is deployed collocated with AP.
+% It's assumed that the edge servers are collocated with APs and there are at most one edge server on one AP.
 Each AP collects the computation jobs from the mobile users within its coverage, and makes dispatching action on the processing servers for each job.
-Furthermore, it is assumed that one AP could only access to the cloud server and neighbor edge servers due to transmission and signaling latency limitation.
+Furthermore, it is assumed that one AP could only access to the cloud server and neighbor edge servers (including the collocated edge server if existed) due to transmission and signaling latency limitation.
 % It is assumed that the $k$-th AP only dispatches the computation jobs to the edge servers within a certain number of hops.
 % Let $\esSet_{k} \subseteq \esSet$ be the subset of edge servers which can compute the jobs from the $k$-th AP, and $\apSet_{m}$ be the subset of APs, which may upload jobs to the $m$-th edge server.
 We refer to $\esSet_{k} \subseteq \esSet$ as the \emph{candidate server set} of the $k$-th AP,  $\apSet_{m} \subseteq \apSet$ as the \emph{potential AP set} of the $m$-th edge server, and $\rho_{k,m}$ as the collocation indicator (i.e., $\rho_{k,m}=1$ if $k$-th AP and $m$-th edge server collocated, otherwise $\rho_{k,m}=0$) ($\forall k\in\apSet, m\in\esSet$).
@@ -23,7 +24,7 @@ Different APs may have different candidate servers according to their locations 
 We consider cloud server as one of the processing server with stronger computation capability, but also with larger transmission latency and signaling latency compared with other edge servers.
 % In this edge computing network, each AP and edge server periodically broadcast their state information (the state information is defined in the Section \ref{subsec:broadcast}), and one AP updates its strategy of job dispatching when receiving the broadcast state information.
 
-The job dispatchers are implemented distributedly on APs.
+The job dispatchers are implemented on the APs in a distributed manner.
 % which would suffer from heavy communication overhead with other AP nodes but with powerful computation capacity.
 The time axis of dispatching is organized by time slots.
 % In this paper, we shall optimize the job dispatching strategy distributed at APs with partially observable state information, where both job uploading and state information broadcasting suffer from random transmission latency.
@@ -43,7 +44,7 @@ Let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency distribution of the type-
 Moreover, the uploading latency $u_{k,m,j}$ is fixed as $0$ if $\rho_{k,m}=1$.
 
 %NOTE: [computation process]
-For job computation process on processing servers, we adopt the \emph{unrelated machines assumption} as in \cite{tan-online} where the computation time on different processing servers would follow independent distribution.
+We adopt the \emph{unrelated machines assumption} as in \cite{tan-online} for job computation process, where the computation time on different processing servers would follow independent distribution.
 Specifically, there are $J$ parallel virtual machines (VMs) running on each processing server for the $J$ job types, respectively.
 It is assumed that the computation time of different job types on different edge servers follows independent memoryless geometric distribution 
 % \footnote{In this paper, we adopt the memoryless geometric distribution to simplify the elaboration of algorithm. In fact, the proposed algorithm can be easily extended to other distributions.}
