@@ -24,7 +24,7 @@ In fact, it is full of challenge to consider latency in {both job delivery and} 
 
 
 %NOTE: Our contributions
-In this paper, we would like to shed some lights on the above challenging distributed dispatcher design via proposing POMDP (partially observable Markov decision process) problem formulation and a novel low-complexity approximate MDP solution framework.
+In this paper, we would like to shed some lights on the above challenging distributed dispatcher design via proposing the POMDP (partially observable Markov decision process) problem formulation and a novel low-complexity approximate MDP solution framework.
 Specifically, we consider a practical scenario where the signaling latency among APs and edge servers as well as job uploading latency from APs to edge servers are assumed to be random, and each AP can only receive the broadcast state information from part of the APs with random latency (i.e., the global system state is not available at the APs).
 Our main contributions in this new optimization scenario are summarized as follows.
 \begin{itemize}
@@ -37,7 +37,7 @@ Our main contributions in this new optimization scenario are summarized as follo
     \item %NOTE: performance guarantee
     We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above low-complexity solution framework.
     In the conventional approximate MDP methods, the solution is usually evaluated via numerical method which and hard to obtain analytical performance bound.
-    \item We conduct extensive simulations based on the Google Cluster trace, compared with three heuristic benchmarks. The evaluation results show that our proposed job dispatching policy can achieve $20.67\%$ decreasing in average job response time, and our algorithm consistently performs well under various parameter settings of signaling latency, job arrival intensity and processing time.
+    \item We conduct extensive simulations based on the Google Cluster trace, compared with three heuristic benchmarks. The evaluation results show that our proposed job dispatching policy can achieve $20.67\%$ decreasing in average job response time, and our algorithm consistently performs well under various parameter settings of signaling latency, job arrival intensity and job processing time.
 \end{itemize}
 
 \noindent \textbf{Paper Organization: }The remainder of this paper is organized as follows.
