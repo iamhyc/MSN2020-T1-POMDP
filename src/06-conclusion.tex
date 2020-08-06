@@ -1,11 +1,22 @@
 \section{Conclusion}
 \label{sec:conclusion}
-In this paper, we consider a distributed and asynchronous job dispatcher design in an edge computing network residing in a MAN with multiple APs and edge servers.
-The APs and edge servers periodically broadcast their local state information to facilitate distributed dispatcher design.
-Due to random transmission latency, the system information observed at different dispatchers are asynchronous.
-We also consider a practical scenario that not all the state information can be observed by each AP.
-Hence, the distributed optimization of job dispatching strategies at all the APs is formulated as a POMDP, whose minimization objective is a discount measurement of job delivery and computation time.
-We propose a novel low-complexity distributed solution framework based on analytical approximation of value function and one-step policy iteration, where the complicated POMDP solution or value iteration is avoided and the analytical performance lower bound is derived.
-The simulation results show that the proposed solution framework outperforms various benchmarks.
+In this paper, we consider an online distributed job dispatcher design problem for an edge computing system residing in a Metropolitan Area Network.
+In this edge computing system, the job dispatchers are implemented in a distributed manner on multiple access points (APs) which collect jobs from mobile users and then dispatch jobs to one edge server or cloud server for processing.
+To facilitate the cooperation among distributed job dispatchers, a signaling mechanism is introduced where the APs and edge servers would periodically broadcast their local state information to the job dispatchers.
+However, the reception of updated and fully-observed global system state is discouraged as the transmission latency is non-negligible in MAN and reception of all broadcast is time consuming.
+Hence, we formulate the distributed optimization problem of job dispatching strategies as a POMDP problem, with outdated and partial-observable information.
+The conventional solution for POMDP is impractical due to huge time complexity.
+In this paper, we propose a novel low-complexity solution framework for distributed job dispatching, based on which the optimization of job dispatching policy can be decoupled via an alternative policy iteration algorithm and a theoretical performance lower bound is obtained.
+The evaluation results show that our proposed policy can achieve obvious and robust performance gain compared with heuristic baselines.
 This work assumes available knowledge on the distributions of signaling latency, uploading latency and computation time.
 As an extension, the reinforcement learning would be integrated with the proposed solution framework when the above statistics are absent.
+%
+% In this paper, we consider a distributed and asynchronous job dispatcher design in an edge computing network residing in a MAN with multiple APs and edge servers.
+% The APs and edge servers periodically broadcast their local state information to facilitate distributed dispatcher design.
+% Due to random transmission latency, the system information observed at different dispatchers are asynchronous.
+% We also consider a practical scenario that not all the state information can be observed by each AP.
+% Hence, the distributed optimization of job dispatching strategies at all the APs is formulated as a POMDP, whose minimization objective is a discount measurement of job delivery and computation time.
+% We propose a novel low-complexity distributed solution framework based on analytical approximation of value function and one-step policy iteration, where the complicated POMDP solution or value iteration is avoided and the analytical performance lower bound is derived.
+% The simulation results show that the proposed solution framework outperforms various benchmarks.
+% This work assumes available knowledge on the distributions of signaling latency, uploading latency and computation time.
+% As an extension, the reinforcement learning would be integrated with the proposed solution framework when the above statistics are absent.
