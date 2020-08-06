@@ -21,13 +21,13 @@ Furthermore, it is assumed that one AP could only access to the cloud server and
 % Let $\esSet_{k} \subseteq \esSet$ be the subset of edge servers which can compute the jobs from the $k$-th AP, and $\apSet_{m}$ be the subset of APs, which may upload jobs to the $m$-th edge server.
 We refer to $\esSet_{k} \subseteq \esSet$ as the \emph{candidate server set} of the $k$-th AP,  $\apSet_{m} \subseteq \apSet$ as the \emph{potential AP set} of the $m$-th edge server, and $\rho_{k,m}$ as the collocation indicator (i.e., $\rho_{k,m}=1$ if $k$-th AP and $m$-th edge server collocated, otherwise $\rho_{k,m}=0$) ($\forall k\in\apSet, m\in\esSet$).
 Different APs may have different candidate servers according to their locations in the network, as illustrated in Fig.\ref{fig:system}.
-We consider cloud server as one of the processing server with stronger computation capability, but also with larger transmission latency and signaling latency compared with other edge servers.
+We consider cloud server as one of the processing server with stronger computation capability, but also with larger transmission latency compared with other edge servers.
 % In this edge computing network, each AP and edge server periodically broadcast their state information (the state information is defined in the Section \ref{subsec:broadcast}), and one AP updates its strategy of job dispatching when receiving the broadcast state information.
 
+%NOTE: [job space support and arrival process]
 The job dispatchers are implemented on the APs in a distributed manner.
 % which would suffer from heavy communication overhead with other AP nodes but with powerful computation capacity.
 % In this paper, we shall optimize the job dispatching strategy distributed at APs with partially observable state information, where both job uploading and state information broadcasting suffer from random transmission latency.
-%NOTE: [job space support and arrival process]
 Without loss of generality, it is assumed that there are $J$ types of jobs computed in this system, which are denoted via the set $\jSpace \define \set{1,\dots,J}$.
 The time axis of dispatching is organized by time slots.
 The arrivals of the type-$j$ jobs at the $k$-th AP ($\forall k\in\apSet,j\in\jSpace$) in different time slots are assumed to be independent and identically distributed (i.i.d.) Bernoulli random variables, and the arrival probability is denoted as $\lambda_{k,j}$.
