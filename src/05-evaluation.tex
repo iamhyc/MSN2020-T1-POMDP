@@ -17,7 +17,7 @@ The arrival traces and job processing time for each job type are extracted from 
 The maximum uploading latency is $\Xi = 3t_B$, and the distribution of $\mathbb{U}_{k,m,j}(\Xi)$ ($\forall k\in\apSet, m\in\esSet_{k}, j\in\jSpace$) is arbitrarily generated within the support $\set{0, 1, \dots, \Xi}$.
 The \brlatency~ is with an integer support from $0.7t_B$ to $0.9t_B$ time slots.
 Each queue for VMs on edge server is with maximum queue length $L_{max}=50$, i.e., there would be at most $50$ jobs on one edge server.
-The discount factor $\gamma$ is $0.95$ and the penalty weight $\beta$ is $120$.
+The discount factor $\gamma$ is $0.95$ and the overflow penalty weight $\beta$ is $120$.
 
 % %-----------------------------------------------------------------------%
 % \begin{figure}[ht]                                                      %
@@ -68,7 +68,7 @@ This demonstrates its high dispatching efficiency.
 \begin{figure}[ht!]                                                                             %
     \centering                                                                                  %
     \includegraphics[width=0.45\textwidth]{the-cost-timeline-alt.pdf}                     %
-    \caption{Illustration of number of jobs on all the APs and edge servers versus index of broadcast interval.}
+    \caption{Illustration of number of jobs on all the APs and processing servers versus index of broadcast interval.}
     \label{fig:general_timeline}                                                                %
 \end{figure}                                                                                    %
 %-----------------------------------------------------------------------------------------------%
@@ -99,12 +99,12 @@ This demonstrates its high dispatching efficiency.
     \centering
     \begin{minipage}[b]{0.23\textwidth}
         \includegraphics[width=\textwidth]{the-arrival-study.pdf}
-        \caption{Illustration of average system cost versus the number of APs.}
+        \caption{Illustration of average system cost versus job arrival intensity.}
         \label{fig:ss_scale}
     \end{minipage}
     \begin{minipage}[b]{0.23\textwidth}
         \includegraphics[width=\textwidth]{the-proc-study.pdf}
-        \caption{Illustration of average system cost versus the processing time distributions.}
+        \caption{Illustration of average system cost versus mean processing time.}
         \label{fig:ss_dist}
     \end{minipage}
 \end{figure}
@@ -138,9 +138,9 @@ This demonstrates its high dispatching efficiency.
 
 %NOTE: sensitivity study
 \textbf{Signaling Latency.}
-The simulation results with different distributions of \brlatency~$\mathcal{D}_{k}$ ($\forall k\in\apSet$) are illustrated in Fig.\ref{fig:ss_signal}, where the cumulative distribution function (CDF) of the job number in the system is plotted.
+The simulation results with different \brlatency~$\mathcal{D}_{k}$ ($\forall k\in\apSet$) are illustrated in Fig.\ref{fig:ss_signal}, where the cumulative distribution function (CDF) of the job number in the system is plotted.
 Specifically, the \brlatency~of all the APs is set to $5, 12, 25$ in Fig.\ref{fig:ss_signal}(a), Fig.\ref{fig:ss_signal}(b), Fig.\ref{fig:ss_signal}(c), respectively.
-It can be observed from Fig.\ref{fig:ss_signal}(a) and Fig.\ref{fig:ss_signal}(c) that, with the increasing \brlatency, the performance of Queue-aware Policy becomes worse.
+It can be observed from Fig.\ref{fig:ss_signal}(a) to Fig.\ref{fig:ss_signal}(c) that, with the increasing of \brlatency, the performance of Queue-aware Policy becomes worse.
 The Queue-aware policy slightly outperforms the Random Policy in Fig.5(a) with small \brlatency~(achieving a smaller number of jobs in the system), and becomes worse in Fig.5(c) with large \brlatency.
 This demonstrates that the Queue-aware Policy is sensitive to the \brlatency.
 In all the figures, the proposed policy performs better than the benchmarks, which demonstrates the robustness of its performance versus signaling latency.
@@ -160,7 +160,7 @@ The simulation results of various mean processing time are illustrated in Fig.\r
 Generally speaking, with the increasing average processing time, the average system cost increases in all the benchmarks and our proposed policy.
 The simulation results are consistent with that in Fig.\ref{fig:ss_scale}.
 It can be observed that the proposed policy has better performance than the benchmarks.
-Moreover, the performance gain becomes significant when the computation time is long (the computation load is heavy).
+Moreover, the performance gain becomes significant when the computation time is long (i.e., the computation load is heavy).
 % On the other hand, the gain is negligible for short computation time (the computation load is light).
 
 %----------------------------------------------------------------------------------------%
