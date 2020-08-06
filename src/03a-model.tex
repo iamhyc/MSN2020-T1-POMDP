@@ -26,10 +26,10 @@ We consider cloud server as one of the processing server with stronger computati
 
 The job dispatchers are implemented on the APs in a distributed manner.
 % which would suffer from heavy communication overhead with other AP nodes but with powerful computation capacity.
-The time axis of dispatching is organized by time slots.
 % In this paper, we shall optimize the job dispatching strategy distributed at APs with partially observable state information, where both job uploading and state information broadcasting suffer from random transmission latency.
 %NOTE: [job space support and arrival process]
 Without loss of generality, it is assumed that there are $J$ types of jobs computed in this system, which are denoted via the set $\jSpace \define \set{1,\dots,J}$.
+The time axis of dispatching is organized by time slots.
 The arrivals of the type-$j$ jobs at the $k$-th AP ($\forall k\in\apSet,j\in\jSpace$) in different time slots are assumed to be independent and identically distributed (i.i.d.) Bernoulli random variables, and the arrival probability is denoted as $\lambda_{k,j}$.
 % Let $B_{k,j}(t) \in \set{0,1}$ represent the event of job arrival, where $B_{k,j}(t)=1$ means one type-$j$ job arrives at the $k$-th AP in the $t$-th time slot, and $B_{k,j}(t)=0$ means otherwise.
 % Hence,
