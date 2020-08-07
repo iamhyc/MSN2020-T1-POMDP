@@ -10,7 +10,7 @@ The establishment of efficient cooperation among edge servers is one of the majo
 
 %NOTE: Motivation with MAN
 We consider an edge computing system with multiple APs and edge servers residing in the Metropolitan Area Network (MAN).
-The APs collect jobs offloaded from the mobile users in its service area and make dispatching decision for each job. According to the MAN performance analysis in \cite{MAN-LATENCY}, the data transmission latency {among APs and edge servers} varies a lot with respect to different hours of day and devices' locations in a MAN. \comments{In addition, each AP also suffer from signaling latency, which is the time consumed for each AP to collect system state information under some signaling mechanism.}
+The APs collect jobs offloaded from the mobile users in its service area and make dispatching decision for each job. According to the MAN performance analysis in \cite{MAN-LATENCY}, the data transmission latency {among APs and edge servers} varies a lot with respect to different hours of day and devices' locations in a MAN. {In addition, each AP also suffer from signaling latency, which is the time consumed for each AP to collect system state information under some signaling mechanism.}
 There has been a number of existing literature considering random transmission latency of job delivery in edge computing networks (e.g., \cite{latency-EDGE19,MOBIHOC19-ZhouZ,IOTJ18-FanQ,TOC19-LiuC,JSAC19-AlameddineHA}). 
 \tann{However, there are only a few works considering signaling latency of cooperation among distributed job dispatchers \cite{JSAC17-LyuX,TWC18-LyuX}.}
 In fact, it is full of challenge to consider latency in {both job delivery and} signaling. The cooperation of distributed dispatchers suffers from significant unpredictable signaling and transmission overhead. Therefore, aggregating the global system state information at each AP is not practical, and a centralized dispatcher design is discouraged. Moreover, the latency will also lead to outdated information at each dispatcher and information inconsistency among different dispatchers.
@@ -58,12 +58,12 @@ The numerical analysis of the proposed solution is provided in Section \ref{sec:
 % }
 
 %NOTE: single-agent dispatching, single UE/server
-There have been a number of works considering the centralized job dispatching with instant and complete knowledge on the states of edge computing systems.
+There have been a number of works considering the centralized job dispatching with updated and complete knowledge on the states of edge computing systems.
 For example, in order to minimize the average job response time in the worst case, the authors in \cite{tan-online} designed an online algorithm for job dispatching in edge computing systems with fixed uploading latency.
-In the scenario that BSs and edge servers are connected via software defined network (SDN), the authors in \cite{IOTJ18-FanQ} proposed a heuristic algorithm to dispatch the jobs to the closest edge servers according to geographical locations.
+In the scenario that BSs and edge servers are connected via software defined network (SDN), the authors in \cite{IOTJ18-FanQ} proposed a heuristic algorithm to dispatch the jobs to the closest edge servers according to their locations.
 Considering random jobs arrival and job offloading to a single edge server, the authors in \cite{mdp-globecom,mdp-tvt} formulate the offloading problem as an infinite-horizon Markov decision process (MDP).
 % When the jobs can be dispatched to either edge servers or cloud servers with fixed uploading latency, the authors in \cite{MASS18-MengZ} formulated job dispatching problem as an integer linear programming to minimize the total uploading latency.
-In the above works, a centralized dispatcher with complete and instant knowledge of the system status was assumed in the edge computing systems, which might be impractical.
+In the above works, a centralized dispatcher with complete and updated knowledge of the system status was assumed in the edge computing systems, which might be impractical.
 
 Hence, there are also some works considering the distributed job dispatching in edge computing systems.
 For example, in order to minimize a weighted sum of total energy consumption and uploading latency, the authors in \cite{ToN-Xuchen2016} proposed a distributed job dispatching algorithm based on game theory to achieve the Nash equilibrium. 

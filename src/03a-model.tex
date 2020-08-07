@@ -15,13 +15,13 @@ We consider an edge computing system with $K$ Access Points (APs), $M$ edge serv
 The set of APs and processing servers are denoted as $\apSet \define \set{1,\dots,K}$ and $\esSet \define \set{0,\dots,M}$, respectively.
 Specifically, we have the $0$-th processing server denote the cloud server and the edge server is deployed collocated with AP.
 % It's assumed that the edge servers are collocated with APs and there are at most one edge server on one AP.
-Each AP collects the computation jobs from the mobile users within its coverage, and makes dispatching action on the processing servers for each job.
+Each AP collects the jobs from the mobile users within its coverage, and makes dispatching action on the processing servers for each job.
 Furthermore, it is assumed that one AP could only access to the cloud server and neighbor edge servers (including the collocated edge server if existed) due to transmission and signaling latency limitation.
 % It is assumed that the $k$-th AP only dispatches the computation jobs to the edge servers within a certain number of hops.
 % Let $\esSet_{k} \subseteq \esSet$ be the subset of edge servers which can compute the jobs from the $k$-th AP, and $\apSet_{m}$ be the subset of APs, which may upload jobs to the $m$-th edge server.
 We refer to $\esSet_{k} \subseteq \esSet$ as the \emph{candidate server set} of the $k$-th AP,  $\apSet_{m} \subseteq \apSet$ as the \emph{potential AP set} of the $m$-th edge server, and $\rho_{k,m}$ as the collocation indicator (i.e., $\rho_{k,m}=1$ if $k$-th AP and $m$-th edge server collocated, otherwise $\rho_{k,m}=0$) ($\forall k\in\apSet, m\in\esSet$).
 Different APs may have different candidate servers according to their locations in the network, as illustrated in Fig.\ref{fig:system}.
-We consider cloud server as one of the processing server with stronger computation capability, but also with larger transmission latency compared with other edge servers.
+We consider cloud server as one of the processing server with stronger computation capability, but also with larger transmission latency compared with the edge servers.
 % In this edge computing network, each AP and edge server periodically broadcast their state information (the state information is defined in the Section \ref{subsec:broadcast}), and one AP updates its strategy of job dispatching when receiving the broadcast state information.
 
 %NOTE: [job space support and arrival process]
