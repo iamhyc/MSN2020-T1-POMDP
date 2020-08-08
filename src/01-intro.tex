@@ -8,6 +8,13 @@ However, the edge servers are usually deployed with limited computation resource
 The establishment of efficient cooperation among edge servers is one of the major design challenges, given the signaling overhead and latency of distributed information exchange and decision making.
 %given the network transmission latency and signaling overhead
 
+\begin{figure}[htp!]
+    \centering
+    \includegraphics[width=0.45\textwidth]{system-model.pdf}
+    \caption{The Illustration of System Model}
+    \label{fig:system}
+\end{figure}
+
 %NOTE: Motivation with MAN
 We consider an edge computing system with multiple APs and edge servers residing in the Metropolitan Area Network (MAN).
 The APs collect jobs offloaded from the mobile users in its service area and make dispatching decision for each job. According to the MAN performance analysis in \cite{MAN-LATENCY}, the data transmission latency {among APs and edge servers} varies a lot with respect to different hours of day and devices' locations in a MAN. {In addition, each AP also suffer from signaling latency, which is the time consumed for each AP to collect system state information under some signaling mechanism.}
@@ -20,8 +27,6 @@ In fact, it is full of challenge to consider latency in {both job delivery and} 
 %     \item Secondly, the cooperation of distributed dispatchers suffers from significant signaling overhead. Therefore, aggregating the global system state information at each AP is not practical.
 %     \item  Finally, the transmission latency causes the inconsistency of system information at different dispatchers.
 % \end{enumerate}
-
-
 
 %NOTE: Our contributions
 In this paper, we would like to shed some lights on the above challenging distributed dispatcher design via proposing the POMDP (partially observable Markov decision process) problem formulation and a novel low-complexity approximate MDP solution framework.
@@ -37,7 +42,7 @@ Our main contributions in this new optimization scenario are summarized as follo
     \item %NOTE: performance guarantee
     We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above low-complexity solution framework.
     In the conventional approximate MDP methods, the solution is usually evaluated via numerical method which and hard to obtain analytical performance bound.
-    \item We conduct extensive simulations based on the Google Cluster trace, compared with three heuristic benchmarks. The evaluation results show that our proposed job dispatching policy can achieve $20.67\%$ decreasing in average job response time, and our algorithm consistently performs well under various parameter settings of signaling latency, job arrival intensity and job processing time.
+    \item We conduct extensive simulations based on the Google Cluster trace, compared with three heuristic benchmarks. The evaluation results show that our proposed job dispatching policy can achieve $20.67\%$ reduction in average job response time, and our algorithm consistently performs well under various parameter settings of signaling latency, job arrival intensity and job processing time.
 \end{itemize}
 
 \noindent \textbf{Paper Organization: }The remainder of this paper is organized as follows.

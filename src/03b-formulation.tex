@@ -47,7 +47,7 @@ Hence, we define the cost function per broadcast interval as follows.
             },
     \end{align}
     }%
-    where $\Inorm{\vec{x}}$ denotes the $L^1$-norm of the vector $\vec{x}$, and $\beta$ is the weight of overflow penalty.
+    where $\Inorm{\vec{x}}$ denotes the $L^1$-norm of the vector $\vec{x}$, $\beta$ is the weight of overflow penalty\comments{, and $I[\cdot]$ denotes the \emph{indicator function} which is equal to $1$ when the statement is true and $0$ otherwise}.
 \end{definition}
 
 Since the job dispatching in one broadcast interval will affect the GSI of the following broadcast intervals, we should consider the joint minimization of the costs of all the broadcast intervals.
