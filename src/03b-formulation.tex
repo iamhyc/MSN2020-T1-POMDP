@@ -3,7 +3,10 @@
 %----------------------------------------------------------------------------------------%
 In this section, we formulate the optimization of job dispatching at all APs as a Markov decision process (MDP) problem.
 Since each AP updates the job dispatching actions according to OSI instead of GSI, the MDP problem is a partially observable MDP (POMDP).
-Specifically, the individual dispatching policy of one AP, the system dispatching policy, and the cost function are firstly defined below.
+\comments{
+    Firstly, we give the definitions of \emph{dispatching policy} and \emph{cost function}, together with the \emph{system state} (i.e., the GSI) defined previously, to complete the MDP problem formulation.
+}%
+% Specifically, the individual dispatching policy of one AP, the system dispatching policy, and the cost function are firstly defined below.
 
 \begin{definition}[Dispatching Policy]
     The individual dispatching policy of the $k$-th AP, denoted as $\Omega_{k}$ ($\forall k \in\apSet$), maps from its OSI $\Stat_{k}$ and its \brlatency~$\mathcal{D}_{k}$ to the dispatching action for each job type, i.e.,
@@ -32,7 +35,8 @@ Specifically, the individual dispatching policy of one AP, the system dispatchin
 \end{definition}
 
 According to the Little's law \cite{Little1961}, the average response time per job, counting the number of broadcast intervals from job arrival to the accomplishment of computation, is proportional to the number of jobs in the system, given the job arrival rates at all the APs.
-Hence, we define the cost function per broadcast interval as follows.
+Hence,% \comments{based on the broadcast GSI per broadcast interval, }
+we define the cost function per broadcast interval\comments{, which consists the cumulative cost to be minimized in the MDP problem,} as follows.
 
 \begin{definition}[Cost Function per Broadcast Interval]
     The cost function of the $t$-th broadcast interval with GSI $\Stat(t)$ is defined as
@@ -47,10 +51,10 @@ Hence, we define the cost function per broadcast interval as follows.
             },
     \end{align}
     }%
-    where $\Inorm{\vec{x}}$ denotes the $L^1$-norm of the vector $\vec{x}$, $\beta$ is the weight of overflow penalty\comments{, and $I[\cdot]$ denotes the \emph{indicator function} which is equal to $1$ when the statement is true and $0$ otherwise}.
+    where $\Inorm{\vec{x}}$ denotes the $L^1$-norm of the vector $\vec{x}$, $\beta$ is the weight of overflow penalty\comments{, and $I[\cdot]$ denotes the indicator function which is equal to $1$ when the inner statement is true and $0$ otherwise}.
 \end{definition}
 
-Since the job dispatching in one broadcast interval will affect the GSI of the following broadcast intervals, we should consider the joint minimization of the costs of all the broadcast intervals.
+\comments{Then, }since the job dispatching in one broadcast interval will affect the cost of the successive broadcast intervals, we should consider the joint minimization of the cumulative costs of all the broadcast intervals.
 Specifically, we consider the following discounted sum of the costs of all the broadcast intervals as the system objective.
 {\small
 \begin{align}
@@ -70,7 +74,8 @@ Hence, the optimization of job dispatching policy can be formulated as the follo
 \end{align}
 }%
 
-If the GSI $\Stat(t)$ and \brlatency~$\Delay(t)$ are known to all the APs, the MDP in problem P1 can be solved via the following Bellman's equations as in \cite{sutton1998}
+\comments{Finally, }if the GSI $\Stat(t)$ and \brlatency~$\Delay(t)$ are known to all the APs,
+the MDP in problem P1 can be solved via the following Bellman's equations as in \cite{sutton1998}:
 {\small
 \begin{align}
     &V\Paren{\Stat(t)} =g\Paren{\Stat(t)}

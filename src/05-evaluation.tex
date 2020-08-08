@@ -67,8 +67,8 @@ This demonstrates its high dispatching efficiency.
 %-----------------------------------------------------------------------------------------------%
 \begin{figure}[ht!]                                                                             %
     \centering                                                                                  %
-    \includegraphics[width=0.45\textwidth]{the-cost-timeline-alt.pdf}                     %
-    \caption{Illustration of number of jobs on all the APs and processing servers versus index of broadcast interval.}
+    \includegraphics[width=0.4\textwidth]{the-cost-timeline-alt.pdf}                     %
+    \caption{Illustration of cost versus index of broadcast interval.}
     \label{fig:general_timeline}                                                                %
 \end{figure}                                                                                    %
 %-----------------------------------------------------------------------------------------------%
@@ -137,25 +137,25 @@ This demonstrates its high dispatching efficiency.
 % %-------------------------------------------------------------------%
 
 %NOTE: sensitivity study
-\textbf{Signaling Latency.}
+\noindent\textbf{Signaling Latency.}
 The simulation results with different \brlatency~$\mathcal{D}_{k}$ ($\forall k\in\apSet$) are illustrated in Fig.\ref{fig:ss_signal}, where the cumulative distribution function (CDF) of the job number in the system is plotted.
 Specifically, the \brlatency~of all the APs is set to $5, 12, 25$ in Fig.\ref{fig:ss_signal}(a), Fig.\ref{fig:ss_signal}(b), Fig.\ref{fig:ss_signal}(c), respectively.
 It can be observed from Fig.\ref{fig:ss_signal}(a) to Fig.\ref{fig:ss_signal}(c) that, with the increasing of \brlatency, the performance of Queue-aware Policy becomes worse.
-The Queue-aware policy slightly outperforms the Random Policy in Fig.5(a) with small \brlatency~(achieving a smaller number of jobs in the system), and becomes worse in Fig.5(c) with large \brlatency.
+The Queue-aware policy slightly outperforms the Random Policy in Fig.5(a) with smaller \brlatency~(achieving a smaller number of jobs in the system), and becomes worse in Fig.5(c) with large \brlatency.
 This demonstrates that the Queue-aware Policy is sensitive to the \brlatency.
-In all the figures, the proposed policy performs better than the benchmarks, which demonstrates the robustness of its performance versus signaling latency.
+In all the figures, the proposed policy outperforms all  the benchmarks, which demonstrates its robustness versus signaling latency.
 
-\textbf{Job Arrival Intensity.}
+\noindent\textbf{Job Arrival Intensity.}
 We carry out the sensitivity study of job arrival intensity by integer scaling the interval of jobs arriving in Google cluster traces.
 % The simulation results of various arrival intensity are illustrated in Fig.\ref{fig:ss_scale}.
 The average system cost versus the number of APs is illustrated in Fig.\ref{fig:ss_scale}.
 With the increasing of job arrival intensity, the average system cost increases in all the benchmarks and our proposed policy.
-It can be observed that the proposed policy has better performance than the benchmarks.
+It can be observed that our policy performs the best.
 Moreover, the performance gain becomes significant when the computation load is heavy.
 % This demonstrates the dispatching efficiency of the proposed policy with heavy load.
 % The gain is negligible for light load, where the computation capability is sufficient and dispatcher optimization may not be necessary.
 
-\textbf{Mean Processing Time.}
+\noindent\textbf{Mean Processing Time.}
 The simulation results of various mean processing time are illustrated in Fig.\ref{fig:ss_dist}, where the mean processing time is taken as $c_{m,j}$ of the processing time distribution $\mathbb{G}(1/c_{m,j})$ ($\forall m\in\esSet,j\in\jSpace$) in our computation model assumption.
 Generally speaking, with the increasing average processing time, the average system cost increases in all the benchmarks and our proposed policy.
 The simulation results are consistent with that in Fig.\ref{fig:ss_scale}.

@@ -8,8 +8,10 @@ Hence, we formulate the distributed optimization problem of job dispatching stra
 The conventional solution for POMDP is impractical due to huge time complexity.
 In this paper, we propose a novel low-complexity solution framework for distributed job dispatching, based on which the optimization of job dispatching policy can be decoupled via an alternative policy iteration algorithm and a theoretical performance lower bound is obtained.
 The evaluation results show that our proposed policy can achieve obvious and robust performance gain compared with heuristic baselines.
+\comments{
 Furthermore, this work assumes available knowledge on the distributions of signaling latency, uploading latency and computation time.
 As an extension, the reinforcement learning could be integrated with the proposed solution framework when the above statistics are absent.
+}
 
 %NOTE: previous version
 % In this paper, we consider a distributed and asynchronous job dispatcher design in an edge computing network residing in a MAN with multiple APs and edge servers.
