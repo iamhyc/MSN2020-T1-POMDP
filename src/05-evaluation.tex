@@ -5,8 +5,47 @@ The experiment setup and performance benchmarks are elaborated in Section \ref{s
 The simulation results are illustrated in Section \ref{subsec:basic}.
 The sensitivity study on parameters is also applied to provide some insights on the robustness of the proposed policy in Section \ref{subsec:advance}.
 
+%-----------------------------------------------------------------------%
+\begin{figure}[t!]                                                      %
+    \centering                                                          %
+    \includegraphics[width=0.45\textwidth]{the-bar-graph-alt.pdf}               %
+    \caption{Illustration of performance metrics comparison with benchmarks.}
+    \label{fig:bar_plot}                                                %
+\end{figure}                                                            %
+%-----------------------------------------------------------------------%
+
+%-----------------------------------------------------------------------------------------------%
+\begin{figure}[t!]                                                                             %
+    \centering                                                                                  %
+    \includegraphics[width=0.45\textwidth]{the-cost-timeline-alt.pdf}                     %
+    \caption{Illustration of cost versus index of broadcast interval.}
+    \label{fig:general_timeline}                                                                %
+\end{figure}                                                                                    %
+%-----------------------------------------------------------------------------------------------%
+
 \subsection{Experiment Setup}
 \label{subsec:setup}
+
+%-----------------------------------------------------------------------------------%
+\begin{figure*}[t!]                                                                %
+    \centering                                                                      %
+    \begin{minipage}[b]{0.30\textwidth}                                             %
+        \includegraphics[width=\textwidth]{the-delay-small.pdf} \\                  %
+        {(a) \brlatency~as $5$ timeslots.}                                               %
+    \end{minipage}                                                                  %
+    \begin{minipage}[b]{0.30\textwidth}                                             %
+        \includegraphics[width=\textwidth]{the-delay-medium.pdf} \\                 %
+        {(b) \brlatency~as $12$ timeslots.}           %
+    \end{minipage}                                                                  %
+    \begin{minipage}[b]{0.30\textwidth}                                             %
+        \includegraphics[width=\textwidth]{the-delay-large.pdf} \\                  %
+        {(c) \brlatency~as $25$ timeslots.}             %
+    \end{minipage}                                                                  %
+    \caption{Algorithm Robustness versus Signaling Latency.}                        %
+    \label{fig:ss_signal}                                                           %
+\end{figure*}                                                                       %
+%-----------------------------------------------------------------------------------%
+
 In the simulation, we assume that there are $K=15$ APs, $M=10$ processing servers and $J=10$ types of jobs in the system.
 One broadcast interval is consist of $t_{B}=25$ time slots.
 % The time slot duration is $20$ milliseconds and one broadcast interval consists of $t_{B}=25$ time slots.
@@ -27,15 +66,6 @@ The discount factor $\gamma$ is $0.95$ and the overflow penalty weight $\beta$ i
 %     \label{fig:bipartite}                                               %
 % \end{figure}                                                            %
 % %-----------------------------------------------------------------------%
-
-%-----------------------------------------------------------------------%
-\begin{figure}[ht]                                                      %
-    \centering                                                          %
-    \includegraphics[width=0.45\textwidth]{the-bar-graph-alt.pdf}               %
-    \caption{Illustration of performance metrics comparison with benchmarks.}
-    \label{fig:bar_plot}                                                %
-\end{figure}                                                            %
-%-----------------------------------------------------------------------%
 
 %NOTE: Benchmark Elaboration
 We also propose {three heuristic benchmarks to profile the performance of the proposed MDP policy}, which are listed as follows.
@@ -64,37 +94,6 @@ Finally, an realization of job dispatching is illustrated in Fig.\ref{fig:genera
 It can be observed that the proposed policy manage to keep the number of jobs in lower level, compared with the other benchmarks.
 This demonstrates its high dispatching efficiency.
 
-%-----------------------------------------------------------------------------------------------%
-\begin{figure}[ht!]                                                                             %
-    \centering                                                                                  %
-    \includegraphics[width=0.4\textwidth]{the-cost-timeline-alt.pdf}                     %
-    \caption{Illustration of cost versus index of broadcast interval.}
-    \label{fig:general_timeline}                                                                %
-\end{figure}                                                                                    %
-%-----------------------------------------------------------------------------------------------%
-
-\subsection{Sensitivity Study}
-\label{subsec:advance}
-%-----------------------------------------------------------------------------------%
-\begin{figure*}[ht!]                                                                %
-    \centering                                                                      %
-    \begin{minipage}[b]{0.30\textwidth}                                             %
-        \includegraphics[width=\textwidth]{the-delay-small.pdf} \\                  %
-        {(a) \brlatency~as $5$ timeslots.}                                               %
-    \end{minipage}                                                                  %
-    \begin{minipage}[b]{0.30\textwidth}                                             %
-        \includegraphics[width=\textwidth]{the-delay-medium.pdf} \\                 %
-        {(b) \brlatency~as $12$ timeslots.}           %
-    \end{minipage}                                                                  %
-    \begin{minipage}[b]{0.30\textwidth}                                             %
-        \includegraphics[width=\textwidth]{the-delay-large.pdf} \\                  %
-        {(c) \brlatency~as $25$ timeslots.}             %
-    \end{minipage}                                                                  %
-    \caption{Algorithm Robustness versus Signaling Latency.}                        %
-    \label{fig:ss_signal}                                                           %
-\end{figure*}                                                                       %
-%-----------------------------------------------------------------------------------%
-
 \begin{figure}[ht!]
     \centering
     \begin{minipage}[b]{0.23\textwidth}
@@ -108,6 +107,9 @@ This demonstrates its high dispatching efficiency.
         \label{fig:ss_dist}
     \end{minipage}
 \end{figure}
+
+\subsection{Sensitivity Study}
+\label{subsec:advance}
 
 % %-------------------------------------------------------------------%
 % \begin{figure}[hbt]                                                 %
