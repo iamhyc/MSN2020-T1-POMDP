@@ -65,7 +65,7 @@ Specifically, we consider the following discounted sum of the costs of all the b
     },
 \end{align}
 }%
-where $\mathbb{E}^{\Policy}_{\set{\Stat(t)|\forall t}}[\cdot]$ denotes the expectation with respect to all possible system state in the future given scheduling policy $\Policy$, and $\gamma \in (0,1)$ is the discount factor.
+where $\mathbb{E}^{\Policy}_{\set{\Stat(t)|\forall t}}[\cdot]$ denotes the expectation with respect to all possible system states in the future given scheduling policy $\Policy$, and $\gamma \in (0,1)$ is the discount factor.
 Hence, the optimization of job dispatching policy can be formulated as the following minimization problem.
 {\small
 \begin{align}
@@ -103,7 +103,7 @@ is defined as follows.
 }%
 Moreover, the optimal policy $\Omega^{*}$ can be obtained by solving the right-hand-side (RHS) of the above Bellman's equations.
 
-However, it is infeasible to solve the above Bellman's equations because because each AP only has the knowledge of its own OSI and local \brlatency in our considered edge computing system.
+However, it is infeasible to solve the above Bellman's equations because each AP only has the knowledge of its own OSI and local \brlatency~in our considered edge computing system.
 Thus problem P1 is actually a POMDP, whose general solution is of huge complexity \cite{IJCAI03-NairR,IJCAI99-BoutilierC}.
 % In this paper, we shall propose a novel low-complexity solution framework based on an analytical approximation of the value function $V(\cdot)$ and alternative actions update, where distributed job dispatching via the Bellman's equations becomes feasible.
 % even with OSI and local \brlatency.

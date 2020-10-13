@@ -22,7 +22,7 @@ To alleviate the curse of dimensionality, we first use the baseline policy with 
 The baseline policy is elaborated below.
 
 \begin{policy}[Baseline Policy]
-    In the baseline policy $\Baseline$, each AP fixes their dispatching actions as in the previous broadcast interval. Specifically, at the $t$-th broadcast interval,
+    In the baseline policy $\Baseline$, each AP fixes its dispatching actions as in the previous broadcast interval. Specifically, at the $t$-th broadcast interval,
     {\small
     \begin{align}
         \Baseline\Paren{\Stat(t),\Delay(t)} &\define \Brace{ 
@@ -235,7 +235,7 @@ This conclusion is summarized below.
 \end{lemma}
 \begin{proof}
     $V(\Stat) \leq W_{\tilde{\Policy}}(\Stat)$ is straightforward as $\tilde{\Policy}$ is not optimal policy.
-    The proof of $W_{\tilde{\Policy}}(\Stat) \leq W_{\Baseline}(\Stat)$ is equal to prove the improvement of one-step policy iteration, which is similar to the proof of \emph{Policy Improvement Property} in \cite{dp-control}.
+    The proof of $W_{\tilde{\Policy}}(\Stat) \leq W_{\Baseline}(\Stat)$ is equivalent to prove the improvement of one-step policy iteration, which is similar to the proof of \emph{Policy Improvement Property} in \cite{dp-control}.
 \end{proof}
 Therefore, $W_{\Baseline}(\Stat)$ derived in equation (\ref{eqn:baseline}) can be used as the analytical cost upper bound of the proposed policy $\Baseline$.
 Moreover, Lemma \ref{lemma:bound} also implies that the proposed policy with fixed service edge server for each AP, as long as the {static dispatching policy} is used as the baseline policy.

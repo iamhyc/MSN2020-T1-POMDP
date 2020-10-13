@@ -8,7 +8,7 @@
 We consider an edge computing system with $K$ Access Points (APs), $M$ edge servers, and $1$ cloud server as illustrated in Fig.\ref{fig:system}.
 The set of APs and processing servers are denoted as $\apSet \define \set{1,\dots,K}$ and $\esSet \define \set{0,\dots,M}$, respectively.
 Specifically, we have \comments{\emph{processing server} denote both edge servers and the cloud server for job processing} and the $0$-th processing server denote the cloud server.
-\comments{One edge server is always collocated with one AP, i.e., the edge server is deployed at the same place with the access point.}%
+\comments{One edge server is always collocated with one AP, i.e., the edge server is deployed at the same place with the access point.}
 Each AP collects the jobs from the mobile users within its coverage, and makes dispatching action on the processing servers for each job.
 Furthermore, it is assumed that one AP could only access to the cloud server, the collocated edge server if existed, and neighbor edge servers \comments{(i.e., the pair of edge servers connected via the routing path as illustrated in Fig.\ref{fig:system})} due to transmission latency limitation.
 % It is assumed that the $k$-th AP only dispatches the computation jobs to the edge servers within a certain number of hops.
@@ -91,7 +91,7 @@ At the beginning of each broadcast interval, the local state information (LSI) o
         \mathcal{A}_{k}(t) &\define \Brace{\omega_{k,j}(t) \Big| \forall j\in\jSpace}
     \end{align}
     }%
-    are referred as status of the type-$j$ job type uploading from the $k$-th AP to the$m$-th processing server, and the set of dispatching actions of the $k$-th AP at the beginning of the $t$-th broadcast interval, respectively.
+    are referred as status of the type-$j$ job uploading from the $k$-th AP to the $m$-th processing server, and the set of dispatching actions of the $k$-th AP at the beginning of the $t$-th broadcast interval, respectively.
 \end{definition}
 
 %NOTE: State and Broadcast Information for Processing Server

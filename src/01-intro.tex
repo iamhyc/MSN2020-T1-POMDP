@@ -17,7 +17,7 @@ The establishment of efficient cooperation among edge servers is one of the majo
 
 %NOTE: Motivation with MAN
 We consider an edge computing system with multiple APs and edge servers residing in the Metropolitan Area Network (MAN).
-The APs collect jobs offloaded from the mobile users in its service area and make dispatching decision for each job. According to the MAN performance analysis in \cite{MAN-LATENCY}, the data transmission latency {among APs and edge servers} varies a lot with respect to different hours of day and devices' locations in a MAN. {In addition, each AP also suffer from signaling latency, which is the time consumed for each AP to collect system state information under some signaling mechanism.}
+The APs collect jobs offloaded from the mobile users in its service area and make dispatching decision for each job. According to the MAN performance analysis in \cite{MAN-LATENCY}, the data transmission latency {among APs and edge servers} varies a lot with respect to different hours of day and devices' locations in a MAN. {In addition, each AP also suffers from signaling latency, which is the time consumed for each AP to collect system state information under some signaling mechanism.}
 There has been a number of existing literature considering random transmission latency of job delivery in edge computing networks (e.g., \cite{latency-EDGE19,MOBIHOC19-ZhouZ,IOTJ18-FanQ,TOC19-LiuC,JSAC19-AlameddineHA}). 
 \tann{However, there are only a few works considering signaling latency of cooperation among distributed job dispatchers \cite{JSAC17-LyuX,TWC18-LyuX}.}
 In fact, it is full of challenge to consider latency in {both job delivery and} signaling. The cooperation of distributed dispatchers suffers from significant unpredictable signaling and transmission overhead. Therefore, aggregating the global system state information at each AP is not practical, and a centralized dispatcher design is discouraged. Moreover, the latency will also lead to outdated information at each dispatcher and information inconsistency among different dispatchers\comments{, which may introduce ineliminable estimation error on the number of jobs in the system and thus discourage the cooperative dispatcher design}.
@@ -41,7 +41,7 @@ Our main contributions in this new optimization scenario are summarized as follo
     To our best knowledge, this is the first work to address the cooperative distributed multi-agent optimization problem with outdated and partial information under MDP framework.
     \item %NOTE: performance guarantee
     We derive an analytical cost lower bound for the proposed distributed dispatching policy in the above low-complexity solution framework.
-    In the conventional approximate MDP methods, the solution is usually evaluated via numerical method which and hard to obtain analytical performance bound.
+    In the conventional approximate MDP methods, the solution is usually evaluated via numerical method which are hard to obtain analytical performance bound.
     \item We conduct extensive simulations based on the Google Cluster trace, compared with three heuristic benchmarks. The evaluation results show that our proposed job dispatching policy can achieve $20.67\%$ reduction in average job response time, and our algorithm consistently performs well under various parameter settings of signaling latency, job arrival intensity and job processing time.
 \end{itemize}
 
@@ -81,7 +81,7 @@ In fact, due to the complicated network traffic, this latency might be significa
 The staleness of information sharing among APs and edge servers may degrade the performance of the job dispatching algorithm in edge computing systems.
 To the best of our knowledge, there are very limited works investigating this issue.
 For example, the authors in \cite{JSAC17-LyuX} proposed a randomized policy via Lyapunov optimization approach to stabilize the queues in a MEC system with multiple IoT devices offloading jobs to one edge server, where \brlatency~is considered. 
-In \cite{TWC18-LyuX}, the above approach was applied to the scenario that mobile devices offload jobs to each others via D2D link.
+In \cite{TWC18-LyuX}, the above approach was applied to the scenario that mobile devices offload jobs to each other via D2D link.
 In the above two works, there is one centralized dispatcher in the system and the objective is to stabilize the transmission queues.
 Hence, the existence of \brlatency~may not raise significant challenge to the algorithm designs.
 
