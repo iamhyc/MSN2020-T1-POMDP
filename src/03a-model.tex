@@ -64,8 +64,8 @@ At the beginning of each broadcast interval, the local state information (LSI) o
 %NOTE: State and Broadcast Information for AP
 \begin{definition}[LSI of APs]
     Let $R^{(k)}_{m,j}(\xi,t,n) \in \set{0,1}$ be the indicator of the type-$j$ jobs at the $n$-th time slot of the $t$-th interval.
-    Its value is $1$ when there is one job being uploaded from the $k$-th AP to the $m$-th server which has been delivered for $\xi$ time slots, and $0$ otherwise.
-    Let $\omega_{k,j}(t)$ be the target processing server for the type-$j$ jobs of the $k$-th AP dispatched at the very beginning of the $t$-th broadcast interval.
+    Its value is $1$ when there is one job being uploaded from the $k$-th AP to the $m$-th server which has been delivered for $\xi$ time slots, and $0$ otherwise ($\forall k\in\apSet, m\in\esSet, j\in\jSpace$).
+    Let $\omega_{k,j}(t)$ be the target processing server for the type-$j$ jobs of the $k$-th AP dispatched at the beginning of the $t$-th broadcast interval.
     % , and $\omega_{k,j}(t+1)$ be the updated target processing server when the $k$-th AP observes a number of the broadcast LSIs of the $t$-th broadcast interval.
     And the LSI of the $k$-th AP at the beginning of the $t$-th broadcast interval is defined as
     {\small
@@ -93,13 +93,13 @@ At the beginning of each broadcast interval, the local state information (LSI) o
     %     \mathcal{A}_{k}(t) &\define \Brace{\omega_{k,j}(t) \Big| \forall j\in\jSpace}
     % \end{align}
     % }%
-    are referred as status of the type-$j$ job uploading from the $k$-th AP to the $m$-th processing server, and the set of dispatching actions of the $k$-th AP at the beginning of the $t$-th broadcast interval, respectively.
+    are referred as status of the type-$j$ job from the $k$-th AP to the $m$-th processing server, and dispatching actions of the $k$-th AP at the beginning of the $t$-th broadcast interval, respectively. % (mod) the set of dispatching actions
 \end{definition}
 
 %NOTE: State and Broadcast Information for Processing Server
 \begin{definition}[LSI of Processing Servers]
     Let $Q_{m,j}({t,n})$ be the number of type-$j$ jobs on the $m$-th processing server at the $n$-th time slot of the $t$-th interval ($\forall m\in\esSet, j\in\jSpace$).
-    The LSI of the $m$-th processing server at the $t$-th broadcast interval is defined as
+    The LSI of the $m$-th processing server at beginning of the $t$-th broadcast interval is defined as
     {\small
     \begin{align}
         \mathcal{Q}_{m}(t) \define \Brace{
