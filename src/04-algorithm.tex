@@ -109,7 +109,7 @@ A heuristic greedy algorithm is given in Algorithm \ref{alg_0}.
     {
         Count number of subsets in the current subset partition which have disjoint candidate set with $\mathcal{Y}_n$ ($\forall n$), denoted the number as $I_{n}$.\;
         $\tilde{n} \gets \arg\min_{n} I_{n}$\;
-        Merge the subset $Y_{\tilde{n}}$ with one of its disjoint subsets.\;
+        Merge subset $Y_{\tilde{n}}$ with one of its disjoint subsets.\;
     }
 \end{algorithm}
 
@@ -165,7 +165,7 @@ Moreover, we have the following conclusion on the decomposition of P2.
 The optimization of {dispatching actions $\mathcal{A}_{y}(t+1)$} for the $y$-th AP ($\forall y\in\mathcal{Y}_{n}$) in P3 could be achieved via searching all the processing servers in $\esSet_{y}$, {whose computational complexity is $O(J|\mathcal{M}_{y}|)$}.
 As a result, the overall algorithm of job dispatching is elaborated in Algorithm \ref{alg_1}.
 \begin{algorithm}[ht]
-    \caption{Online Alternative Actions Update Algorithm}\label{alg_1}
+    \caption{{Online Alternative Actions Update Algorithm}}\label{alg_1}
     \DontPrintSemicolon % Some LaTeX compilers require you to use \dontprintsemicolon instead
     % \KwIn{$\Stat(t), \Delay(t)$}
     % \KwOut{$\tilde{\mathcal{A}}(t)$}

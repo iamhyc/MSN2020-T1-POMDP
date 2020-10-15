@@ -8,7 +8,7 @@ The sensitivity study on parameters is also applied to provide some insights on 
 %-----------------------------------------------------------------------%
 \begin{figure}[t!]                                                      %
     \centering                                                          %
-    \includegraphics[width=0.45\textwidth]{the-bar-graph-alt.pdf}               %
+    \includegraphics[width=0.42\textwidth]{the-bar-graph-alt.pdf}               %
     \caption{Illustration of performance metrics comparison with benchmarks.}
     \label{fig:bar_plot}                                                %
 \end{figure}                                                            %
@@ -17,7 +17,7 @@ The sensitivity study on parameters is also applied to provide some insights on 
 %-----------------------------------------------------------------------------------------------%
 \begin{figure}[t!]                                                                             %
     \centering                                                                                  %
-    \includegraphics[width=0.45\textwidth]{the-cost-timeline-alt.pdf}                     %
+    \includegraphics[width=0.42\textwidth]{the-cost-timeline-alt.pdf}                     %
     \caption{Illustration of cost versus index of broadcast interval.}
     \label{fig:general_timeline}                                                                %
 \end{figure}                                                                                    %
@@ -31,15 +31,15 @@ The sensitivity study on parameters is also applied to provide some insights on 
     \centering                                                                      %
     \begin{minipage}[b]{0.30\textwidth}                                             %
         \includegraphics[width=\textwidth]{the-delay-small.pdf} \\                  %
-        {(a) \brlatency~as $5$ timeslots.}                                               %
+        {(a) \brlatency~as $5$ time slots.}                                               %
     \end{minipage}                                                                  %
     \begin{minipage}[b]{0.30\textwidth}                                             %
         \includegraphics[width=\textwidth]{the-delay-medium.pdf} \\                 %
-        {(b) \brlatency~as $12$ timeslots.}           %
+        {(b) \brlatency~as $12$ time slots.}           %
     \end{minipage}                                                                  %
     \begin{minipage}[b]{0.30\textwidth}                                             %
         \includegraphics[width=\textwidth]{the-delay-large.pdf} \\                  %
-        {(c) \brlatency~as $25$ timeslots.}             %
+        {(c) \brlatency~as $25$ time slots.}             %
     \end{minipage}                                                                  %
     \caption{Algorithm Robustness versus Signaling Latency.}                        %
     \label{fig:ss_signal}                                                           %
@@ -50,13 +50,13 @@ In the simulation, we assume that there are $K=15$ APs, $M=10$ processing server
 One broadcast interval is consist of $t_{B}=25$ time slots.
 % The time slot duration is $20$ milliseconds and one broadcast interval consists of $t_{B}=25$ time slots.
 The network topology among APs is generated according to Barab\'asi-Albert (BA) model \cite{albert1999diameter} and the processing servers are randomly placed collocated with the APs.
-% Under this network topology setup with degree as $3$, the subset partition algorithm \ref{alg_0} could reduce the update period $N$ from $15$ to $6$ timeslots.
+% Under this network topology setup with degree as $3$, the subset partition algorithm \ref{alg_0} could reduce the update period $N$ from $15$ to $6$ time slots.
 % The BA model is parameterized by $n$ and $m$ and produces a graph with $n$ vertices and $m$ edges such that the degree distribution follows a power-law.
 The arrival traces and job processing time for each job type are extracted from Google cluster traces \cite{clusterdata:Reiss2011} and then randomly assigned on APs and edge servers, respectively.
 The maximum uploading latency is $\Xi = 3t_B$, and the distribution of $\mathbb{U}_{k,m,j}(\Xi)$ ($\forall k\in\apSet, m\in\esSet_{k}, j\in\jSpace$) is arbitrarily generated within the support $\set{0, 1, \dots, \Xi}$.
 The \brlatency~ is with an integer support from $0.7t_B$ to $0.9t_B$ time slots.
 Each queue for VMs on edge server is with maximum queue length $L_{max}=50$, i.e., there would be at most $50$ jobs on one edge server.
-The discount factor $\gamma$ is $0.95$ and the overflow penalty weight $\beta$ is $120$.
+The discount factor $\gamma$ is $0.95$ and the overflow penalty $\beta$ is $120$.
 
 % %-----------------------------------------------------------------------%
 % \begin{figure}[ht]                                                      %
@@ -68,7 +68,7 @@ The discount factor $\gamma$ is $0.95$ and the overflow penalty weight $\beta$ i
 % %-----------------------------------------------------------------------%
 
 %NOTE: Benchmark Elaboration
-We also propose {three heuristic benchmarks to profile the performance of the proposed MDP policy}, which are listed as follows.
+We also propose {three heuristic benchmarks to profile the performance of the proposed MDP policy}. %which are listed as follows.
 \begin{itemize}
     \item \textbf{Random Dispatching Policy}:
             Randomly choose a dispatching edge server in each time slot; 

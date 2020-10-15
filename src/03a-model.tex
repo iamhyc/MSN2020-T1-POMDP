@@ -80,17 +80,19 @@ At the beginning of each broadcast interval, the local state information (LSI) o
     where
     {\small
     \begin{align}
-        \vec{R}^{(k)}_{m,j}(t,0) \define \Paren{
+        \vec{R}^{(k)}_{m,j}(t,0) &\define \Paren{
             R^{(k)}_{m,j}(0,t,0), \dots, R^{(k)}_{m,j}(\Xi,t,0)
         },
-    \end{align}
-    }%
-    and
-    {\small
-    \begin{align}
+        \\
         \mathcal{A}_{k}(t) &\define \Brace{\omega_{k,j}(t) \Big| \forall j\in\jSpace}
     \end{align}
     }%
+    % and
+    % {\small
+    % \begin{align}
+    %     \mathcal{A}_{k}(t) &\define \Brace{\omega_{k,j}(t) \Big| \forall j\in\jSpace}
+    % \end{align}
+    % }%
     are referred as status of the type-$j$ job uploading from the $k$-th AP to the $m$-th processing server, and the set of dispatching actions of the $k$-th AP at the beginning of the $t$-th broadcast interval, respectively.
 \end{definition}
 
@@ -130,7 +132,7 @@ For example, the transmission latency of the LSI from the edge servers out of it
 \comments{
     Here, we firstly define \emph{conflict AP set} and notice that only the LSIs of a subset of APs are interested for one single dispatcher, and then we define the interested partially-observable information as \emph{observable state information} (OSI) based on the \emph{conflict AP set} and \emph{candidate server set}.
 }%
-The definition of \emph{conflict AP set} and OSI are given below, respectively.
+The definitions of \emph{conflict AP set} and OSI are given below, respectively.
 \begin{definition}[Conflict AP Set]
     The conflict AP set to the $k$-th AP consists of the neighboring APs who have direct impacts on the queueing time of the jobs on processing servers dispatched from the $k$-th AP, i.e., $ \ccSet_{k} \define \bigcup_{m\in\esSet_{k}} \apSet_{m}$.
     % {\small
