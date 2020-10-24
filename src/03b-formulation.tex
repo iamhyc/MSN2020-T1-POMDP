@@ -39,7 +39,7 @@ Hence,% \comments{based on the broadcast GSI per broadcast interval, }
 we define the cost function per broadcast interval\comments{, which consists the cumulative cost to be minimized in the MDP problem,} as follows.
 
 \begin{definition}[Cost Function per Broadcast Interval]
-    The cost function of the $t$-th broadcast interval with GSI $\Stat(t)$ is defined as
+    The cost function of the $t$-th broadcast interval with $\Stat(t)$ is defined as
     {\small
     \begin{align}
         g\Paren{\Stat(t)} \define
@@ -95,7 +95,7 @@ is defined as follows.
 \begin{align}
     &V\Paren{\Stat(t)} \define
     \lim_{T\to\infty} 
-    \mathbb{E}^{\Policy^*}_{\set{\Stat(t)|\forall t}, \Delay} \Bracket{
+    \mathbb{E}^{\Policy^*}_{\set{\Stat(t)|\forall t}} \Bracket{
         \sum_{t=1}^{T} \gamma^{t-1} g\Big( \Stat(t) \Big) \Big| \Stat(1)
     }.
     \label{eqn:val_f}

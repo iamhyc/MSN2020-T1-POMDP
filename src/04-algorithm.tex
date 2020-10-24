@@ -218,8 +218,8 @@ This conclusion is summarized below.
     {\small
     \begin{align}
         W_{\tilde{\Policy}}(\Stat) \define
-        \sum_{t'=1}^{\infty} \gamma^{t'-1} \mathbb{E}^{ \tilde{\Policy} } \Bracket{
-            g\Paren{\Stat(t'), \tilde{\Policy}(\Stat(t'),t')} \Big| \Stat(1)=\Stat
+        \sum_{t=1}^{\infty} \gamma^{t-1} \mathbb{E}^{ \tilde{\Policy} }_{\set{\Stat(t)|\forall t}} \Bracket{
+            g\Paren{\Stat(t)} \Big| \Stat(1)=\Stat
         },  
     \end{align}
     }%

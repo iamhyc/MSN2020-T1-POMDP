@@ -4,7 +4,7 @@ In this paper, we consider an online distributed job dispatcher design problem f
 In this edge computing system, the job dispatchers are implemented in a distributed manner on multiple access points (APs) which collect jobs from mobile users and then dispatch jobs to one edge server or cloud server for processing.
 To facilitate the cooperation among distributed job dispatchers, a signaling mechanism is introduced where the APs and edge servers would periodically broadcast their local state information to the job dispatchers.
 However, the reception of updated and fully-observed global system state is discouraged as the transmission latency is non-negligible in MAN and reception of all broadcast is time consuming.
-Hence, we formulate the distributed optimization problem of job dispatching strategies as a POMDP problem, with outdated and partial-observable information.
+Hence, we formulate the distributed optimization problem of job dispatching strategies as a POMDP problem, with outdated and partially-observable information.
 The conventional solution for POMDP is impractical due to huge time complexity.
 In this paper, we propose a novel low-complexity solution framework for distributed job dispatching, based on which the optimization of job dispatching policy can be decoupled via an alternative policy iteration algorithm and a theoretical performance lower bound is obtained.
 The evaluation results show that our proposed policy can achieve obvious and robust performance gain compared with heuristic baselines.
