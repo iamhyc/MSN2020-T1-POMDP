@@ -23,8 +23,8 @@ The dispatchers are implemented on the APs in a distributed manner.
 % which would suffer from heavy communication overhead with other AP nodes but with powerful computation capacity.
 % In this paper, we shall optimize the job dispatching strategy distributed at APs with partially observable state information, where both job uploading and state information broadcasting suffer from random transmission latency.
 Without loss of generality, it is assumed that there are $J$ types of jobs computed in this system, which are denoted via the set $\jSpace \define \set{1,\dots,J}$.
-The time axis of job dispatching is organized by time slots.
-The arrivals of the type-$j$ jobs at the $k$-th AP ($\forall k\in\apSet,j\in\jSpace$) in different time slots are assumed to be independent and identically distributed (i.i.d.) Bernoulli random variables, and the arrival probability is denoted as $\lambda_{k,j}$.
+The time axis is organized by time slots.
+The arrivals of the type-$j$ jobs at the $k$-th AP in different time slots are assumed to be independent and identically distributed Bernoulli random variables, and the arrival probability are denoted as $\lambda_{k,j}$.
 % Let $B_{k,j}(t) \in \set{0,1}$ represent the event of job arrival, where $B_{k,j}(t)=1$ means one type-$j$ job arrives at the $k$-th AP in the $t$-th time slot, and $B_{k,j}(t)=0$ means otherwise.
 % Hence,
 % \begin{align}
@@ -32,11 +32,11 @@ The arrivals of the type-$j$ jobs at the $k$-th AP ($\forall k\in\apSet,j\in\jSp
 % \end{align}
 %NOTE: [uploading process]
 Each AP immediately dispatches each type of arrived jobs to one processing server.
-\comments{It's assumed that the network traffic over the routing path is random, and the job uploading from one AP to one edge server consumes a random number of time slots.}%
+\comments{It's assumed that the network traffic over the routing path is random, and the job uploading from one AP to one edge server consumes a random number of time slots.}
 %Due to the random traffic in the network, the job uploading from one AP to one edge server consumes a random number of time slots.
 % It is assumed that the random uploading latency are independent for each job.
-Let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency distribution of the type-$j$ jobs from the $k$-th AP to the $m$-th server with finite support $\set{1, \dots, \Xi}$ ($\forall k\in\apSet, m\in\esSet, j\in\jSpace$), whose expectation is denoted as $u_{k,m,j}$.
-Specifically, the uploading latency $u_{k,m,j}$ is fixed as $0$ if $\rho_{k,m}=1$ for job uploading to the collocated edge server.
+Let $\mathbb{U}_{k,m,j}(\Xi)$ be the uploading latency distribution of the type-$j$ jobs from the $k$-th AP to the $m$-th server with finite support $\set{1, \dots, \Xi}$, whose expectation is denoted as $u_{k,m,j}$.
+Specifically, the uploading latency is fixed as $0$ if $\rho_{k,m}=1$ for job uploading to the collocated edge server ($\forall k\in\apSet,m\in\esSet,j\in\jSpace$).
 
 %NOTE: [computation process]
 We adopt the \emph{unrelated machines assumption} as in \cite{tan-online} for job computation process, where the computation time on different processing servers would follow independent distribution.
